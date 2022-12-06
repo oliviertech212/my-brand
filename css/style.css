@@ -23,7 +23,7 @@ header nav{
     padding-bottom: 20px;
 }
 nav .logo{
-    margin-left:60px;
+    margin-left:50px;
     width: 439px;
     height: 63px;
 }
@@ -32,7 +32,7 @@ nav ul{
     justify-content: space-between;
     margin-right: 70px;
     list-style-type: none;
-    width: 40%;
+    /* width: 40%; */
 }
 nav ul li a{
     text-decoration: none;
@@ -40,6 +40,7 @@ nav ul li a{
     font-weight: bold;
     font-size: 25px;
     font-family: 'Roboto', sans-serif;
+    margin-right: 20px;
 }
 nav ul li a:hover{
     color:#00ADB5;
@@ -71,7 +72,7 @@ nav ul li button{
     grid-template-columns:repeat(2,1fr);
     margin-left: 70px;
     padding-right: 70px;
-    /* margin-bottom: 90px; */
+    margin-bottom: 0px;
 }
 .home  .left-div{
     float: left;
@@ -97,6 +98,9 @@ line-height: 82px;
     padding-right:30px;
     color:#00ADB5
 
+}
+.right-div{
+    padding-top: 30px;
 }
 .hire-and-cvbtn{
     float:  left;
@@ -157,11 +161,134 @@ line-height: 82px;
 }
 
 
+/* skills page */
+
+.skills-section{
+    display:flex;
+    flex-direction: column;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+.skill{
+  text-align: center;
+}
+.skills-containers{
+    margin: 20px auto 20px auto;
+    display: grid;
+    grid-template-columns: repeat(4);
+    gap: 10px;
+
+}
+.skill img{
+    width: 250px;
+    height: 250px;
+}
 
 
 
 
 
+/* work section */
+.work-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    /* gap:10px; */
+    margin-left: 70px;
+    margin-right: 70px;
+    /* border: 4px solid blue; */
+}
+.work{
+   display: flex;
+    flex-direction: column;
+}
+.work .project-pc{
+    text-align: center;
+    padding-top: 20PX;
+    height:300px;
+    width: 400px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 40px #D2D5EC;
+    border-radius: 10px;
+    /* margin: 0px auto 0px auto; */
+}
+.work .project-pc h2{
+    float: left;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    font-family: 'Rubik', sans-serif; 
+    padding-top: 10PX;
+    margin-left: 30px;
+}
+.work .project-desc{
+    margin-top: 10px;
+    font-family: 'Rubik', sans-serif; 
+    float: left;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    width: 400px;
+    /* margin: 0px auto 0px 25px; */
+
+}
+.work button{
+    margin-top: 20px;
+    font-family: 'Rubik', sans-serif; 
+    float: left;
+    font-style:bold;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    width:190px;
+    color: white;
+    background-color: #00ADB5;
+    border-radius: 15px;
+    border: none;
+
+}
+
+
+
+/* blog section */
+.blog-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:10px;
+    margin-left: 70px;
+    margin-right: 70px;
+}
+.blog{
+    box-shadow: 0px 0px 10px #D2D5EC;
+    width:390px;
+
+
+}
+.blog .blog-desc{
+    width:390px;
+    font-style: normal;
+    font-weight:300px;
+    font-size: 15px;
+    line-height: 22px;
+    font-family: 'Rubik', sans-serif; 
+}
+.blog button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Rubik', sans-serif; 
+    float: left;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 36px;
+    width: 244px;
+    height: 42px;
+    color: white;
+    background-color: #00ADB5;
+    border-radius: 15px;
+    border: none;
+
+}
 
 
 
