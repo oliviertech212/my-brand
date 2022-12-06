@@ -175,7 +175,7 @@ line-height: 82px;
 .skills-containers{
     margin: 20px auto 20px auto;
     display: grid;
-    grid-template-columns: repeat(4);
+    grid-template-columns: repeat(4,1fr);
     gap: 10px;
 
 }
@@ -261,6 +261,8 @@ line-height: 82px;
 .blog{
     box-shadow: 0px 0px 10px #D2D5EC;
     width:390px;
+    display: flex;
+    flex-direction: column;
 
 
 }
@@ -288,6 +290,13 @@ line-height: 82px;
     border-radius: 15px;
     border: none;
 
+}
+.blog .like-comment{
+    float: left;
+    font-style: normal;
+font-weight: 300;
+font-size: 15px;
+line-height: 22px;
 }
 
 
