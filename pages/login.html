@@ -16,48 +16,45 @@
 <body>
     <header>
         <nav>
-            <a href="../index.html">
-                <img class="logo" src="../images/logo.png" alt="">
-            </a>
-            
+            <img class="logo" src="../images/logo.png" alt="">
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="./skills.html">Skills</a></li>
                 <li><a href="./works.html">Works</a></li>
                 <li><a href="./blogs.html">Blogs</a></li>
-                <li><a href="./contact.html"class="active">Contact</a></li>
-                <li><a href="./login.html"><button>Login</button></a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="./login.html"><button class="active-login">Login</button></a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="contact-section">
-        <div class="head-desc">
-            <h1>Contact me</h1>
-            <hr>
-        </div> 
-        <div class="contact-form">
-           <div class="left-div">
+    <section class="login-section">
+        <div class="login-form">
+           <div class="top-div">
              <form action="">
                 <div class="label">
-                  <div>
-                    <label for="name">name</label><br>
-                  <input class="input" type="text" placeholder="enter your name">
-                  </div>
-                  <div>
-                    <label for="email">email</label><br>
-                  <input class="input" type="email" placeholder="enter your email">
-                  </div>
+                   <h1>Login</h1>
+                  <input class="input" type="email" placeholder="email">
+                  <input class="input" type="password" placeholder="password">
                 </div>
-                <label for="message">message</label>
-                <textarea class="message" placeholder="enter your message "  name="" id="" cols="30" rows="10"></textarea>
-                <input class="send-btn" type="submit" value="send">
+                <input class="login-btn" type="submit" value="Login">
              </form>
            </div>
-           <div class="right-div">
-            <i class="fa-brands fa-whatsapp"></i>
-            <i class="fa-solid fa-phone"></i>
+          
+            <div class="sign-in">
+                <div class="google">
+                  <a class="btn-google" href="/auth/google" role="button">
+                    <i class="fab fa-google"></i>
+                    Sign In with Google
+                  </a>
+                </div>
+                <div class="facebook">
+                  <a class="btn-facebook" href="/auth/google" role="button">
+                    <i class="fab fa-facebook"></i>
+                    Sign In with facebook
+                  </a>
+                </div>
            </div>
         </div>
     </section>
