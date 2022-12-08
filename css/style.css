@@ -125,6 +125,11 @@ line-height: 82px;
 .right-div{
     padding-top: 30px;
 }
+.right-div .image{
+    /* background-color: #00ADB5; */
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 80px;
+}
 .hire-and-cvbtn{
     float:  left;
     margin-top: 30px;
@@ -577,7 +582,17 @@ span i{
 }
 
 
-
+header .mobile{
+    display: none;
+    text-align: center;
+    background-color:black;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height:max-content;
+    margin-top: 0px;
+    opacity:0.9;
+}
 
 
 
@@ -593,36 +608,49 @@ span i{
 }
 
 @media (max-width:480px)and (min-width:320px) {
-
-    nav ul{
-        margin-top: 50px;
-        /* display: flex; */
-        flex-direction: column;
-        /* justify-content: space-between; */
-        margin-right:0px;
-        width: 100%;
+    #mainmenu{
+        display:block;
     }
-    nav ul li a{
+    .mobile ul{
+        margin-right:0px;
+        /* border: 2px solid red; */
+    }
+    .mobile ul li{
+        padding-top: 10px;
+        width: 90%;
+        /* border: 2px solid red; */
+
+    }
+    .mobile ul li a{
+        text-decoration: none;
         font-size: 20px;
         font-family: 'Roboto', sans-serif;
-        margin-right: 20px;
+        color: #FFFFFF;
+        font-weight: bold;
     }
-    nav ul li a:hover{
+    .mobile ul li a:hover{
         font-size: 25px;
+        color: #00ADB5;
+        width: 90%;
         border-bottom: 2px solid gray;
     }
-    nav ul li .active{
-        font-size:20px;
+    .mobile ul li .active{
+        font-size:25px;
+        color:#00ADB5;
     }
     
-    nav ul li button{
+    .mobile ul li button{
         width:100%;
+        color: black;
+        font-weight: bold;
+        margin-bottom: 20px;
     }
 
-
-
-
-
+    .mobile ul li button:hover,.active-login{
+        color: #FFFFFF;
+        background: #136A6E;
+        border: 2px solid #FAFAFA;
+    }
 
 
 
@@ -652,6 +680,11 @@ margin-left: 0%;
     .right-mobile{
         display:flex;
         justify-content: center;
+    }
+    .right-mobile .image{
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        /* background-color: #00ADB5; */
     }
     .home{
         display: grid;

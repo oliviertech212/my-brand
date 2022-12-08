@@ -20,11 +20,11 @@
             <a href="./index.html">
                 <img class="logo" src="../images/logo.png" alt="">
             </a>
-            <button class="menu-btn">
+            <button id="menuicon" class="menu-btn">
                 <i class="fa-sharp fa-solid fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="./home.html" class="active">Home</a></li>
+                <li><a href="./index.html" class="active">Home</a></li>
                 <li><a href="./pages/about.html">About</a></li>
                 <li><a href="./pages/skills.html">Skills</a></li>
                 <li><a href="./pages/works.html">Works</a></li>
@@ -33,14 +33,26 @@
                 <li><a href="./pages/login.html"><button>Login</button></a></li>
             </ul>
         </nav>
+        <div id="mainmenu" class="mobile">
+            <ul class="nav-links">
+                <li><a href="./index.html" class="active">Home</a></li>
+                <li><a href="./pages/about.html">About</a></li>
+                <li><a href="./pages/skills.html">Skills</a></li>
+                <li><a href="./pages/works.html">Works</a></li>
+                <li><a href="./pages/blogs.html">Blogs</a></li>
+                <li><a href="./pages/contact.html">Contact</a></li>
+                <li><a href="./pages/login.html"><button>Login</button></a></li>
+            </ul>
+        </div>
     </header>
+   
 
     <!-- home page section -->
     <section  class="home">
         <div class="left-div">
             <h2>Hello this is olivier</h2>
             <div class="right-mobile">
-                <img src="../images/profile-removebg.png" width="90%" alt="">
+                <img class="image" src="../images/profile-removebg.png" width="90%" alt="">
             </div>
             <h1>
                 <p class="ui">UI & UX DESIGNER,<br>FRONTEND</p>
@@ -51,19 +63,13 @@
                 <button type="button">
                     Download cv 
                     <i class="fa-solid fa-down-long"></i>
-                     <!-- <span class="material-symbols-outlined">
-                       
-                        download
-
-
-                    </span>    -->
                 </button>
                
             </div>
 
         </div>
         <div class="right-div">
-            <img src="../images/profile-removebg.png" width="592px" height=" 700px" alt="">
+            <img class="image" src="../images/profile-removebg.png" width="592px" height=" 700px" alt="">
         </div>
 
     </section>
@@ -86,7 +92,7 @@
 
 
 
-
+<script src="./js/script.js"></script>
     
 </body>
 </html>
