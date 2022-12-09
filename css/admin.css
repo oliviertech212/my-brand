@@ -1,0 +1,139 @@
+header nav{
+    background-color: #26262c;
+    padding-top:10px;
+    padding-bottom:auto;
+    height: 60px;
+    max-height: 40px;
+}
+nav .logo{
+    width: 339px;
+    height: 40px;
+}
+
+
+.admin-home{
+    margin-top:70px;
+    /* height: calc(100%-60px); */
+    height:100%;
+    display: flex;
+   
+}
+.admin-home .left-sidebar {
+    flex: 2;
+    height: 100%;
+    background-color: #3e3e50;
+    border-right: 5px solid gray ; 
+    padding-top: 20px;
+}
+
+.admin-home .left-sidebar ul{
+    list-style-type: none;
+    margin:0px;
+    padding: 0px;
+}
+.admin-home .left-sidebar ul li a{
+    margin:0px;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    border-bottom: 3px solid #004044;
+}
+.admin-home .left-sidebar ul li a:hover{
+    /* background-color: #26262c; */
+    background-color:#00ADB5;
+
+}
+a{
+    text-decoration: none;
+}
+
+
+
+
+
+.admin-home .admin-content{
+  flex: 8;
+  height: 100%;
+  padding: 40px 100px 100px;
+  /* overflow-y: scroll; */
+}
+.btn{
+    background-color:#00ADB5 ;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 3px;
+}
+.admin-content .content{
+    margin-top: 20px;
+}
+.admin-content .content .page-title{
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom:16px;
+    font-style: normal;
+    font-weight: bolder;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+th,td{
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid gray;
+    font-family: 'Roboto', sans-serif;
+}
+
+.edit{
+    color: green;
+}
+.delete{
+    color: red;
+    margin-left: 20px;
+}
+.publish{
+    color:blue;
+    margin-left: 20px;
+}
+.edit:hover,.delete:hover,.publish:hover{
+    border-bottom: 2px solid gray;
+}
+
+
+
+
+/* create post */
+form{
+    border-radius: 8px;
+    background-color: #00ADB5;
+    padding: 20px;
+}
+form label{
+    color: black;
+}
+form .text-input{
+    width:100%;
+    height: 50px;
+    border: none;
+    background: #F5F5F5;
+    border-radius: 8px;
+}
+
+
+form .btn-sub{
+    margin-top: 10px;
+    background-color:white;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    border: 2px solid black;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 3px;
+}

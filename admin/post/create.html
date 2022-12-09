@@ -1,0 +1,108 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin-add Post</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <!-- fontawersome -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- <script src="https://kit.fontawesome.com/6eef1430d0.js" crossorigin="anonymous"></script>  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- google font robot Alconica -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Alegreya+Sans&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./index.html">
+                <img class="logo" src="../../images/logo.png" alt="">
+            </a>
+            <button id="menuicon" class="menu-btn">
+                <i class="fa-sharp fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="./pages/login.html">
+                    <!-- <button>Logout </button> -->
+                    <i class="fa-solid fa-user"></i>
+                    admin
+                    <!-- <span>
+                        <i class="fa-sharp fa-solid fa-chevron-down"></i>
+                    </span> -->
+                </a></li>
+            </ul>
+        </nav>
+        <div id="mainmenu" class="mobile">
+            <ul class="nav-links">
+                <li><a href="./pages/login.html"><button>Logout</button></a></li>
+            </ul>
+        </div>
+    </header>
+   
+
+    <!-- admin page section -->
+    <section  class="admin-home ">
+        <div class="left-sidebar">
+            <ul>
+                <li>
+                    <a href="../../index.html"><h1>Home</h1></a>
+                    <a href="./index.html">Manage Posts</a>
+                    <!-- <a href="../user/index.html">Manage Users</a>
+                    <a href="../topics/index.html">Manage Topics</a> -->
+                </li>
+            </ul>
+            
+
+        </div>
+        <div class="admin-content">
+            <div class="btn-group">
+                <a href="./create.html" class="btn" >Add Post</a>
+                <a href="./index.html" class="btn" >Manage Posts</a>
+            </div>
+
+
+
+            <div class="content">
+                <h1 class="page-title" >Manage Posts</h1> 
+
+                <form action="./create.html" method="post">
+                    <div>
+                        <label class="text-label">Title</label>
+                        <br>
+                        <input type="text" name="title" class="text-input">
+                    </div>
+
+                    <div>
+                        <label class="text-label">Body</label>
+                        <br>
+                        <textarea  name="" id="blog-editor" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn-sub">Add post</button>
+                    </div>
+                 
+                </form>
+
+            </div>
+            
+        </div>
+
+    </section>
+
+
+
+<!-- Ckeditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+
+
+<!-- script -->
+<script src="../../js/script.js"></script>
+    
+</body>
+</html>

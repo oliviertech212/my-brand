@@ -8,8 +8,12 @@ font-family: 'Rubik', sans-serif; */
 *{
     margin: 0;
 }
+Html{
+    scroll-behavior: smooth;
+}
 i{
     cursor: pointer;
+    text-decoration: none;
 }
 body{
     display: flex;
@@ -147,6 +151,11 @@ line-height: 82px;
     border-radius: 65px;
     border: none;
 }
+.hire-and-cvbtn button a{
+    text-decoration: none;
+    color:white;
+}
+
 
 
 
@@ -221,8 +230,10 @@ line-height: 82px;
 
 
 /* work section */
-.work-container{
+.work-section{
     margin-top: 100px;
+}
+.work-container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     /* gap:10px; */
@@ -284,8 +295,10 @@ line-height: 82px;
 
 
 /* blog section */
-.blog-container{
+.blog-section{
     margin-top: 100px;
+}
+.blog-container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     gap:10px;
@@ -574,6 +587,10 @@ footer  span{
     color: #00ADB5;
     margin-right: 70px;
     padding: 0%;
+}
+footer  span a i{
+    color: #00ADB5;
+    text-decoration: none;
 }
 span i{
     font-size: xx-large;
@@ -976,6 +993,7 @@ footer p{
 footer  span{
     display: flex;
     margin-right: 10px;
+     border: 2px solid green;
     padding: 0%;
 }
 span i{
@@ -984,6 +1002,6 @@ span i{
     width: 20px;
     height:auto; 
 }
-    
+ 
     
 }
