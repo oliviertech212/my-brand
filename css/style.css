@@ -25,6 +25,9 @@ body{
     /* color: #000000; */
     font-size: x-large;
 }
+.mobile ul{
+    list-style: none;
+}
 header{
     position: fixed;
     top: 0;
@@ -620,6 +623,7 @@ header .mobile{
 
 
 
+
 /* 320px — 480px: Mobile devices
 481px — 768px: iPads, Tablets
 769px — 1024px: Small screens, laptops
@@ -632,9 +636,12 @@ header .mobile{
 }
 
 @media (max-width:480px)and (min-width:320px) {
-    #mainmenu{
+    /* #mainmenu{
         display:block;
-    }
+    } */
+    /* .hide{
+        display: none;
+    } */
     .mobile ul{
         margin-right:0px;
     }
