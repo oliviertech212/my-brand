@@ -73,12 +73,22 @@
                 <form action="./create.html" method="post">
                     <div>
                         <label class="text-label">Title</label>
-                        <br>
                         <input type="text" name="title" class="text-input">
                     </div>
+                    <div>
+                        <label class="text-label">Date</label>
+                
+                        <input type="text" name="title" class="text-input">
+                    </div>
+                    <div>
+                        <label class="text-label">image</label>
+                     
+                        <input type="file" name="title" class="text-input">
+                    </div>
+                    
 
                     <div>
-                        <label class="text-label">Body</label>
+                        <label class="text-label">Content</label>
                         <br>
                         <textarea  name="" id="blog-editor" cols="30" rows="10"></textarea>
                     </div>
@@ -98,7 +108,16 @@
 
 
 <!-- Ckeditor -->
-<script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script> -->
+<!-- Tiny MCE -->
+<script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+<script>
+    tinymce.init({
+      selector: '#blog-editor'
+    });
+  </script>
 
 
 <!-- script -->
