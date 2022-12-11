@@ -1,6 +1,10 @@
 
 
 // javascript for mobile menuicon
+window.addEventListener("load",()=>{
+    document.getElementById("mainmenu").style.display="none";
+});
+
 
 function mobilemenu(){
     if(document.getElementById("mainmenu").style.display==="block"){
