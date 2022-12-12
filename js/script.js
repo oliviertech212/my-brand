@@ -58,7 +58,9 @@ function contactformvalidation(){
         alert("Please enter a valid e-mail address must contain @ and .");  
         return false;
     }else{
-        return true;
+        window.location.href="../index.html";
+        // return true;
     }
+   
 }
-// contactformvalidation();
+// contactformvalidation();g
