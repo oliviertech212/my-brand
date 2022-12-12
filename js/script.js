@@ -42,20 +42,23 @@ function contactformvalidation(){
     // There must be at least two characters after . (dot).
     let atposition=email.indexOf("@");
     // inorder to get last occurance
-    let dotposition=email.lastindexOf(".");
+    let dotposition=email.lastIndexOf(".");
 
-
-    if(name==null|| name==""){
+    if(name===null|| name===""){
         alert("Name can't be blank");
         return false;
     }else if (message.length>200) {
         alert("message must be lessthan 200 character");
         return false;
-    }else if (message==null||message=="") {
+    }else if (message===null||message==="") {
         alert("please enter your message");
         return false;
-    } else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
+    }
+    else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
         alert("Please enter a valid e-mail address must contain @ and .");  
         return false;
+    }else{
+        return true;
     }
 }
+contactformvalidation();
