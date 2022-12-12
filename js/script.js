@@ -58,9 +58,37 @@ function contactformvalidation(){
         alert("Please enter a valid e-mail address must contain @ and .");  
         return false;
     }else{
-        window.location.href="../index.html";
-        // return true;
+        return true;
     }
    
 }
 // contactformvalidation();g
+
+
+// login formvalidation
+// contact form validation
+
+function loginformvalidation(){
+    let password=document.loginform.password.value;
+    let email=document.loginform.email.value;
+
+    let atposition=email.indexOf("@");
+    let dotposition=email.lastIndexOf(".");
+
+    if(password===null|| password===""){
+        alert("password is must");
+        return false;
+    }
+    else if(password!="oliviertech"){
+      alert("password is incorrect");
+    }
+    else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
+        alert("Please enter a valid e-mail address must contain @ and .");  
+        return false;
+    }else if(email==="oliviertech27@gmail.com"){
+        return true;
+    }else{
+        alert("enter correct email")
+    }
+   
+}

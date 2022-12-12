@@ -48,11 +48,11 @@
     <section class="login-section">
         <div class="login-form">
            <div class="top-div">
-             <form action="" method="get">
+             <form  name="loginform" action="../admin/post/index.html" method="post" onsubmit="return loginformvalidation();">
                 <div class="label">
                    <h1>Login</h1>
-                  <input class="input" type="email" placeholder="email">
-                  <input class="input" type="password" placeholder="password">
+                  <input name="email" class="input" type="email" placeholder="email">
+                  <input name="password" class="input" type="password" placeholder="password">
                 </div>
                 <input class="login-btn" type="submit" value="Login">
              </form>
