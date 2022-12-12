@@ -66,7 +66,6 @@ function contactformvalidation(){
 
 
 // login formvalidation
-// contact form validation
 
 function loginformvalidation(){
     let password=document.loginform.password.value;
@@ -74,21 +73,26 @@ function loginformvalidation(){
 
     let atposition=email.indexOf("@");
     let dotposition=email.lastIndexOf(".");
+    
 
-    if(password===null|| password===""){
+
+    if(email!=="oliviertech27@gmail.com"||email===""){
+        alert("enter correct email");
+        return false;
+    } else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
+        alert("Please enter a valid e-mail address must contain @ and .");  
+        return false;
+    }
+    else if(password===null|| password===""){
         alert("password is must");
         return false;
     }
-    else if(password!="oliviertech"){
+    else if(password!=="oliviertech"){
       alert("password is incorrect");
+      return false;
     }
-    else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
-        alert("Please enter a valid e-mail address must contain @ and .");  
-        return false;
-    }else if(email==="oliviertech27@gmail.com"){
-        return true;
-    }else{
-        alert("enter correct email")
-    }
+   else if(email==="oliviertech27@gmail.com"&& password==="oliviertech"){
+    return true;
+   }
    
 }
