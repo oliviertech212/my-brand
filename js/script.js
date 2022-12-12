@@ -61,4 +61,4 @@ function contactformvalidation(){
         return true;
     }
 }
-contactformvalidation();
+// contactformvalidation();
