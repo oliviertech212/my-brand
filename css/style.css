@@ -748,9 +748,9 @@ margin-left: 0%;
     }
     .hire-and-cvbtn{
          display: flex;
+         width: 100%;
+         gap: 0px;
          margin: 2px auto 2px auto;
-         padding-left: 40px;
-         /* background-color: #0A0A0B; */
     }
     .hire-and-cvbtn button{
         padding: 2px 20px 2px 10px;
@@ -1010,7 +1010,7 @@ footer p{
 footer  span{
     display: flex;
     margin-right: 10px;
-     border: 2px solid green;
+     /* border: 2px solid green; */
     padding: 0%;
 }
 span i{

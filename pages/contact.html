@@ -52,19 +52,19 @@
         </div> 
         <div class="contact-form">
            <div class="left-div">
-                <form action="" method="post">
+                <form name="contactform" action="mailto:oliviertech27@gmail.com" method="post" onsubmit="return contactformvalidation()">
                   <div class="label">
                     <div class="mobile">
                       <label for="name">name</label><br>
-                    <input class="input" type="text" placeholder="enter your name">
+                    <input name="name" class="input" type="text" placeholder="enter your name">
                     </div>
                     <div class="mobile">
                       <label for="email">email</label><br>
-                    <input class="input" type="email" placeholder="enter your email">
+                    <input name="email" class="input" type="email" placeholder="enter your email">
                     </div>
                   </div>
                  <label for="message">message</label>
-                 <textarea class="message" placeholder="enter your message "  name="" id="" cols="30" rows="10"></textarea>
+                 <textarea class="message" placeholder="enter your message "  name="message" id="" cols="30" rows="10"></textarea>
                  <input class="send-btn" type="submit" value="send">
                 </form>
            </div>
