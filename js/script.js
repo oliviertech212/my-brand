@@ -130,8 +130,8 @@ const seterror=(element,messaage)=>{
     const errorDisplay=inputcontrol.querySelector(".error");
 
     errorDisplay.innerHTML=messaage;
-    inputcontrol.classList.add("error");
-    inputcontrol.classList.remove("success")
+    // inputcontrol.classList.add("error");
+    // inputcontrol.classList.remove("success")
 }
 
 const setsuccess=element=>{
@@ -139,8 +139,8 @@ const setsuccess=element=>{
     const errorDisplay=inputcontrol.querySelector(".error")
     
     errorDisplay.innerHTML="";
-    inputcontrol.classList.add("success");
-    inputcontrol.classList.remove("error");
+    // inputcontrol.classList.add("success");
+    // inputcontrol.classList.remove("error");
 
 }
 
