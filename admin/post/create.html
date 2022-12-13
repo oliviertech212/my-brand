@@ -101,7 +101,7 @@
                     <div>
                         <label class="text-label">Content</label>
                         <br>
-                        <textarea id="blogcontent"  name="" id="blog-editor" cols="30" rows="10"></textarea>
+                        <textarea   name="" id="blog-editor" cols="30" rows="10"></textarea>
                         <p class="error"></p>
                     </div>
 
@@ -135,7 +135,7 @@ const form2=document.getElementById("blogform");
 const blogtitle=document.getElementById("blogtitle");
 const blogimage=document.getElementById("blogimage");
 const blogdate=document.getElementById("blogdate");
-const blogconent=document.getElementById("blogcontent");
+const blogcontent=document.getElementById("blog-editor");
 
 form2.addEventListener("submit",e=>{
     e.preventDefault();
@@ -167,7 +167,7 @@ const validateinputs=()=>{
     // blogpost content
     const blogimagevalue=blogimage.value.trim();
     const blogtitlevalue= blogtitle.value.trim();
-    const blogcontentvalue= blogconent.value.trim();
+    const blogcontentvalue= blogcontent.value.trim();
     const blogdatevalue=blogdate.value.trim();
 
     if (blogtitlevalue==="") {

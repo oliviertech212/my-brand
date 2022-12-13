@@ -56,16 +56,16 @@
                   <div class="label">
                     <div class="mobile">
                       <label for="name">name</label><br>
-                    <input name="name" class="input" type="text" placeholder="enter your name">
+                    <input id="cname" name="name" class="input" type="text" placeholder="enter your name">
                     </div>
                     <div class="mobile">
                       <label for="email">email</label><br>
-                    <input name="email" class="input" type="email" placeholder="enter your email">
+                    <input id="cemail" name="email" class="input" type="email" placeholder="enter your email">
                     </div>
                   </div>
                  <label for="message">message</label>
-                 <textarea class="message" placeholder="enter your message "  name="message" id="" cols="30" rows="10"></textarea>
-                 <input class="send-btn" type="submit" value="send">
+                 <textarea  id="cmessage" class="message" placeholder="enter your message "  name="message" id="" cols="30" rows="10"></textarea>
+                 <input id="csubmit" class="send-btn" type="submit" value="send">
                 </form>
            </div>
            <div class="right-div">
@@ -108,7 +108,7 @@
 
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="../js/script.js"></script>    
 </body>
 </html>
