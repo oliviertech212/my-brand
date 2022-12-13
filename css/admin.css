@@ -143,3 +143,73 @@ form .btn-sub{
     font-family: 'Roboto', sans-serif;
     border-radius: 3px;
 }
+#mainmenu{
+    display: none;
+}
+
+@media (max-width:480px)and (min-width:320px) {
+    .admin-home{
+        margin-top:70px;
+        display: flex;
+        flex-direction: column;
+        
+       
+    }
+    #bordmenu {
+        display: none;
+    }  
+    
+    
+
+    .admin-home .admin-content{
+        /* padding: 20px 100px 100px; */
+        overflow-y:unset;
+        max-width: 100%;
+        max-height:fit-content;
+        padding-left: 0%;
+      }
+      .btn{
+          background-color:#00ADB5 ;
+          padding: 10px;
+          color: white;
+          font-weight: bold;
+          font-family: 'Roboto', sans-serif;
+          border-radius: 3px;
+      }
+      .admin-content .content{
+          margin-top: 20px;
+      }
+      .admin-content .content .page-title{
+          text-align: center;
+          font-family: 'Roboto', sans-serif;
+          margin-bottom:10px;
+          font-style: normal;
+          font-weight: bolder;
+      }
+      
+      table{
+          width: 100%;
+          text-align: center;
+          border-collapse: collapse;
+      }
+      .delete{
+        margin-left:0px;
+    }
+    .publish{
+        margin-left:0px;
+    }
+
+
+
+
+    form{
+        padding:10px;
+        width:100%;
+        margin: 20px auto 10px auto;
+    }
+    form div{
+        padding-top: 10px;
+    }
+      
+    
+}
