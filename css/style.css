@@ -634,7 +634,21 @@ header .mobile{
 .right-mobile{
     display: none;
 }
-
+/* form */
+ .success{
+    border-color: green;
+}
+ .failed{
+    border-color:red;
+    border:  2px solid red;
+}
+form div .error{
+    color: red;
+    font-size: 15px;
+    height: 13px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+}
 @media (max-width:480px)and (min-width:320px) {
     /* #mainmenu{
         display:block;
@@ -1023,6 +1037,6 @@ span i{
     
 }
 
-@media (ma) {
+/* @media (ma) {
     
-}
+} */

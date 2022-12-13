@@ -76,7 +76,7 @@ function loginformvalidation(){
     
 
 
-    if(email!=="oliviertech27@gmail.com"||email===""){
+    if(email!=="oliviertech27@gmail.com"||email===""||email===""){
         alert("enter correct email");
         return false;
     } else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
@@ -95,4 +95,93 @@ function loginformvalidation(){
     return true;
    }
    
+}
+
+
+
+
+
+
+
+
+// reset form validation
+
+const form=document.getElementById("resetform");
+const lastemail=document.getElementById("lastemail");
+const lastpassword=document.getElementById("lastpassword");
+const newemail=document.getElementById("newemail");
+const newpassword=document.getElementById("newpassword");
+
+
+
+if(form){
+
+    form.addEventListener("submit",e=>{
+        e.preventDefault();
+        validateinput();
+      },false);
+   
+  }
+
+
+
+const seterror=(element,messaage)=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error");
+
+    errorDisplay.innerHTML=messaage;
+    inputcontrol.classList.add("error");
+    inputcontrol.classList.remove("success")
+}
+
+const setsuccess=element=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error")
+    
+    errorDisplay.innerHTML="";
+    inputcontrol.classList.add("success");
+    inputcontrol.classList.remove("error");
+
+}
+
+const validateinput=()=>{
+    const lastemailvalue=lastemail.value.trim();
+    const lastpasswordvalue=lastpassword.value.trim();
+    const newemailvalue=newemail.value.trim();
+    const newpasswordvalue=newpassword.value.trim();
+
+    // let atposition=lastemailvalue.indexOf("@");
+    // inorder to get last occurance
+    // let dotposition=lastemailvalue.lastIndexOf(".");
+
+    if (lastemailvalue===""){
+        seterror(lastemail,"lastemail is required");
+    }
+    else{
+        setsuccess(lastemail)
+    }
+
+    if(lastpasswordvalue===""){
+        seterror(lastpassword,"please enter last password");
+    }else{
+        setsuccess(lastpassword);
+    }
+
+
+
+
+
+    if (newemailvalue===""){
+        seterror(newemail,"newemail is required");
+    }
+    else{
+        setsuccess(newemail)
+    }
+
+    if(newpasswordvalue===""){
+        seterror(newpassword,"please enter newpassword");
+    }else{
+        setsuccess(newpassword);
+    }
+
 }
