@@ -170,6 +170,14 @@ const validateinputs=()=>{
     const blogcontentvalue= blogcontent.value.trim();
     const blogdatevalue=blogdate.value.trim();
 
+    let blog = {
+        blogcontent:blogcontentvalue,
+        blogdate:blogdatevalue,
+        blogimage:blogimagevalue,
+        blogtitle:blogtitlevalue
+    }
+    window.localStorage.setItem("blog",JSON.stringify(blog));
+
     if (blogtitlevalue==="") {
         seterror(blogtitle,"please blog must contain title");
         

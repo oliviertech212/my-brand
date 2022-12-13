@@ -61,8 +61,17 @@ function contactformvalidation(){
         alert("Please enter a valid e-mail address must contain @ and .");  
         return false;
     }else{
+        // localstorage
+    let userdetails = {
+        username:name,
+        useremail:email,
+        usermessage:message
+    }
+    window.localStorage.setItem("visitor",JSON.stringify(userdetails));
         return true;
     }
+
+    
    
 }
 // contactformvalidation();g
@@ -77,10 +86,14 @@ function loginformvalidation(){
     let atposition=email.indexOf("@");
     let dotposition=email.lastIndexOf(".");
     
+    let user = {
+        email:email,
+        password:password
+    }
+    window.localStorage.setItem("admin",JSON.stringify(user));
 
-
-    if(email!=="oliviertech27@gmail.com"||email===""||email===""){
-        alert("enter correct email");
+    if(email===""||email===""){
+        alert("enter  email");
         return false;
     } else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
         alert("Please enter a valid e-mail address must contain @ and .");  
@@ -90,11 +103,11 @@ function loginformvalidation(){
         alert("password is must");
         return false;
     }
-    else if(password!=="oliviertech"){
+    else if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
       alert("password is incorrect");
       return false;
     }
-   else if(email==="oliviertech27@gmail.com"&& password==="oliviertech"){
+   else {
     return true;
    }
    
@@ -124,7 +137,7 @@ if(form){
         validateinput();
       },false);
    
-  }
+}
 
 
 
@@ -156,6 +169,13 @@ const validateinput=()=>{
     // let atposition=lastemailvalue.indexOf("@");
     // inorder to get last occurance
     // let dotposition=lastemailvalue.lastIndexOf(".");
+    let userReset = {
+        email:lastemailvalue,
+        password:lastpasswordvalue,
+        newemail:newemailvalue,
+        newpassword:newpasswordvalue
+    }
+    window.localStorage.setItem("AdminReset",JSON.stringify(userReset));
 
     if (lastemailvalue===""){
         seterror(lastemail,"lastemail is required");
@@ -188,3 +208,6 @@ const validateinput=()=>{
     }
 
 }
+
+
+
