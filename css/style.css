@@ -639,8 +639,8 @@ header .mobile{
     border-color: green;
 }
  .failed{
-    border-color:red;
-    border:  2px solid red;
+    border-color: red;
+    /* border:2px solid red; */
 }
 form div .error{
     color: red;
