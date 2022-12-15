@@ -83,19 +83,8 @@
                         <th>Date</th>
                         <th colspan="3">Action</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>UI & UX Developer</td>
-                            <td>08/12/2022</td>
-                            <td>
-                              <a href="http://" class="edit">edit</a>  
-                              <a href="http://" class="delete">delete</a> 
-                              <a href="http://" class="publish">publish</a> 
-                            </td>
-                        </tr> 
-
-                        <tr>
+                    <tbody id="blogtable">
+                        <!-- <tr>
                             <td>2</td>
                             <td>Front-end Developer</td>
                             <td>08/12/2022</td>
@@ -115,7 +104,7 @@
                               <a href="http://" class="delete">delete</a> 
                               <a href="http://" class="publish">publish</a> 
                             </td>
-                        </tr> 
+                        </tr>  -->
 
                     </tbody>
                  </table>
@@ -142,6 +131,56 @@
         
         
     </footer> -->
+<script>
+  
+if(localStorage.getItem("blogs")!==null){
+    
+    let arr=JSON.parse(localStorage.getItem("blogs"))
+    arr.forEach((blog, index) => {
+        // console.log(JSON.parse(blog));
+    //    return JSON.parse(blog)
+       console.log(blog)
+    //    console.log(singleObject);
+      let display= document.getElementById("blogtable");
+    
+      
+       display.insertAdjacentHTML("beforeend",`
+                        <tr id="${index+1}">
+                            <td>${index+1}</td>
+                            <td>${blog.blogtitle}</td>
+                            <td>${blog.blogdate}</td>
+                            <td>
+                              <a href="http://" class="edit">edit</a>  
+                              <a type="button" id="delet" class="delete">delete</a> 
+                              <a href="http://" class="publish">publish</a> 
+                            </td>
+                        </tr> `);
+
+
+                    let delet=   document.querySelectorAll(".delete")
+                    delet.forEach(blog=>{
+                        blog.addEventListener("click",()=>{
+                        // console.log("deleted");
+                        deleteData(index)
+                        window.location.href="./index.html"
+                       })
+                    })
+
+    });
+    function deleteData(index) {
+    arr.splice(index, 1);
+    localStorage.setItem("blogs",JSON.stringify(arr));
+    // table();
+
+    // console.log('delete work')
+    // console.log(details)
+};
+    
+}
+
+
+// localStorage.clear()
+</script>
    
 
 

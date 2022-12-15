@@ -67,6 +67,7 @@
             
 
         </div>
+      
         <div class="admin-content">
             <div class="btn-group">
                 <a href="./create.html" class="btn" >Add Post</a>
@@ -78,7 +79,7 @@
             <div class="content">
                 <h1 class="page-title" >Manage Posts</h1> 
 
-                <form id="blogform" action="" onsubmit="return validateinputs()">
+                <form id="blogform" autocomplete="off" action="" >
                     <div>
                         <label class="text-label">Title</label>
                         <input id="blogtitle" type="text" name="title" class="text-input">
@@ -106,11 +107,13 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn-sub">Add post</button>
+                        <button type="submit" id="btn" class="btn-sub">Add post</button>
                     </div>
                  
                 </form>
+                <div id="test" class="test">
 
+                </div>
             </div>
             
         </div>
@@ -122,25 +125,24 @@
 <!-- Ckeditor -->
 <!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script> -->
 <!-- Tiny MCE -->
-<script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 
 
 <script>
-    tinymce.init({
-      selector: '#blog-editor'
-    });
+    // localStorage.clear()
+    // tinymce.init({
+    //   selector: '#blog-editor'
+    // });
 
     // form rorblogpost
 const form2=document.getElementById("blogform");
 const blogtitle=document.getElementById("blogtitle");
 const blogimage=document.getElementById("blogimage");
+// .files[0];
 const blogdate=document.getElementById("blogdate");
 const blogcontent=document.getElementById("blog-editor");
+const btn=document.getElementById("btn");
 
-form2.addEventListener("submit",e=>{
-    e.preventDefault();
-    validateinputs();
-});
 
 
 // const seterror=(element,messaage)=>{
@@ -165,18 +167,19 @@ form2.addEventListener("submit",e=>{
 const validateinputs=()=>{
    
     // blogpost content
-    const blogimagevalue=blogimage.value.trim();
-    const blogtitlevalue= blogtitle.value.trim();
-    const blogcontentvalue= blogcontent.value.trim();
-    const blogdatevalue=blogdate.value.trim();
+    // const blogimagevalue=`<img src=${URL.createObjectURL(blogimage)}>`;
+    const blogimagevalue= blogimage.value;
+    const blogtitlevalue= blogtitle.value;
+    const blogcontentvalue= blogcontent.value;
+    const blogdatevalue=blogdate.value;
 
-    let blog = {
+    let blog={
         blogcontent:blogcontentvalue,
         blogdate:blogdatevalue,
         blogimage:blogimagevalue,
         blogtitle:blogtitlevalue
-    }
-    window.localStorage.setItem("blog",JSON.stringify(blog));
+    };
+   
 
     if (blogtitlevalue==="") {
         seterror(blogtitle,"please blog must contain title");
@@ -203,11 +206,58 @@ const validateinputs=()=>{
         seterror(blogcontent,"write body content");
         
     } else {
-        setsuccess(blogconent)
+        setsuccess(blogcontent)
     }
+
+    
+ // if nothing saved in local storage
+ if(localStorage.getItem("blogs")==null){
+        localStorage.setItem("blogs","[]");
+ }else{
+     let old_data=JSON.parse(localStorage.getItem("blogs"));
+     if((blogcontentvalue && blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
+        old_data.push(blog);
+    }
+  
+    // save the old+new dat to local storage
+    localStorage.setItem("blogs",JSON.stringify(old_data))
+    // localStorage.clear()
+    let arr=JSON.parse(localStorage.getItem("blogs"))
+    console.log(arr)
+    // arr.forEach(blog => {
+    //     // console.log(JSON.parse(blog));
+    // });
+    
+    
+ }
+
+//  to view my data
 
 
 }
+// if(localStorage.getItem("blogs")!==null){
+//     let arr=JSON.parse(localStorage.getItem("blogs"))
+//     arr.forEach(blog => {
+//         // console.log(JSON.parse(blog));
+//     //    return JSON.parse(blog)
+//        console.log(blog)
+//     //    console.log(singleObject);
+//       let display= document.getElementById("test");
+      
+//        display.insertAdjacentHTML("beforeend",`<h1>${blog.blogtitle}</h1>`);
+//     });
+    
+// }
+
+
+btn.addEventListener("click",e=>{
+    e.preventDefault();
+    validateinputs();
+    blogimagevalue=blogimage.value="";
+    blogtitlevalue= blogtitle.value="";
+    blogcontentvalue= blogcontent.value="";
+    blogdatevalue=blogdate.value="";
+});
 </script>
 
 
