@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,38 +82,8 @@
                 <h1 class="page-title" >Manage Posts</h1> 
 
                 <form id="blogform" autocomplete="off" action="" >
-                    <div>
-                        <label class="text-label">Title</label>
-                        <input id="blogtitle" type="text" name="title" class="text-input">
-                        <p class="error"></p>
-                    </div>
-                    <div>
-                        <label class="text-label">Date</label>
-                
-                        <input id="blogdate" type="text" name="title" class="text-input">
-                        <p class="error"></p>
-                    </div>
-                    <div>
-                        <label class="text-label">image</label>
-                     
-                        <input id="blogimage" type="file" name="title" >
-                        <p class="error"></p>
-                    </div>
                     
-
-                    <div>
-                        <label class="text-label">Content</label>
-                        <br>
-                        <textarea   name="" class="blog-editor" id="blog-editor" cols="30" rows="10"></textarea>
-                        <p class="error"></p>
-                    </div>
-
-                    <div>
-                        <button type="submit" id="btn" class="btn-sub">Add post</button>
-                    </div>
-                 
                 </form>
-                <div id="test" class="test">
 
                 </div>
             </div>
@@ -131,42 +103,27 @@
 <script>
     // localStorage.clear()
     // tinymce.init({
-    //   selector: '.blog-editor'
+    //   selector: '#blog-editor'
     // });
 
     // form rorblogpost
 const form2=document.getElementById("blogform");
 const blogtitle=document.getElementById("blogtitle");
 const blogimage=document.getElementById("blogimage");
+// .files[0];
 const blogdate=document.getElementById("blogdate");
 const blogcontent=document.getElementById("blog-editor");
 const btn=document.getElementById("btn");
 
 
 
-// const seterror=(element,messaage)=>{
-//     const inputcontrol=element.parentElement;
-//     const errorDisplay=inputcontrol.querySelector(".error");
 
-//     errorDisplay.innerHTML=messaage;
-//     inputcontrol.classList.add("error");
-//     inputcontrol.classList.remove("success")
-// }
-
-// const setsuccess=element=>{
-//     const inputcontrol=element.parentElement;
-//     const errorDisplay=inputcontrol.querySelector(".error")
-    
-//     errorDisplay.innerHTML="";
-//     inputcontrol.classList.add("success");
-//     inputcontrol.classList.remove("error");
-
-// }
 
 const validateinputs=()=>{
    
     // blogpost content
-    const blogimagevalue=blogimage.value;
+    // const blogimagevalue=`<img src=${URL.createObjectURL(blogimage)}>`;
+    const blogimagevalue= blogimage.value;
     const blogtitlevalue= blogtitle.value;
     const blogcontentvalue= blogcontent.value;
     const blogdatevalue=blogdate.value;
@@ -233,29 +190,83 @@ const validateinputs=()=>{
 
 
 }
-// if(localStorage.getItem("blogs")!==null){
-//     let arr=JSON.parse(localStorage.getItem("blogs"))
-//     arr.forEach(blog => {
-//         // console.log(JSON.parse(blog));
-//     //    return JSON.parse(blog)
-//        console.log(blog)
-//     //    console.log(singleObject);
-//       let display= document.getElementById("test");
-      
-//        display.insertAdjacentHTML("beforeend",`<h1>${blog.blogtitle}</h1>`);
-//     });
+
+if(localStorage.getItem("blogs")!==null){
     
-// }
+    let arr=JSON.parse(localStorage.getItem("blogs"))
+    arr.forEach((blog, index) => {
+        // console.log(JSON.parse(blog));
+    //    return JSON.parse(blog)
+       console.log(blog)
+    //    console.log(singleObject);
+      let display= document.getElementById("blogform");
+    
+      
+       display.insertAdjacentHTML("beforeend",`
+                    <div>
+                        <label class="text-label">Title</label>
+                        <input id="blogtitle" type="text" name="title"value=${blog.blogtitle} class="text-input">
+                        <p class="error"></p>
+                    </div>
+                    <div>
+                        <label class="text-label">Date</label>
+                
+                        <input id="blogdate" type="text" name="title" value=${blog.blogdate}   class="text-input">
+                        <p class="error"></p>
+                    </div>
+                    <div>
+                        <label class="text-label">image</label>
+                     
+                        <input id="blogimage" type="file"  value=${blog.blogimage}  name="title" >
+                        <p class="error"></p>
+                    </div>
+                    
+
+                    <div>
+                        <label class="text-label">Content</label>
+                        <br>
+                        <textarea   name="" id="blog-editor" value=${blog.blogcontent}  cols="30" rows="10"></textarea>
+                        <p class="error"></p>
+                    </div>
+
+                    <div>
+                        <button type="submit" id="btn" class="btn-sub">UPDATE</button>
+                    </div>
+                 
+            
+
+                         `);
 
 
-btn.addEventListener("click",e=>{
-    e.preventDefault();
-    validateinputs();
-    blogimagevalue=blogimage.value="";
-    blogtitlevalue= blogtitle.value="";
-    blogcontentvalue= blogcontent.value="";
-    blogdatevalue=blogdate.value="";
-});
+                    let delet=   document.querySelectorAll(".delete")
+                    delet.forEach(blog=>{
+                        blog.addEventListener("click",()=>{
+                        // console.log("deleted");
+                        deleteData(index)
+                        
+                       })
+                    })
+
+    });
+    function deleteData(index) {
+    arr.splice(index, 1);
+    localStorage.setItem("blogs",JSON.stringify(arr));
+    // table();
+
+    // console.log('delete work')
+    // console.log(details)
+};
+    
+}
+
+// btn.addEventListener("click",e=>{
+//     e.preventDefault();
+//     validateinputs();
+//     blogimagevalue=blogimage.value="";
+//     blogtitlevalue= blogtitle.value="";
+//     blogcontentvalue= blogcontent.value="";
+//     blogdatevalue=blogdate.value="";
+// });
 </script>
 
 
