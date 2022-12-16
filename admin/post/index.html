@@ -96,20 +96,6 @@
 
 
 
-    <!-- <footer>
-        <img class="logo" src="./images/images-removebg-preview.png" alt="">
-        <p>
-            <i class="fa-regular fa-copyright"></i>Copyright 2022. Designed by olivier 
-        </p>
-            <span>
-                <i class="fa-brands fa-facebook"></i> 
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-linkedin"></i>
-                <i class="fa-brands fa-github"></i>
-            </span>
-        
-        
-    </footer> -->
 <script>
   
 if(localStorage.getItem("blogs")!==null){
@@ -121,13 +107,18 @@ if(localStorage.getItem("blogs")!==null){
        console.log(blog)
     //    console.log(singleObject);
       let display= document.getElementById("blogtable");
+    //   <td><img width="20px" height="20px" src=${blog.blogimage}/></td>
+    // <td><img width="20px" height="20px" src="${blog.blogimage}"></td>
+    console.log(blog.blogimage);
     
-      
        display.insertAdjacentHTML("beforeend",`
-                        <tr id="${index+1}">
+                        <tr id="${index}">
                             <td>${index+1}</td>
                             <td>${blog.blogtitle}</td>
                             <td>${blog.blogdate}</td>
+                          
+                            
+    
                             <td>
                               <a href="./edit.html" class="edit">edit</a>  
                               <a type="button" id="delet" class="delete">delete</a> 
@@ -149,10 +140,9 @@ if(localStorage.getItem("blogs")!==null){
     function deleteData(index) {
     arr.splice(index, 1);
     localStorage.setItem("blogs",JSON.stringify(arr));
-    // table();
 
     // console.log('delete work')
-    // console.log(details)
+  
 };
     
 }

@@ -88,7 +88,7 @@
                     <div>
                         <label class="text-label">Date</label>
                 
-                        <input id="blogdate" type="text" name="title" class="text-input">
+                        <input id="blogdate" type="date" name="title" class="text-input">
                         <p class="error"></p>
                     </div>
                     <div>
@@ -102,7 +102,7 @@
                     <div>
                         <label class="text-label">Content</label>
                         <br>
-                        <textarea   name="" class="blog-editor" id="blog-editor" cols="30" rows="10"></textarea>
+                        <textarea   name="" class="blog-editor" id="blog-editor" width="40" rows="10"></textarea>
                         <p class="error"></p>
                     </div>
 
@@ -130,9 +130,9 @@
 
 <script>
     // localStorage.clear()
-    // tinymce.init({
-    //   selector: '.blog-editor'
-    // });
+    tinymce.init({
+      selector: '#blog-editor'
+    });
 
     // form rorblogpost
 const form2=document.getElementById("blogform");
@@ -142,34 +142,47 @@ const blogdate=document.getElementById("blogdate");
 const blogcontent=document.getElementById("blog-editor");
 const btn=document.getElementById("btn");
 
+let image;
 
-
-// const seterror=(element,messaage)=>{
-//     const inputcontrol=element.parentElement;
-//     const errorDisplay=inputcontrol.querySelector(".error");
-
-//     errorDisplay.innerHTML=messaage;
-//     inputcontrol.classList.add("error");
-//     inputcontrol.classList.remove("success")
-// }
-
-// const setsuccess=element=>{
-//     const inputcontrol=element.parentElement;
-//     const errorDisplay=inputcontrol.querySelector(".error")
+blogimage.addEventListener("change",(e)=>{
     
-//     errorDisplay.innerHTML="";
-//     inputcontrol.classList.add("success");
-//     inputcontrol.classList.remove("error");
+        const img=e.target.files[0];
 
-// }
+        const reader=new FileReader();
+
+        reader.readAsDataURL(img);
+        // console.log(reader.readAsDataURL(img))
+      
+        reader.addEventListener("load",()=>{
+            image=reader.result;
+            console.log(image);
+
+        });
+    });
+   
+
 
 const validateinputs=()=>{
+  
+  
+    // blogimage.addEventListener("change",()=>{
+    //     const reader=new FileReader();
+    //     reader.addEventListener("load",()=>{
+    //     //   image=reader.result;  
+    //     console.log(reader.result);
+    //     })
+    //     reader.readAsDataURL(blogimage.files[0]);
+    //     console.log(reader.readAsDataURL(blogimage.files[0]));
+    //    })
+
+
+    //    console.log(image);
    
     // blogpost content
-    const blogimagevalue=blogimage.value;
-    const blogtitlevalue= blogtitle.value;
-    const blogcontentvalue= blogcontent.value;
-    const blogdatevalue=blogdate.value;
+    let blogimagevalue=image;
+    let blogtitlevalue= blogtitle.value;
+    let blogcontentvalue= blogcontent.value;
+    let blogdatevalue=blogdate.value;
 
     let blog={
         blogcontent:blogcontentvalue,
@@ -200,32 +213,31 @@ const validateinputs=()=>{
         setsuccess(blogimage)
     }
 
-    if (blogcontentvalue==="") {
-        seterror(blogcontent,"write body content");
+    // if (blogcontentvalue==="") {
+    //     seterror(blogcontent,"write body content");
         
-    } else {
-        setsuccess(blogcontent)
-    }
+    // } else {
+    //     setsuccess(blogcontent)
+    // }
 
     
  // if nothing saved in local storage
  if(localStorage.getItem("blogs")==null){
         localStorage.setItem("blogs","[]");
  }else{
+    // localStorage.setItem("blogs",JSON.stringify(blog));
      let old_data=JSON.parse(localStorage.getItem("blogs"));
-     if((blogcontentvalue && blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
+     if(( blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
+        // console.log(blog);
         old_data.push(blog);
     }
+    console.log(old_data);
   
     // save the old+new dat to local storage
     localStorage.setItem("blogs",JSON.stringify(old_data))
     // localStorage.clear()
     let arr=JSON.parse(localStorage.getItem("blogs"))
-    console.log(arr)
-    // arr.forEach(blog => {
-    //     // console.log(JSON.parse(blog));
-    // });
-    
+    // console.log(arr)
     
  }
 

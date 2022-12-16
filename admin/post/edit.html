@@ -94,181 +94,165 @@
 
 
 
-<!-- Ckeditor -->
-<!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script> -->
-<!-- Tiny MCE -->
-<script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
-
-<script>
-    // localStorage.clear()
-    // tinymce.init({
-    //   selector: '#blog-editor'
-    // });
-
-    // form rorblogpost
-const form2=document.getElementById("blogform");
-const blogtitle=document.getElementById("blogtitle");
-const blogimage=document.getElementById("blogimage");
-// .files[0];
-const blogdate=document.getElementById("blogdate");
-const blogcontent=document.getElementById("blog-editor");
-const btn=document.getElementById("btn");
-
-
-
-
-
-const validateinputs=()=>{
-   
-    // blogpost content
-    // const blogimagevalue=`<img src=${URL.createObjectURL(blogimage)}>`;
-    const blogimagevalue= blogimage.value;
-    const blogtitlevalue= blogtitle.value;
-    const blogcontentvalue= blogcontent.value;
-    const blogdatevalue=blogdate.value;
-
-    let blog={
-        blogcontent:blogcontentvalue,
-        blogdate:blogdatevalue,
-        blogimage:blogimagevalue,
-        blogtitle:blogtitlevalue
-    };
-   
-
-    if (blogtitlevalue==="") {
-        seterror(blogtitle,"please blog must contain title");
-        
-    } else {
-        setsuccess(blogtitle)
-    }
-
-    if (blogdatevalue==="") {
-        seterror(blogdate,"please blog must contain date");
-    } else {
-        setsuccess(blogdate)
-    }
-
-    if (blogtitlevalue===""||blogimagevalue==null) {
-        seterror(blogimage,"please choose image for blog");
-        
-    } else {
-        console.log(blogimagevalue);
-        setsuccess(blogimage)
-    }
-
-    if (blogcontentvalue==="") {
-        seterror(blogcontent,"write body content");
-        
-    } else {
-        setsuccess(blogcontent)
-    }
-
+    <script>
+        // localStorage.clear()
+        // tinymce.init({
+        //   selector: '#blog-editor'
+        // });
     
- // if nothing saved in local storage
- if(localStorage.getItem("blogs")==null){
-        localStorage.setItem("blogs","[]");
- }else{
-     let old_data=JSON.parse(localStorage.getItem("blogs"));
-     if((blogcontentvalue && blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
-        old_data.push(blog);
-    }
-  
-    // save the old+new dat to local storage
-    localStorage.setItem("blogs",JSON.stringify(old_data))
-    // localStorage.clear()
-    let arr=JSON.parse(localStorage.getItem("blogs"))
-    console.log(arr)
-    // arr.forEach(blog => {
-    //     // console.log(JSON.parse(blog));
-    // });
+        // form rorblogpost
+    const form2=document.getElementById("blogform");
+    const blogtitle=document.getElementById("blogtitl");
+    const blogimage=document.getElementById("blogimag");
+    const blogdate=document.getElementById("blogdat");
+    const blogcontent=document.getElementById("blog-edito");
+    const btn=document.getElementById("btn");
     
     
- }
-
-//  to view my data
-
-
-}
-
-if(localStorage.getItem("blogs")!==null){
     
-    let arr=JSON.parse(localStorage.getItem("blogs"))
-    arr.forEach((blog, index) => {
-        // console.log(JSON.parse(blog));
-    //    return JSON.parse(blog)
-       console.log(blog)
-    //    console.log(singleObject);
-      let display= document.getElementById("blogform");
     
-      
-       display.insertAdjacentHTML("beforeend",`
-                    <div>
-                        <label class="text-label">Title</label>
-                        <input id="blogtitle" type="text" name="title"value=${blog.blogtitle} class="text-input">
-                        <p class="error"></p>
-                    </div>
-                    <div>
-                        <label class="text-label">Date</label>
-                
-                        <input id="blogdate" type="text" name="title" value=${blog.blogdate}   class="text-input">
-                        <p class="error"></p>
-                    </div>
-                    <div>
-                        <label class="text-label">image</label>
-                     
-                        <input id="blogimage" type="file"  value=${blog.blogimage}  name="title" >
-                        <p class="error"></p>
-                    </div>
-                    
+    
+    const validateinputs=()=>{
+       
+        // blogpost content
+        // const blogimagevalue=`<img src=${URL.createObjectURL(blogimage)}>`;
 
-                    <div>
-                        <label class="text-label">Content</label>
-                        <br>
-                        <textarea   name="" id="blog-editor" value=${blog.blogcontent}  cols="30" rows="10"></textarea>
-                        <p class="error"></p>
-                    </div>
 
-                    <div>
-                        <button type="submit" id="btn" class="btn-sub">UPDATE</button>
-                    </div>
-                 
+        // const blogimagevalue= blogimage;
+        // const blogtitlevalue= blogtitle;
+        // const blogcontentvalue= blogcontent;
+        // const blogdatevalue=blogdate;
+    
+        // let blog={
+        //     blogcontent:blogcontentvalue,
+        //     blogdate:blogdatevalue,
+        //     blogimage:blogimagevalue,
+        //     blogtitle:blogtitlevalue
+        // };
+       
+    
+        // if (blogtitlevalue==="") {
+        //     seterror(blogtitle,"please blog must contain title");
             
-
-                         `);
-
-
-                    let delet=   document.querySelectorAll(".delete")
-                    delet.forEach(blog=>{
-                        blog.addEventListener("click",()=>{
-                        // console.log("deleted");
-                        deleteData(index)
-                        
-                       })
-                    })
-
-    });
-    function deleteData(index) {
-    arr.splice(index, 1);
-    localStorage.setItem("blogs",JSON.stringify(arr));
-    // table();
-
-    // console.log('delete work')
-    // console.log(details)
-};
+        // } else {
+        //     setsuccess(blogtitle)
+        // }
     
-}
-
-// btn.addEventListener("click",e=>{
-//     e.preventDefault();
-//     validateinputs();
-//     blogimagevalue=blogimage.value="";
-//     blogtitlevalue= blogtitle.value="";
-//     blogcontentvalue= blogcontent.value="";
-//     blogdatevalue=blogdate.value="";
-// });
-</script>
-
+        // if (blogdatevalue==="") {
+        //     seterror(blogdate,"please blog must contain date");
+        // } else {
+        //     setsuccess(blogdate)
+        // }
+    
+        // if (blogtitlevalue===""||blogimagevalue==null) {
+        //     seterror(blogimage,"please choose image for blog");
+            
+        // } else {
+        //     console.log(blogimagevalue);
+        //     setsuccess(blogimage)
+        // }
+    
+        // if (blogcontentvalue==="") {
+        //     seterror(blogcontent,"write body content");
+            
+        // } else {
+        //     setsuccess(blogcontent)
+        // }
+    
+        
+     // if nothing saved in local storage
+     if(localStorage.getItem("blogs")==null){
+            localStorage.setItem("blogs","[]");
+     }else{
+         let old_data=JSON.parse(localStorage.getItem("blogs"));
+        //  if((blogcontentvalue && blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
+        //     old_data.push(blog);
+        // }
+      
+        // save the old+new dat to local storage
+        localStorage.setItem("blogs",JSON.stringify(old_data))
+        // localStorage.clear()
+        let arr=JSON.parse(localStorage.getItem("blogs"))
+        console.log(arr)
+        // arr.forEach(blog => {
+        //     // console.log(JSON.parse(blog));
+        // });
+        
+        
+     }
+    }
+    
+    let button;
+    
+    if(localStorage.getItem("blogs")!==null){
+        
+        let arr=JSON.parse(localStorage.getItem("blogs"))
+        arr.forEach((blog, index) => {
+           
+           console.log(index)
+        //    console.log(singleObject)
+          function edit(index){
+            let display= document.getElementById("blogform");
+            display.innerHTML=(`
+                        <div>
+                            <label class="text-label">Title</label>
+                            <input id="blogtitl" type="text" name="title"value=${blog.blogtitle} class="text-input">
+                            <p class="error"></p>
+                        </div>
+                        <div>
+                            <label class="text-label">Date</label>
+                    
+                            <input id="blogdat" type="date" name="title" value=${blog.blogdate}   class="text-input">
+                            <p class="error"></p>
+                        </div>
+                        <div>
+                            <label class="text-label">image</label>
+                         
+                            <input id="blogimag" type="file"  value=${blog.blogimage}  name="title" >
+                            <p class="error"></p>
+                        </div>
+                        
+    
+                        <div>
+                            <label class="text-label">Content</label>
+                            <br>
+                            <textarea   name="" id="blog-edito" value=${blog.blogcontent}  cols="30" rows="10"></textarea>
+                            <p class="error"></p>
+                        </div>
+    
+                        <div>
+                            <button type="submit" id="btn" onclick="${update(index)}"   class="btn-sub">UPDATE</button>
+                        </div>
+                   
+    
+                             `);
+          }edit()
+            function update(index) {
+                validateinputs();
+                const blogtitle=document.getElementById("blogtitl");
+                const blogimage=document.getElementById("blogimag");
+                const blogdate=document.getElementById("blogdat");
+                const blogcontent=document.getElementById("blog-edito");
+                const btn=document.getElementById("btn");
+      
+            blog={
+            blogcontent:blogcontent,
+            blogdate:blogdate,
+            blogimage:blogimage,
+            blogtitle:blogtitle
+            };
+            console.log(arr);
+       
+        //   localStorage.setItem("blogs",JSON.stringify(arr));
+        //   document.getElementById("").innerHTML = form;
+        }
+    
+        });
+        
+    }
+    </script>
+    
 
 <!-- script -->
 <script src="../../js/script.js"></script>
