@@ -53,7 +53,7 @@
             <hr>
         </div> 
         <div class="blog-container">
-            <div class="blog">
+            <!-- <div class="blog">
                 <p class="date">november/30/2022</p>
                 <h1>UX/UI developers and UX/UI designers</h1>
                 <div class="blog-pc">
@@ -136,7 +136,7 @@
                      </span>
                 </div>
 
-            </div>
+            </div> -->
         </div>
       </section>
 
@@ -163,7 +163,58 @@
         
     </footer>
    
+    <script>
 
+    blogs=JSON.parse(localStorage.getItem("blogs"));
+
+
+    let blogDisplay=document.querySelector(".blog-container");
+    blogs.forEach((blog,index ) => {
+
+        console.log(blog,index);
+
+        // function blogRendering(){
+           blogDisplay.insertAdjacentHTML("beforeend",(
+            ` <div class="blog">
+                    <p class="date">${blog.blogdate}</p>
+                    <h1>${blog.blogtitle}</h1>
+                    <div class="blog-pc">
+                    <img  class="mobile"  src="${blog.blogimage}" alt="">
+                    </div>
+                    <div id="blog-desc" class="blog-desc">${blog.blogcontent} </div>
+                    <div>
+                        <a href="../blogs/ui.html" target="_blank">
+                            <button type="button">
+                                Read more
+                                <span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </span>  
+                            </button>
+                        </a>
+                    </div>
+                    <div class="like-comment">like
+                         <span> <i class="fa-solid fa-thumbs-up"></i></span>
+                         comment 
+                         <span class="material-symbols-outlined">
+                            comment
+                         </span>
+                    </div>
+                </div>
+                `
+
+            ))
+               
+                
+        // }
+        // blogRendering()
+            
+        
+    });
+
+
+
+
+    </script>
 
 
     <script src="../js/script.js"></script>   

@@ -1,5 +1,5 @@
 
-
+//    manageposts();
 
 // javascript for mobile menuicon
 window.addEventListener("load",()=>{
@@ -35,46 +35,89 @@ document.getElementById("menuicon").addEventListener("click",mobilemenu);
 
 
 // contact form validation
-
+const contactform=document.getElementById("cform");
+let csubmit=document.getElementById("csubmit");
 function contactformvalidation(){
-    let name=document.contactform.name.value;
-    let email=document.contactform.email.value;
-    let message=document.contactform.message.value;
+    const cname=document.querySelector(".cname");
+    const cemail=document.querySelector(".cemail");
+    const cmessage=document.querySelector(".cmessage");
     // email id must contain the @ and . character
     // There must be at least one character before and after the @.
     // There must be at least two characters after . (dot).
-    let atposition=email.indexOf("@");
+    let atposition=cemail.value.indexOf("@");
     // inorder to get last occurance
-    let dotposition=email.lastIndexOf(".");
-
-    if(name===null|| name===""){
-        alert("Name can't be blank");
-        return false;
-    }else if (message.length>200) {
-        alert("message must be lessthan 200 character");
-        return false;
-    }else if (message===null||message==="") {
-        alert("please enter your message");
-        return false;
+    let dotposition=cemail.value.lastIndexOf(".");
+    if (cname.value===""){
+        seterror(cname,"name is required");
     }
-    else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
-        alert("Please enter a valid e-mail address must contain @ and .");  
-        return false;
+    else{
+        setsuccess(cname)
+        console.log(cemail.value);
+    }
+
+    if(cemail.value===""){
+        seterror(cemail,"please enter your email");
     }else{
-        // localstorage
-    let userdetails = {
-        username:name,
-        useremail:email,
-        usermessage:message
+        setsuccess(cemail);
     }
-    window.localStorage.setItem("visitor",JSON.stringify(userdetails));
-        return true;
+   
+    if(atposition<1||dotposition<atposition+2||dotposition+2>cemail.length){
+        // alert("Please enter a valid e-mail address must contain @ and .");  
+        seterror(cemail,"Please enter a valid e-mail address contain @ and .")
+       
     }
-
+    if(cmessage.value===""){
+        seterror(cmessage,"please enter your message");
+    }else{
+        setsuccess(cmessage);
+    }
+   
+  
     
+   if(cemail.value!=='' && cname.value!==''&& cmessage.value!==''){
+    let visitors=[];
+    if(localStorage.getItem("visitors")){
+        // console.log(visitors);
+        visitors=JSON.parse(localStorage.getItem("visitors"))
+    }else{
+        window.localStorage.setItem("visitors",JSON.stringify(visitors));
+    }
+    function insertuser (){
+        let userdetails = {
+            username:cname.value,
+            useremail:cemail.value,
+            usermessage:cmessage.value
+        }
+        visitors.push(userdetails);
+        window.localStorage.setItem("visitors",JSON.stringify(visitors));
+        cmessage.value="";
+        cemail.value="";
+        cname.value="";
+    }insertuser();
+  
+  
+ 
+    
+   }
+   
+    //     // localstorage
+    // let userdetails = {
+    //     username:name,
+    //     useremail:email,
+    //     usermessage:message
+    // }
+    // window.localStorage.setItem("visitor",JSON.stringify(userdetails));
+    //     return true; 
    
 }
-// contactformvalidation();g
+if(contactform){
+
+    contactform.addEventListener("submit",e=>{
+        e.preventDefault();
+        contactformvalidation();
+      },false);
+   
+}
 
 
 // login formvalidation
@@ -145,7 +188,9 @@ const seterror=(element,messaage)=>{
     const inputcontrol=element.parentElement;
     const errorDisplay=inputcontrol.querySelector(".error");
 
+
     errorDisplay.innerHTML=messaage;
+    
     // inputcontrol.classList.add("error");
     inputcontrol.children.item(1).classList.add("failed");
     inputcontrol.children.item(1).classList.remove("success");
@@ -155,8 +200,10 @@ const seterror=(element,messaage)=>{
 const setsuccess=element=>{
     const inputcontrol=element.parentElement;
     const errorDisplay=inputcontrol.querySelector(".error")
+   
     
     errorDisplay.innerHTML="";
+  
     inputcontrol.children.item(1).classList.remove("failed");
     inputcontrol.children.item(1).classList.add("success");
 
@@ -213,3 +260,205 @@ const validateinput=()=>{
 
 
 
+// for create page
+
+
+
+
+    // // localStorage.clear()
+    // // tinymce.init({
+    // //   selector: '#blog-editor'
+    // // });
+
+    // // form rorblogpost
+    // // localStorage.clear();
+    // let form2=document.getElementById("blogform");
+    // // let blogtitle=document.getElementById("blogtitle");
+    // // let blogimage=document.getElementById("blogimage");
+    // // let blogdate=document.getElementById("blogdate");
+    // // let blogcontent=document.querySelector(".blog-editor");
+    // // let btn=document.getElementById("test");
+
+    // // // table fo manageposts
+    // // let posttable= document.getElementById("contentTomange");
+
+
+    // // let image;
+ 
+        
+       
+    
+    // const validateinputs=()=>{
+    
+    //     // blogpost content
+    //     const blogimagevalue=image;
+    //     const blogtitlevalue= blogtitle.value;
+    //     const blogcontentvalue= blogcontent.value;
+    //     const blogdatevalue=blogdate.value;
+       
+    //     if (blogtitlevalue==="") {
+    //         seterror(blogtitle,"please blog must contain title");
+            
+    //     } else {
+    //         setsuccess(blogtitle)
+    //     }
+    
+    //     if (blogdatevalue==="") {
+    //         seterror(blogdate,"please blog must contain date");
+    //     } else {
+    //         setsuccess(blogdate)
+    //     }
+    
+    //     if (blogimagevalue==="") {
+    //         seterror(blogimage,"please choose image for blog");
+    
+            
+    //     } else {
+    //         // console.log(blogimagevalue);
+    //         setsuccess(blogimage)
+    //     }
+    
+    //     if (blogcontentvalue==="") {
+    //         // seterror(blogcontent,"write body content");
+            
+    //     } else {
+    //         setsuccess(blogcontent)
+    //     }
+    
+    //     if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+    //         insertblog()
+    //     }
+    
+    // }
+    // console.log("blogcontent value",blogcontent.value);
+
+
+
+
+
+    
+//    manage post page
+    
+// function manageposts(){
+//     let arr=JSON.parse(localStorage.getItem("blogs"));
+//     // let arr2=JSON.stringify(arr);
+//     console.log( "mangepost" ,arr);
+  
+//     let table=`
+//       <table>
+//         <thead>
+//             <th>Number</th>
+//             <th>Title</th>
+//             <th>Date</th>
+//             <th colspan="3">Action</th>
+//         </thead>
+//         <tbody id="blogtable
+      
+//     `;
+// //    arr.forEach(element => {
+//      // let item=JSON.stringify(element);
+//     // //    console.log(element);
+//     for(let i=0;i<arr.length;i++){
+
+//     // })
+//     console.log(arr[i]);
+   
+//       table=table+`
+//         <tr>
+//             <td>${arr[i].blog}.</td>
+//             <td>${arr[i].blogtitle}</td>
+//             <td>${arr[i].blogdate}</td>
+        
+//             <td>
+//                 <a href="./edit.html" class="edit">edit</a>  
+//                 <a type="button" id="delet" class="delete">delete</a> 
+//                 <a href="http://" class="publish">publish</a>
+//             </td>
+//         </tr>
+//       ` ;  
+//     };
+//     table=table+`
+//        </tbody>
+//       </table>
+//     `
+//   posttable.innerHTML=table;
+   
+
+// }
+
+
+
+
+
+
+
+
+
+
+    
+        // let blogs=[];
+   
+    
+        // function createblogs(){
+        //     localStorage.setItem("blogs",JSON.stringify(blogs));
+        // };
+    
+        // function getblog(){
+        //     let blogdata=localStorage.getItem("blogs");
+        //     if(blogdata){
+        //         // console.log("blogdata",JSON.stringify(JSON.parse(blogdata)));
+        //         // blogs.JSON.parse(blogdata);
+        //     }else{
+        //         createblogs();
+        //     };
+        // };  getblog();
+    
+    
+        // function insertblog(){
+        //     manageposts();
+            
+        //     let blog={
+        //     blogcontent:blogcontent.value,
+        //     blogdate:blogdate.value,
+        //     blogimage:image,
+        //     blogtitle:blogtitle.value
+        //   };
+        //   blogs.push(blog);
+        //   createblogs();
+        // console.log(blog);
+        // console.log("onaddpost",posttable);
+    
+        //   blogimagevalue=blogimage.value="";
+        //   blogtitlevalue= blogtitle.value="";
+        // //   blogcontentvalue= blogcontent.value="";
+        //   blogdatevalue=blogdate.value="";
+       
+    
+        // };
+    
+    // }
+    
+   
+    
+
+
+
+   
+
+
+
+    //  if(btn){
+    //     btn.addEventListener("click",e=>{
+    //         e.preventDefault();
+    
+    //         // insertblog();
+    //         validateinputs();
+    //         insertblog();
+    //         console.log("btn",btn);
+        
+           
+    //     });
+    
+    //     }
+
+    

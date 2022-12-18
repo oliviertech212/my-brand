@@ -94,7 +94,7 @@
                     <div>
                         <label class="text-label">image</label>
                      
-                        <input id="blogimage" type="file" name="title" >
+                        <input id="blogimage" type="file" name="title"  class="text-input" >
                         <p class="error"></p>
                     </div>
                     
@@ -102,16 +102,15 @@
                     <div>
                         <label class="text-label">Content</label>
                         <br>
-                        <textarea   name="" class="blog-editor" id="blog-editor" width="40" rows="10"></textarea>
+                        <textarea   name=""  id="editor" width="40" rows="10"></textarea>
                         <p class="error"></p>
                     </div>
 
                     <div>
-                        <button type="submit" id="btn" class="btn-sub">Add post</button>
+                        <button type="submit" id="test" class="btn-su">Add post</button>
                     </div>
                  
                 </form>
-                <div id="test" class="test">
 
                 </div>
             </div>
@@ -121,28 +120,26 @@
     </section>
 
 
-
-<!-- Ckeditor -->
-<!-- <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script> -->
-<!-- Tiny MCE -->
-<script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
 
 
 <script>
-    // localStorage.clear()
-    tinymce.init({
-      selector: '#blog-editor'
-    });
+//     // localStorage.clear()
+    // tinymce.init({
+    //   selector: '#editor'
+    // });
 
-    // form rorblogpost
-const form2=document.getElementById("blogform");
-const blogtitle=document.getElementById("blogtitle");
-const blogimage=document.getElementById("blogimage");
-const blogdate=document.getElementById("blogdate");
-const blogcontent=document.getElementById("blog-editor");
-const btn=document.getElementById("btn");
+//     // form rorblogpost
+    // localStorage.clear();
+// let form2=document.getElementById("blogform");
+let blogtitle=document.getElementById("blogtitle");
+let blogimage=document.getElementById("blogimage");
+let blogdate=document.getElementById("blogdate");
+let blogcontent=document.getElementById("editor");
+let btn=document.getElementById("test");
 
 let image;
+console.log("textarea",blogcontent.value);
 
 blogimage.addEventListener("change",(e)=>{
     
@@ -155,63 +152,43 @@ blogimage.addEventListener("change",(e)=>{
       
         reader.addEventListener("load",()=>{
             image=reader.result;
-            console.log(image);
+            // console.log(image);
 
         });
     });
    
-
-
-const validateinputs=()=>{
-  
-  
-    // blogimage.addEventListener("change",()=>{
-    //     const reader=new FileReader();
-    //     reader.addEventListener("load",()=>{
-    //     //   image=reader.result;  
-    //     console.log(reader.result);
-    //     })
-    //     reader.readAsDataURL(blogimage.files[0]);
-    //     console.log(reader.readAsDataURL(blogimage.files[0]));
-    //    })
-
-
-    //    console.log(image);
-   
-    // blogpost content
-    let blogimagevalue=image;
-    let blogtitlevalue= blogtitle.value;
-    let blogcontentvalue= blogcontent.value;
-    let blogdatevalue=blogdate.value;
-
-    let blog={
-        blogcontent:blogcontentvalue,
-        blogdate:blogdatevalue,
-        blogimage:blogimagevalue,
-        blogtitle:blogtitlevalue
-    };
+    
    
 
-    if (blogtitlevalue==="") {
-        seterror(blogtitle,"please blog must contain title");
-        
-    } else {
-        setsuccess(blogtitle)
-    }
+// const validateinputs=()=>{
 
-    if (blogdatevalue==="") {
-        seterror(blogdate,"please blog must contain date");
-    } else {
-        setsuccess(blogdate)
-    }
-
-    if (blogtitlevalue===""||blogimagevalue==null) {
-        seterror(blogimage,"please choose image for blog");
+//     // blogpost content
+//     const blogimagevalue=image;
+//     const blogtitlevalue= blogtitle.value;
+//     const blogcontentvalue= blogcontent.value;
+//     const blogdatevalue=blogdate.value;
+   
+//     if (blogtitlevalue==="") {
+//         seterror(blogtitle,"please blog must contain title");
         
-    } else {
-        console.log(blogimagevalue);
-        setsuccess(blogimage)
-    }
+//     } else {
+//         setsuccess(blogtitle)
+//     }
+
+//     if (blogdatevalue==="") {
+//         seterror(blogdate,"please blog must contain date");
+//     } else {
+//         setsuccess(blogdate)
+//     }
+
+//     if (blogimagevalue==="") {
+//         seterror(blogimage,"please choose image for blog");
+
+        
+//     } else {
+//         // console.log(blogimagevalue);
+//         setsuccess(blogimage)
+//     }
 
     // if (blogcontentvalue==="") {
     //     seterror(blogcontent,"write body content");
@@ -220,54 +197,65 @@ const validateinputs=()=>{
     //     setsuccess(blogcontent)
     // }
 
-    
- // if nothing saved in local storage
- if(localStorage.getItem("blogs")==null){
-        localStorage.setItem("blogs","[]");
- }else{
-    // localStorage.setItem("blogs",JSON.stringify(blog));
-     let old_data=JSON.parse(localStorage.getItem("blogs"));
-     if(( blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
-        // console.log(blog);
-        old_data.push(blog);
-    }
-    console.log(old_data);
+    // if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+    //     insertblog()
+    // }
+
+// }
+
+    let blogs=[];
   
-    // save the old+new dat to local storage
-    localStorage.setItem("blogs",JSON.stringify(old_data))
-    // localStorage.clear()
-    let arr=JSON.parse(localStorage.getItem("blogs"))
-    // console.log(arr)
+
+   
+    getblog();
+    function getblog(){
+        let blogdata=localStorage.getItem("blogs");
+        if(blogdata){
+            console.log(blogdata);
+            blogs=JSON.parse(blogdata);
+        }else{
+            createblogs();
+        };
+    }; 
     
- }
+    function createblogs(){
+        localStorage.setItem("blogs",JSON.stringify(blogs));
+    };
 
-//  to view my data
 
+    function insertblog(){
+        
+        let blog={
+        blogcontent:blogcontent.value,
+        blogdate:blogdate.value,
+        blogimage:image,
+        blogtitle:blogtitle.value
+      };
+      blogs.push(blog);
+      createblogs();
+    // console.log(blogs);
 
-}
-// if(localStorage.getItem("blogs")!==null){
-//     let arr=JSON.parse(localStorage.getItem("blogs"))
-//     arr.forEach(blog => {
-//         // console.log(JSON.parse(blog));
-//     //    return JSON.parse(blog)
-//        console.log(blog)
-//     //    console.log(singleObject);
-//       let display= document.getElementById("test");
-      
-//        display.insertAdjacentHTML("beforeend",`<h1>${blog.blogtitle}</h1>`);
-//     });
-    
+      blogimage.value="";
+      blogtitle.value="";
+      blogcontent.value="";
+      blogdate.value="";
+
+    };
+
 // }
 
 
 btn.addEventListener("click",e=>{
     e.preventDefault();
-    validateinputs();
-    blogimagevalue=blogimage.value="";
-    blogtitlevalue= blogtitle.value="";
-    blogcontentvalue= blogcontent.value="";
-    blogdatevalue=blogdate.value="";
+    // validateinputs();
+    insertblog();
+
+   
 });
+
+   
+
+   
 </script>
 
 

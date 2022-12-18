@@ -113,144 +113,84 @@
     
     
     
-    const validateinputs=()=>{
-       
-        // blogpost content
-        // const blogimagevalue=`<img src=${URL.createObjectURL(blogimage)}>`;
+    
+        
 
-
-        // const blogimagevalue= blogimage;
-        // const blogtitlevalue= blogtitle;
-        // const blogcontentvalue= blogcontent;
-        // const blogdatevalue=blogdate;
-    
-        // let blog={
-        //     blogcontent:blogcontentvalue,
-        //     blogdate:blogdatevalue,
-        //     blogimage:blogimagevalue,
-        //     blogtitle:blogtitlevalue
-        // };
-       
-    
-        // if (blogtitlevalue==="") {
-        //     seterror(blogtitle,"please blog must contain title");
-            
-        // } else {
-        //     setsuccess(blogtitle)
-        // }
-    
-        // if (blogdatevalue==="") {
-        //     seterror(blogdate,"please blog must contain date");
-        // } else {
-        //     setsuccess(blogdate)
-        // }
-    
-        // if (blogtitlevalue===""||blogimagevalue==null) {
-        //     seterror(blogimage,"please choose image for blog");
-            
-        // } else {
-        //     console.log(blogimagevalue);
-        //     setsuccess(blogimage)
-        // }
-    
-        // if (blogcontentvalue==="") {
-        //     seterror(blogcontent,"write body content");
-            
-        // } else {
-        //     setsuccess(blogcontent)
-        // }
-    
         
-     // if nothing saved in local storage
-     if(localStorage.getItem("blogs")==null){
-            localStorage.setItem("blogs","[]");
-     }else{
-         let old_data=JSON.parse(localStorage.getItem("blogs"));
-        //  if((blogcontentvalue && blogimagevalue && blogtitlevalue && blogdatevalue)!==''){
-        //     old_data.push(blog);
-        // }
-      
-        // save the old+new dat to local storage
-        localStorage.setItem("blogs",JSON.stringify(old_data))
-        // localStorage.clear()
-        let arr=JSON.parse(localStorage.getItem("blogs"))
-        console.log(arr)
-        // arr.forEach(blog => {
-        //     // console.log(JSON.parse(blog));
-        // });
-        
-        
-     }
-    }
+ 
     
     let button;
     
-    if(localStorage.getItem("blogs")!==null){
+    // if(localStorage.getItem("blogs")!==null){
+
         
-        let arr=JSON.parse(localStorage.getItem("blogs"))
-        arr.forEach((blog, index) => {
+    //     let arr=JSON.parse(localStorage.getItem("blogs"))
+    //     arr.forEach((blog, index) => {
            
-           console.log(index)
-        //    console.log(singleObject)
-          function edit(index){
-            let display= document.getElementById("blogform");
-            display.innerHTML=(`
-                        <div>
-                            <label class="text-label">Title</label>
-                            <input id="blogtitl" type="text" name="title"value=${blog.blogtitle} class="text-input">
-                            <p class="error"></p>
-                        </div>
-                        <div>
-                            <label class="text-label">Date</label>
-                    
-                            <input id="blogdat" type="date" name="title" value=${blog.blogdate}   class="text-input">
-                            <p class="error"></p>
-                        </div>
-                        <div>
-                            <label class="text-label">image</label>
-                         
-                            <input id="blogimag" type="file"  value=${blog.blogimage}  name="title" >
-                            <p class="error"></p>
-                        </div>
-                        
+    //           console.log("image",blog.blogimage)
+              console.log(editblog())
+    blogs=JSON.parse(localStorage.getItem("blogs"));
     
-                        <div>
-                            <label class="text-label">Content</label>
-                            <br>
-                            <textarea   name="" id="blog-edito" value=${blog.blogcontent}  cols="30" rows="10"></textarea>
-                            <p class="error"></p>
-                        </div>
-    
-                        <div>
-                            <button type="submit" id="btn" onclick="${update(index)}"   class="btn-sub">UPDATE</button>
-                        </div>
-                   
-    
-                             `);
-          }edit()
-            function update(index) {
-                validateinputs();
-                const blogtitle=document.getElementById("blogtitl");
-                const blogimage=document.getElementById("blogimag");
-                const blogdate=document.getElementById("blogdat");
-                const blogcontent=document.getElementById("blog-edito");
-                const btn=document.getElementById("btn");
-      
-            blog={
-            blogcontent:blogcontent,
-            blogdate:blogdate,
-            blogimage:blogimage,
-            blogtitle:blogtitle
-            };
-            console.log(arr);
+           function edit(index){
+               let display= document.getElementById("blogform");
+               console.log(blogs);
+               display.innerHTML=(`
+                           <div>
+                               <label class="text-label">Title</label>
+                               <input id="blogtitl" type="text" name="title"value=${blogs[index]} class="text-input">
+                               <p class="error"></p>
+                           </div>
+                           <div>
+                               <label class="text-label">Date</label>
+                       
+                               <input id="blogdat" type="date" name="title" value=${blogs[index]}   class="text-input">
+                               <p class="error"></p>
+                           </div>
+                           <div>
+                               <label class="text-label">image</label>
+                            
+                               <input id="blogimag" type="file"  value=${blogs[index]}  name="title" >
+                               <p class="error"></p>
+                           </div>
+                           
        
-        //   localStorage.setItem("blogs",JSON.stringify(arr));
-        //   document.getElementById("").innerHTML = form;
-        }
+                           <div>
+                               <label class="text-label">Content</label>
+                               <br>
+                               <textarea   name="" id="blog-edito" value=${blogs[index]}  cols="30" rows="10"></textarea>
+                               <p class="error"></p>
+                           </div>
+       
+                           <div>
+                               <button type="submit" id="btn" onclick="update(${index})"   class="btn-sub">UPDATE</button>
+                           </div>
+                      
+       
+                                `);
+                  }
+                  edit()
+               function update(index) {;
+                   const blogtitle=document.getElementById("blogtitl");
+                   const blogimage=document.getElementById("blogimag");
+                   const blogdate=document.getElementById("blogdat");
+                   const blogcontent=document.getElementById("blog-edito");
+                   const btn=document.getElementById("btn");
+         
+               blog={
+               blogcontent:blogcontent,
+               blogdate:blogdate,
+               blogimage:blogimage,
+               blogtitle:blogtitle
+               };
+               console.log(arr);
+          
+           //   localStorage.setItem("blogs",JSON.stringify(arr));
+           //   document.getElementById("").innerHTML = form;
+            }
     
-        });
+    //     });
         
-    }
+    // }
     </script>
     
 
