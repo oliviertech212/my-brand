@@ -121,39 +121,78 @@ if(contactform){
 
 
 // login formvalidation
-
+let loginform=document.getElementById("loginform");
+let loginBtn=document.getElementById("login-btn");
 function loginformvalidation(){
-    let password=document.loginform.password.value;
-    let email=document.loginform.email.value;
+    // let password=document.loginform.password.value;
+    // let email=document.loginform.email.value;
+    let adminEmail=document.getElementById("admin-email");
+    let adminPassword=document.getElementById("admin-pass");
 
-    let atposition=email.indexOf("@");
-    let dotposition=email.lastIndexOf(".");
+    let atposition=adminEmail.value.indexOf("@");
+    let dotposition=adminEmail.value.lastIndexOf(".");
     
     let user = {
-        email:email,
-        password:password
+        email:adminEmail.value,
+        password:adminPassword.value
+    };
+    if(adminEmail.value===""){
+        seterror(adminEmail,"please enter your email");
+    }else{
+        setsuccess(adminEmail);
     }
-    window.localStorage.setItem("admin",JSON.stringify(user));
-
-    if(email===""||email===""){
-        alert("enter  email");
-        return false;
-    } else if(atposition<1||dotposition<atposition+2||dotposition+2>email.length){
-        alert("Please enter a valid e-mail address must contain @ and .");  
-        return false;
-    }
-    else if(password===null|| password===""){
-        alert("password is must");
-        return false;
-    }
-    else if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
-      alert("password is incorrect");
-      return false;
-    }
-   else {
-    return true;
-   }
    
+    if(atposition<1||dotposition<atposition+2||dotposition+2>adminEmail.length){
+        // alert("Please enter a valid e-mail address must contain @ and .");  
+        seterror(adminEmail,"Please enter a valid e-mail address contain @ and .")
+       
+    }
+
+  
+    if(adminPassword.value===null){
+        // alert("password is must");
+       seterror(adminPassword,"password is must" )
+    }
+    else{
+        setsuccess(adminPassword)
+    }
+    console.log(adminPassword);
+//     if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
+//         seterror(adminPassword,"password is incorrect" )
+//     }else {
+//         window.localStorage.href="../admin/post/index.html"
+//     setsuccess(adminPassword);
+  
+//    }
+
+//    if(adminEmail.value!=='' && adminPassword.value!==''){
+//     if(localStorage.getItem("admin")){
+//         user=JSON.parse(localStorage.getItem("admin"))
+//         console.log(user);
+//     }else{
+//         window.localStorage.setItem("admin",JSON.stringify(user));
+//     }
+    // function insertuser (){
+    //     let userdetails = {
+    //         username:cname.value,
+    //         useremail:cemail.value,
+    //         usermessage:cmessage.value
+    //     }
+    //     visitors.push(userdetails);
+    //     window.localStorage.setItem("visitors",JSON.stringify(visitors));
+    //     cmessage.value="";
+    //     cemail.value="";
+    //     cname.value="";
+    // }insertuser();
+
+    //  }
+}
+if(loginform){
+    loginBtn.addEventListener("submit",e=>{
+        e.preventDefault();
+        loginformvalidation();
+    },false);
+
 }
 
 
