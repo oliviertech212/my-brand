@@ -45,16 +45,23 @@
       </div>
     </header>
 
-    <section class="login-section">
+    <section  class="login-section">
         <div class="login-form">
            <div class="top-div">
-             <form  name="loginform" action="../admin/post/index.html">
+             <form id="loginform" name="loginform" >
                 <div class="label">
-                   <h1>Login</h1><p class="error"></p>
+                   <h1>Login</h1>
+                   <div>
                   <input id="admin-email" name="email" class="input" type="email" placeholder="email">
-                  <input id="admin-pass" name="password" class="input" type="password" placeholder="password">
+                  <p class="error"></p>
+                  </div>
+                   <div>
+                    <input id="admin-pass" name="password" class="input" type="password" placeholder="password">
+                    <p class="error"></p>
+                   </div>
+                  
                 </div>
-                <input class="login-btn" type="submit" value="Login">
+                <input id="login-btn" class="login-btn" type="submit" value="Login">
              </form>
            </div>
           

@@ -32,6 +32,35 @@ document.getElementById("menuicon").addEventListener("click",mobilemenu);
 })();
 
 
+// set error popup an form validated
+
+const seterror=(element,messaage)=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error");
+
+
+    errorDisplay.innerHTML=messaage;
+    
+    // inputcontrol.classList.add("error");
+    inputcontrol.children.item(1).classList.add("failed");
+    inputcontrol.children.item(1).classList.remove("success");
+    
+}
+
+const setsuccess=element=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error")
+   
+    
+    errorDisplay.innerHTML="";
+  
+    inputcontrol.children.item(1).classList.remove("failed");
+    inputcontrol.children.item(1).classList.add("success");
+
+}
+
+
+
 
 
 // contact form validation
@@ -123,11 +152,12 @@ if(contactform){
 // login formvalidation
 let loginform=document.getElementById("loginform");
 let loginBtn=document.getElementById("login-btn");
+let adminEmail=document.getElementById("admin-email");
+let adminPassword=document.getElementById("admin-pass");
 function loginformvalidation(){
     // let password=document.loginform.password.value;
     // let email=document.loginform.email.value;
-    let adminEmail=document.getElementById("admin-email");
-    let adminPassword=document.getElementById("admin-pass");
+   
 
     let atposition=adminEmail.value.indexOf("@");
     let dotposition=adminEmail.value.lastIndexOf(".");
@@ -136,6 +166,7 @@ function loginformvalidation(){
         email:adminEmail.value,
         password:adminPassword.value
     };
+
     if(adminEmail.value===""){
         seterror(adminEmail,"please enter your email");
     }else{
@@ -149,46 +180,39 @@ function loginformvalidation(){
     }
 
   
-    if(adminPassword.value===null){
+    if(adminPassword.value===""){
         // alert("password is must");
        seterror(adminPassword,"password is must" )
     }
     else{
         setsuccess(adminPassword)
     }
-    console.log(adminPassword);
-//     if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
-//         seterror(adminPassword,"password is incorrect" )
-//     }else {
-//         window.localStorage.href="../admin/post/index.html"
-//     setsuccess(adminPassword);
+    console.log(user);
+   
+    window.localStorage.setItem("admin",JSON.stringify(user));
+    if(localStorage.getItem("admin")){
+        if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
+            seterror(adminPassword,"enter correct admin password" )
+
+        }else {
+            window.location.href="../admin/post/index.html"
+            setsuccess(adminPassword);
+          
+
+        }
+
+    }
+
+        
+      
+    
+
+ 
   
-//    }
-
-//    if(adminEmail.value!=='' && adminPassword.value!==''){
-//     if(localStorage.getItem("admin")){
-//         user=JSON.parse(localStorage.getItem("admin"))
-//         console.log(user);
-//     }else{
-//         window.localStorage.setItem("admin",JSON.stringify(user));
-//     }
-    // function insertuser (){
-    //     let userdetails = {
-    //         username:cname.value,
-    //         useremail:cemail.value,
-    //         usermessage:cmessage.value
-    //     }
-    //     visitors.push(userdetails);
-    //     window.localStorage.setItem("visitors",JSON.stringify(visitors));
-    //     cmessage.value="";
-    //     cemail.value="";
-    //     cname.value="";
-    // }insertuser();
-
-    //  }
 }
+// loginformvalidation()
 if(loginform){
-    loginBtn.addEventListener("submit",e=>{
+    loginform.addEventListener("submit",(e)=>{
         e.preventDefault();
         loginformvalidation();
     },false);
@@ -222,31 +246,6 @@ if(form){
 }
 
 
-
-const seterror=(element,messaage)=>{
-    const inputcontrol=element.parentElement;
-    const errorDisplay=inputcontrol.querySelector(".error");
-
-
-    errorDisplay.innerHTML=messaage;
-    
-    // inputcontrol.classList.add("error");
-    inputcontrol.children.item(1).classList.add("failed");
-    inputcontrol.children.item(1).classList.remove("success");
-    
-}
-
-const setsuccess=element=>{
-    const inputcontrol=element.parentElement;
-    const errorDisplay=inputcontrol.querySelector(".error")
-   
-    
-    errorDisplay.innerHTML="";
-  
-    inputcontrol.children.item(1).classList.remove("failed");
-    inputcontrol.children.item(1).classList.add("success");
-
-}
 
 const validateinput=()=>{
     const lastemailvalue=lastemail.value.trim();

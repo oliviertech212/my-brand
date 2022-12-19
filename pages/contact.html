@@ -110,9 +110,52 @@
         
         
     </footer>
-   
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>    
+<script>
+        //  web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
+  authDomain: "my-brand-ab3eb.firebaseapp.com",
+  projectId: "my-brand-ab3eb",
+  storageBucket: "my-brand-ab3eb.appspot.com",
+  messagingSenderId: "1054921679340",
+  appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
+  measurementId: "G-8T216E4TG5"
+};
 
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+let firestore=firebase.firestore();
 
+//variable to  access database collection
+const db=firestore.collection("conatctForm");
+
+// get submited data
+let submitbtn=document.getElementById("csubmit");
+
+// cereate addEventListener to allow form submission
+submitbtn.addEventListener("click",e=>{
+  e.preventDefault()
+//   get form value
+    let cname=document.querySelector(".cname").value;
+    let cemail=document.querySelector(".cemail").value;
+    let cmessage=document.querySelector(".cmessage").value;
+
+    // save formdat to file base
+    db.doc().set({
+        username:cname,
+        useremail:cemail,
+        usermessage:cmessage
+    }).then(()=>{
+        console.log("datasave to dtabase");
+    }).catch((error)=>{
+        console.log(error);
+    })
+});
+    </script>
+    -->
+    
+    
     <script src="../js/script.js"></script>    
 </body>
 </html>
