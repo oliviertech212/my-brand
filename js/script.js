@@ -1,5 +1,13 @@
-
-//    manageposts();
+// filebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
+    authDomain: "my-brand-ab3eb.firebaseapp.com",
+    projectId: "my-brand-ab3eb",
+    storageBucket: "my-brand-ab3eb.appspot.com",
+    messagingSenderId: "1054921679340",
+    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
+    measurementId: "G-8T216E4TG5"
+  };
 
 // javascript for mobile menuicon
 window.addEventListener("load",()=>{
@@ -104,40 +112,54 @@ function contactformvalidation(){
   
     
    if(cemail.value!=='' && cname.value!==''&& cmessage.value!==''){
-    let visitors=[];
-    if(localStorage.getItem("visitors")){
-        // console.log(visitors);
-        visitors=JSON.parse(localStorage.getItem("visitors"))
-    }else{
-        window.localStorage.setItem("visitors",JSON.stringify(visitors));
-    }
-    function insertuser (){
-        let userdetails = {
-            username:cname.value,
-            useremail:cemail.value,
-            usermessage:cmessage.value
-        }
-        visitors.push(userdetails);
-        window.localStorage.setItem("visitors",JSON.stringify(visitors));
-        cmessage.value="";
-        cemail.value="";
-        cname.value="";
-    }insertuser();
-  
-  
- 
+    // let visitors=[];
+    // if(localStorage.getItem("visitors")){
+    //     // console.log(visitors);
+    //     visitors=JSON.parse(localStorage.getItem("visitors"))
+    // }else{
+    //     window.localStorage.setItem("visitors",JSON.stringify(visitors));
+    // }
+    // function insertuser (){
+    //     let userdetails = {
+    //         username:cname.value,
+    //         useremail:cemail.value,
+    //         usermessage:cmessage.value
+    //     }
+    //     visitors.push(userdetails);
+    //     window.localStorage.setItem("visitors",JSON.stringify(visitors));
+    //     cmessage.value="";
+    //     cemail.value="";
+    //     cname.value="";
+    // }insertuser();
+
+    
+      
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      let firestore=firebase.firestore();
+      
+      //variable to  access database collection
+      const db=firestore.collection("contactfrom");
+      
+      
+      // cereate addEventListener to allow form submission
+    
+      
+          // save formdat to file base
+          db.doc().set({
+              username:cname.value,
+              useremail:cemail.value,
+              usermessage:cmessage.value
+          }).then(()=>{
+              console.log("datasave to dtabase");
+              cmessage.value="";
+              cemail.value = "";
+              cname.value = "";
+          }).catch((error)=>{
+              console.log(error);
+          })
     
    }
-   
-    //     // localstorage
-    // let userdetails = {
-    //     username:name,
-    //     useremail:email,
-    //     usermessage:message
-    // }
-    // window.localStorage.setItem("visitor",JSON.stringify(userdetails));
-    //     return true; 
-   
 }
 if(contactform){
 
