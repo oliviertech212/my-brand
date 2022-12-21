@@ -1,4 +1,8 @@
 // filebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+// import{getDatabase} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js"
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
     authDomain: "my-brand-ab3eb.firebaseapp.com",
@@ -8,6 +12,7 @@ const firebaseConfig = {
     appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
     measurementId: "G-8T216E4TG5"
   };
+
 
 // javascript for mobile menuicon
 window.addEventListener("load",()=>{
@@ -73,7 +78,7 @@ const setsuccess=element=>{
 
 // contact form validation
 const contactform=document.getElementById("cform");
-let csubmit=document.getElementById("csubmit");
+// let csubmit=document.getElementById("csubmit");
 function contactformvalidation(){
     const cname=document.querySelector(".cname");
     const cemail=document.querySelector(".cemail");
@@ -134,9 +139,10 @@ function contactformvalidation(){
 
     
       
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      let firestore=firebase.firestore();
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+    let firestore=firebase.firestore();
+
       
       //variable to  access database collection
       const db=firestore.collection("contactfrom");
@@ -184,10 +190,10 @@ function loginformvalidation(){
     let atposition=adminEmail.value.indexOf("@");
     let dotposition=adminEmail.value.lastIndexOf(".");
     
-    let user = {
-        email:adminEmail.value,
-        password:adminPassword.value
-    };
+    // let user = {
+    //     email:adminEmail.value,
+    //     password:adminPassword.value
+    // };
 
     if(adminEmail.value===""){
         seterror(adminEmail,"please enter your email");
@@ -209,22 +215,71 @@ function loginformvalidation(){
     else{
         setsuccess(adminPassword)
     }
-    console.log(user);
+    // console.log(user);
    
-    window.localStorage.setItem("admin",JSON.stringify(user));
-    if(localStorage.getItem("admin")){
-        if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
-            seterror(adminPassword,"enter correct admin password" )
+    // window.localStorage.setItem("admin",JSON.stringify(user));
+    // if(localStorage.getItem("admin")){
+    //     if(JSON.parse(window.localStorage.getItem("admin")).password!=="oliviertech"){
+    //         seterror(adminPassword,"enter correct admin password" )
 
-        }else {
-            window.location.href="../admin/post/index.html"
-            setsuccess(adminPassword);
+    //     }else {
+    //         window.location.href="../admin/post/index.html"
+    //         setsuccess(adminPassword);
           
 
-        }
+    //     }
 
-    }
-
+    // }
+  
+    
+    // Your web app's Firebase configuration
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyC8pzec4Bv6aSL1P7S8Jli-b_JsoIg6QCQ",
+    //   authDomain: "login-from-3b0cc.firebaseapp.com",
+    //   projectId: "login-from-3b0cc",
+    //   storageBucket: "login-from-3b0cc.appspot.com",
+    //   messagingSenderId: "45251492934",
+    //   appId: "1:45251492934:web:b10c6c0992dbeee8bd9e47"
+    // };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // const database=getDatabase(app);
+    const Auth = getAuth(app);
+      //variable to  access database collection
+    //   const admindb=firestore.collection("admin");
+      
+      
+      // cereate addEventListener to allow form submission
+      signInWithEmailAndPassword(Auth, adminEmail.value, adminPassword.value)
+      .then((userCredential) => {
+        // Signed in 
+        const user= userCredential.user;
+        window.location.href="../admin/post/index.html"
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // seterror(adminEmail,errorMessage)
+        // seterror(adminPassword,errorMessage)
+      });
+    //   const user = Auth.currentUser;
+    //   onAuthStateChanged(Auth, (user) => {
+    //     if (user) {
+    //         window.location.href="../admin/post/index.html"
+    //       // User is signed in, see docs for a list of available properties
+    //       // https://firebase.google.com/docs/reference/js/firebase.User
+    //       const uid = user.uid;
+    //       // ...
+    //     } else {
+    //       // User is signed out
+    //       window.location.href="./login.html"
+    //       // ...
+    //     }
+    //   });
+      
         
       
     
