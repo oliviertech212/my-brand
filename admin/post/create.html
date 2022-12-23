@@ -120,17 +120,51 @@
     </section>
 
 
-<!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+
+    <!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+    const firebaseConfig = {
+    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
+    authDomain: "my-brand-ab3eb.firebaseapp.com",
+    projectId: "my-brand-ab3eb",
+    storageBucket: "my-brand-ab3eb.appspot.com",
+    messagingSenderId: "1054921679340",
+    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
+    measurementId: "G-8T216E4TG5"
+  };
+
+    // set error popup an form validated
+
+const seterror=(element,messaage)=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error");
 
 
-<script>
-//     // localStorage.clear()
-    // tinymce.init({
-    //   selector: '#editor'
-    // });
+    errorDisplay.innerHTML=messaage;
+    
+    // inputcontrol.classList.add("error");
+    inputcontrol.children.item(1).classList.add("failed");
+    inputcontrol.children.item(1).classList.remove("success");
+    
+}
 
-//     // form rorblogpost
-    // localStorage.clear();
+const setsuccess=element=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error")
+   
+    
+    errorDisplay.innerHTML="";
+  
+    inputcontrol.children.item(1).classList.remove("failed");
+    inputcontrol.children.item(1).classList.add("success");
+
+}
+
+
 // let form2=document.getElementById("blogform");
 let blogtitle=document.getElementById("blogtitle");
 let blogimage=document.getElementById("blogimage");
@@ -138,118 +172,117 @@ let blogdate=document.getElementById("blogdate");
 let blogcontent=document.getElementById("editor");
 let btn=document.getElementById("test");
 
-let image;
-console.log("textarea",blogcontent.value);
+// let image;
+// console.log("textarea",blogcontent.value);
 
-blogimage.addEventListener("change",(e)=>{
+// blogimage.addEventListener("change",(e)=>{
     
-        const img=e.target.files[0];
+//         const img=e.target.files[0];
 
-        const reader=new FileReader();
+//         const reader=new FileReader();
 
-        reader.readAsDataURL(img);
-        // console.log(reader.readAsDataURL(img))
+//         reader.readAsDataURL(img);
+//         // console.log(reader.readAsDataURL(img))
       
-        reader.addEventListener("load",()=>{
-            image=reader.result;
-            // console.log(image);
+//         reader.addEventListener("load",()=>{
+//             image=reader.result;
+//             // console.log(image);
 
+//         });
+//     });
+   
+    
+   
+
+const validateinputs=()=>{
+
+    // blogpost content
+    let blogimagevalue=blogimage.value;
+    let blogtitlevalue= blogtitle.value;
+    let blogcontentvalue= blogcontent.value;
+    let blogdatevalue=blogdate.value;
+   
+    if (blogtitlevalue==="") {
+        seterror(blogtitle,"please blog must contain title");
+        
+    } else {
+        setsuccess(blogtitle)
+    }
+
+    if (blogdatevalue==="") {
+        seterror(blogdate,"please blog must contain date");
+    } else {
+        setsuccess(blogdate)
+    }
+
+    if (blogimagevalue==="") {
+        seterror(blogimage,"please choose image for blog");
+
+        
+    } else {
+        // console.log(blogimagevalue);
+        setsuccess(blogimage)
+    }
+
+    if (blogcontentvalue==="") {
+        seterror(blogcontent,"write body content");
+        
+    } else {
+        setsuccess(blogcontent)
+    }
+
+    if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+       
+       // Initialize Firebase
+    const app=initializeApp(firebaseConfig);
+    const db=getFirestore(app);
+    
+    // Add a new document in collection "cities"
+    // deleteDoc (doc(db, "cretedblogs","43aFspGnZVKZDdP3VhiA"));
+    // blogimage.value="";
+    // blogtitle.value="";
+    // blogcontent.value="";
+    // blogdate.value="";
+
+
+    // getDoc (doc(db, "cretedblogs","UpjN9PSU9xwp5mwW8a19")).then(docSnap=>{
+    //     if (docSnap.exists()) {
+    //         console.log("data",docSnap.data());
+            
+    //     }else{
+    //         console.log("no data");
+    //     }
+    // });
+    // blogimage.value="";
+    // blogtitle.value="";
+    // blogcontent.value="";
+    // blogdate.value="";
+
+    // access data using query
+    const q=query(collection(db,"cretedblogs"));
+
+    getDocs(q).then(docSnap=>{
+        let blogs=[];
+        docSnap.forEach(blog => {
+            blogs.push({...blog.data(), id:blog.id})
         });
+        console.log("blogs",blogs);
     });
-   
-    
-   
-
-// const validateinputs=()=>{
-
-//     // blogpost content
-//     const blogimagevalue=image;
-//     const blogtitlevalue= blogtitle.value;
-//     const blogcontentvalue= blogcontent.value;
-//     const blogdatevalue=blogdate.value;
-   
-//     if (blogtitlevalue==="") {
-//         seterror(blogtitle,"please blog must contain title");
-        
-//     } else {
-//         setsuccess(blogtitle)
-//     }
-
-//     if (blogdatevalue==="") {
-//         seterror(blogdate,"please blog must contain date");
-//     } else {
-//         setsuccess(blogdate)
-//     }
-
-//     if (blogimagevalue==="") {
-//         seterror(blogimage,"please choose image for blog");
-
-        
-//     } else {
-//         // console.log(blogimagevalue);
-//         setsuccess(blogimage)
-//     }
-
-    // if (blogcontentvalue==="") {
-    //     seterror(blogcontent,"write body content");
-        
-    // } else {
-    //     setsuccess(blogcontent)
-    // }
-
-    // if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
-    //     insertblog()
-    // }
-
-// }
-
-    let blogs=[];
+      
   
-
-   
-    getblog();
-    function getblog(){
-        let blogdata=localStorage.getItem("blogs");
-        if(blogdata){
-            console.log(blogdata);
-            blogs=JSON.parse(blogdata);
-        }else{
-            createblogs();
-        };
-    }; 
     
-    function createblogs(){
-        localStorage.setItem("blogs",JSON.stringify(blogs));
-    };
+    }
 
+}
 
-    function insertblog(){
-        
-        let blog={
-        blogcontent:blogcontent.value,
-        blogdate:blogdate.value,
-        blogimage:image,
-        blogtitle:blogtitle.value,
-        likes:0
-      };
-      blogs.push(blog);
-      createblogs();
-    // console.log(blogs);
+ 
+ 
 
-      blogimage.value="";
-      blogtitle.value="";
-      blogcontent.value="";
-      blogdate.value="";
-
-    };
-
-// }
 
 
 btn.addEventListener("click",e=>{
     e.preventDefault();
-    // validateinputs();
-    insertblog();
+    validateinputs();
 
    
 });

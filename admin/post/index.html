@@ -86,136 +86,33 @@
 
 
 
-<script>
-//     // for create page
-//         // localStorage.clear()
-//     // tinymce.init({
-//     //   selector: '#blog-editor'
-//     // });
-
-//     // form rorblogpost
-//     // localStorage.clear();
-// let form2=document.getElementById("blogform");
-// let blogtitle=document.getElementById("blogtitle");
-// let blogimage=document.getElementById("blogimage");
-// let blogdate=document.getElementById("blogdate");
-// let blogcontent=document.getElementById("blog-editor");
-// let btn=document.getElementById("btn");
-
-// let image;
-
-// // blogimage.addEventListener("change",(e)=>{
-    
-// //         const img=e.target.files[0];
-
-// //         const reader=new FileReader();
-
-// //         reader.readAsDataURL(img);
-// //         // console.log(reader.readAsDataURL(img))
-      
-// //         reader.addEventListener("load",()=>{
-// //             image=reader.result;
-// //             // console.log(image);
-
-// //         });
-// //     });
-   
-    
-   
-
-// const validateinputs=()=>{
-
-//     // blogpost content
-//     const blogimagevalue=image;
-//     const blogtitlevalue= blogtitle.value;
-//     const blogcontentvalue= blogcontent.value;
-//     const blogdatevalue=blogdate.value;
-   
-//     if (blogtitlevalue==="") {
-//         seterror(blogtitle,"please blog must contain title");
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+    const firebaseConfig = {
+    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
+    authDomain: "my-brand-ab3eb.firebaseapp.com",
+    projectId: "my-brand-ab3eb",
+    storageBucket: "my-brand-ab3eb.appspot.com",
+    messagingSenderId: "1054921679340",
+    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
+    measurementId: "G-8T216E4TG5"
+  };
         
-//     } else {
-//         setsuccess(blogtitle)
-//     }
+       
+       // Initialize Firebase
+    const app=initializeApp(firebaseConfig);
+    const db=getFirestore(app);
 
-//     if (blogdatevalue==="") {
-//         seterror(blogdate,"please blog must contain date");
-//     } else {
-//         setsuccess(blogdate)
-//     }
+    // access data using query
+    const q=query(collection(db,"cretedblogs"));
 
-//     if (blogimagevalue==="") {
-//         seterror(blogimage,"please choose image for blog");
-
-        
-//     } else {
-//         // console.log(blogimagevalue);
-//         setsuccess(blogimage)
-//     }
-
-//     // if (blogcontentvalue==="") {
-//     //     seterror(blogcontent,"write body content");
-        
-//     // } else {
-//     //     setsuccess(blogcontent)
-//     // }
-
-//     if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
-//         insertblog()
-//     }
-
-// }
-
-//     let blogs=[];
-  
-
-//     // function createblogs(){
-//     //     localStorage.setItem("blogs",JSON.stringify(blogs));
-//     // };
-
-//     // function getblog(){
-//     //     let blogdata=localStorage.getItem("blogs");
-//     //     if(blogdata){
-//     //         console.log(blogdata);
-//     //         // blogs.JSON.parse(blogdata);
-//     //     }else{
-//     //         createblogs();
-//     //     };
-//     // };  getblog();
-
-
-//     function insertblog(){
-        
-//         let blog={
-//         blogcontent:blogcontent.value,
-//         blogdate:blogdate.value,
-//         blogimage:image,
-//         blogtitle:blogtitle.value
-//       };
-//       blogs.push(blog);
-//     //   createblogs();
-//     console.log(blogs);
-
-//       blogimagevalue=blogimage.value="";
-//       blogtitlevalue= blogtitle.value="";
-//       blogcontentvalue= blogcontent.value="";
-//       blogdatevalue=blogdate.value="";
-
-//     };
-
-// // }
-
-
-// // btn.addEventListener("click",e=>{
-// //     e.preventDefault();
-// //     validateinputs();
-   
-// // });
-
-
-// //   document.getElementById("content").insertAdjacentHTML("beforeend",manageposts())
-blogs=JSON.parse(localStorage.getItem("blogs"));
-  function manageposts(){
+    getDocs(q).then(docSnap=>{
+        let blogs=[];
+        docSnap.forEach(blog => {
+            blogs.push({...blog.data(), id:blog.id})
+        });
+        function manageposts(){
     let table=`
       <table>
         <thead>
@@ -228,12 +125,12 @@ blogs=JSON.parse(localStorage.getItem("blogs"));
       
     `;
     // blogs.forEach(element => {
-        for(let i=0;i<blogs.length;i++){
+        for(let i=0;i<blogs.length-1;i++){
       table+=`
         <tr>
             <td>${i+1}</td>
-            <td>${blogs[i].blogtitle}</td>
-            <td>${blogs[i].blogdate}</td>
+            <td>${blogs[i].title}</td>
+            <td>${blogs[i].date}</td>
             <td>
                 <a href="./edit.html" type="button" class="edit" onclick="editblog(${i})">edit</a>  
                 <a type="button" id="delet"  onclick="deletblog(${i})" class="delete">delete</a> 
@@ -249,25 +146,31 @@ blogs=JSON.parse(localStorage.getItem("blogs"));
     // console.log(table);
 
   }
+        manageposts();
+        console.log("blogs",blogs);
+    });
+      
 
-  manageposts();
 
-  function deletblog(i){
-      blogs.splice(i,1);
-    //   after deleting blog from blogs update localstorage
-    localStorage.setItem("blogs",JSON.stringify(blogs));
-    // to loaad window after delete
-    window.location.href="./index.html"
-  }
-// // localStorage.clear()
-window.addEventListener("load",(e)=>{
-    e.preventDefault();
-})
 
-function editblog(i){
-    console.log(i);
 
-}
+
+//   function deletblog(i){
+//       blogs.splice(i,1);
+//     //   after deleting blog from blogs update localstorage
+//     localStorage.setItem("blogs",JSON.stringify(blogs));
+//     // to loaad window after delete
+//     window.location.href="./index.html"
+//   }
+// // // localStorage.clear()
+// window.addEventListener("load",(e)=>{
+//     e.preventDefault();
+// })
+
+// function editblog(i){
+//     console.log(i);
+
+// }
 // </script>
    
 
