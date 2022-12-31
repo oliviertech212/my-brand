@@ -172,24 +172,24 @@ let blogdate=document.getElementById("blogdate");
 let blogcontent=document.getElementById("editor");
 let btn=document.getElementById("test");
 
-// let image;
+let image;
 // console.log("textarea",blogcontent.value);
 
-// blogimage.addEventListener("change",(e)=>{
+blogimage.addEventListener("change",(e)=>{
     
-//         const img=e.target.files[0];
+        const img=e.target.files[0];
 
-//         const reader=new FileReader();
+        const reader=new FileReader();
 
-//         reader.readAsDataURL(img);
-//         // console.log(reader.readAsDataURL(img))
+        reader.readAsDataURL(img);
+        // console.log(reader.readAsDataURL(img))
       
-//         reader.addEventListener("load",()=>{
-//             image=reader.result;
-//             // console.log(image);
+        reader.addEventListener("load",()=>{
+            image=reader.result;
+            // console.log(image);
 
-//         });
-//     });
+        });
+    });
    
     
    
@@ -197,7 +197,7 @@ let btn=document.getElementById("test");
 const validateinputs=()=>{
 
     // blogpost content
-    let blogimagevalue=blogimage.value;
+    let blogimagevalue=image;
     let blogtitlevalue= blogtitle.value;
     let blogcontentvalue= blogcontent.value;
     let blogdatevalue=blogdate.value;
@@ -236,6 +236,16 @@ const validateinputs=()=>{
        // Initialize Firebase
     const app=initializeApp(firebaseConfig);
     const db=getFirestore(app);
+    // add blogs or create blogs
+    addDoc(collection(db, "cretedblogs"),{
+
+    image:blogimagevalue,
+    title:blogtitlevalue,
+    content:blogcontentvalue,
+    date:blogdatevalue
+
+    });
+   
     
     // Add a new document in collection "cities"
     // deleteDoc (doc(db, "cretedblogs","43aFspGnZVKZDdP3VhiA"));
@@ -283,6 +293,12 @@ const validateinputs=()=>{
 btn.addEventListener("click",e=>{
     e.preventDefault();
     validateinputs();
+
+    // make field empty after create
+    blogimage.value="";
+    blogtitle.value="";
+    blogcontent.value="";
+    blogdate.value="";
 
    
 });

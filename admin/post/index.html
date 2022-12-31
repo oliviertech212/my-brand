@@ -76,7 +76,9 @@
 
             <div  class="content">
                  <h1 class="page-title" >Manage Posts</h1>
-                 <div id="contentTomange"></div>
+                 <div id="contentTomange">
+
+                 </div>
             </div>
             
         </div>
@@ -107,47 +109,67 @@
     // access data using query
     const q=query(collection(db,"cretedblogs"));
 
+    // function deletblog(){
+    //     // deleteDoc (doc(db, "cretedblogs",`${i}`));
+    //     // to loaad window after delete
+    //     // window.location.href="./index.html"
+    //     // return "deleted"
+    //     console.log("deleted");
+    // };
+
+    // console.log(deletblog());
+  
     getDocs(q).then(docSnap=>{
         let blogs=[];
         docSnap.forEach(blog => {
             blogs.push({...blog.data(), id:blog.id})
         });
-        function manageposts(){
-    let table=`
-      <table>
-        <thead>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th colspan="3">Action</th>
-        </thead>
-        <tbody id="blogtable">
       
-    `;
-    // blogs.forEach(element => {
-        for(let i=0;i<blogs.length-1;i++){
-      table+=`
-        <tr>
-            <td>${i+1}</td>
-            <td>${blogs[i].title}</td>
-            <td>${blogs[i].date}</td>
-            <td>
-                <a href="./edit.html" type="button" class="edit" onclick="editblog(${i})">edit</a>  
-                <a type="button" id="delet"  onclick="deletblog(${i})" class="delete">delete</a> 
-            </td>
-        </tr>
-      `   
-    };
-    table=table+`
-       </tbody>
-      </table>
-    `
-    document.getElementById("contentTomange").innerHTML=table
-    // console.log(table);
-
-  }
+      console.log(blogs);
+      
+        function manageposts(){
+     
+           let table=`
+             <table>
+               <thead>
+                   <th>Number</th>
+                   <th>Title</th>
+                   <th>Date</th>
+                   <th colspan="3">Action</th>
+               </thead>
+               <tbody id="blogtable">
+             
+           `;
+           // blogs.forEach(element => {
+               for(let i=0;i<blogs.length;i++){
+             table+=`
+               <tr>
+                   <td>${i+1}</td>
+                   <td>${blogs[i].title}</td>
+                   <td>${blogs[i].date}</td>
+                   <td><img width="40px" height="40px" src="${blogs[i].image}">  </td>
+                   <td>
+                       <a href="./edit.html" type="button" class="edit" onclick="editblog(${i})">edit</a>  
+                       <a type="button" id="delet"   class="delete"  data-blog-id="${blogs[i].id}">delete</a> 
+                   </td>
+               </tr>
+             `   
+           };
+           table=table+`
+              </tbody>
+             </table>
+           `
+           document.getElementById("contentTomange").innerHTML=table
+           // console.log(table);
+    
+        }   
+         
         manageposts();
-        console.log("blogs",blogs);
+        // console.log("blogs",deletblog());
+        
+
+
+      
     });
       
 
@@ -155,13 +177,7 @@
 
 
 
-//   function deletblog(i){
-//       blogs.splice(i,1);
-//     //   after deleting blog from blogs update localstorage
-//     localStorage.setItem("blogs",JSON.stringify(blogs));
-//     // to loaad window after delete
-//     window.location.href="./index.html"
-//   }
+
 // // // localStorage.clear()
 // window.addEventListener("load",(e)=>{
 //     e.preventDefault();
@@ -171,7 +187,25 @@
 //     console.log(i);
 
 // }
-// </script>
+//
+
+    function deletblog(i){
+        deleteDoc (doc(db, "cretedblogs",`${i}`));
+        // to loaad window after delete
+        // window.location.href="./index.html"
+        // return "deleted"
+        console.log("deleted");
+    };
+    
+    // adding event listener to parent using event delegation injavascript
+    document.getElementById("contentTomange").addEventListener("click",function (e){
+        
+        if(e.target.classList.contains('delete')){
+            console.log(e.target.dataset.blogId)
+            deletblog(e.target.dataset.blogId)
+        }
+    })
+</script>
    
 
 
