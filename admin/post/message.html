@@ -47,8 +47,8 @@
                 <li>
                     <a href="../../index.html">Home</a>
                     <a href="./profile.html">Reset</a>
-                    <a href="./index.html"class="active" >Manage Posts</a>
-                    <a href="./message.html"   >Messages</a>
+                    <a href="./index.html" >Manage Posts</a>
+                    <a href="./message.html" class="active"  >Messages</a>
                     <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
                 </li>
@@ -62,7 +62,7 @@
                     <a href="../../index.html">Home</a>
                     <a href="./profile.html">Reset</a>
                     <a href="./index.html" class="active">Manage Posts</a>
-                    <a href="./message.html"   >Messages</a>
+                    <a href="./message.html" class="active"  >Messages</a>
                 </li>
             </ul>
             
@@ -70,14 +70,13 @@
         </div>
         <div  class="admin-content">
             <div class="btn-group">
-                <a href="./create.html" class="btn" >Add Post</a>
-                <a href="./index.html" class="btn" >Manage Posts</a>
+               
             </div>
 
 
 
             <div  class="content">
-                 <h1 class="page-title" >Manage Posts</h1>
+                 <h1 class="page-title" >Messages</h1>
                  <div id="contentTomange">
 
                  </div>
@@ -86,8 +85,7 @@
         </div>
 
     </section>
-<!-- <script type="module">
-      export  let deleteID;
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
     import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs,updateDoc} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
     const firebaseConfig = {
@@ -106,17 +104,17 @@
     const db=getFirestore(app);
 
     // access data using query
-    const q=query(collection(db,"cretedblogs"));
+    const q=query(collection(db,"contactfrom"));
 
 
   
     getDocs(q).then(docSnap=>{
-        let blogs=[];
+        let msgs=[];
         docSnap.forEach(blog => {
-            blogs.push({...blog.data(), id:blog.id})
+            msgs.push({...blog.data(), id:blog.id})
         });
       
-      console.log(blogs);
+      console.log(msgs);
       
         function manageposts(){
      
@@ -124,25 +122,24 @@
              <table>
                <thead>
                    <th>Number</th>
-                   <th>Title</th>
-                   <th>Date</th>
-                   <th>image</th>
+                   <th>UserName</th>
+                   <th>UserEmail</th>
+                   <th>UserMessage</th>
                    <th colspan="3">Action</th>
                </thead>
                <tbody id="blogtable">
              
            `;
            // blogs.forEach(element => {
-               for(let i=0;i<blogs.length;i++){
+               for(let i=0;i<msgs.length;i++){
              table+=`
                <tr>
                    <td>${i+1}</td>
-                   <td>${blogs[i].title}</td>
-                   <td>${blogs[i].date}</td>
-                   <td><img width="40px" height="40px" src="${blogs[i].image}">  </td>
+                   <td>${msgs[i].username}</td>
+                   <td>${msgs[i].useremail}</td>
+                   <td> ${msgs[i].usermessage} </td>
                    <td>
-                       <a  type="button" class="edit" data-blo-id="${blogs[i].id}">edit</a>  
-                       <a type="button" id="delet"   class="delete"  data-blog-id="${blogs[i].id}">delete</a> 
+                    <a type="button" id="delet"   class="delete"  data-blog-id="${msgs[i].id}">delete</a> 
                    </td>
                </tr>
              `   
@@ -164,70 +161,32 @@
       
     });
       
-
-
-
-
-
-
-// // // localStorage.clear()
-// window.addEventListener("load",(e)=>{
-//     e.preventDefault();
-// })
-
-// function editblog(i){
-//     console.log(i);
-
-// }
-//
-
-    function deletblog(i){
-        deleteDoc (doc(db, "cretedblogs",`${i}`));
-        // to loaad window after delete
-        // window.location.href="./index.html"
-        // return "deleted"
+    function deletemessage(i){
+        deleteDoc (doc(db, "contactfrom",`${i}`));
+       
         console.log("deleted");
     };
    
   
-    
-  
 
-    // function updateblog(i){
-        
-    //     updateDoc (doc(db, "cretedblogs",`${i}`),{
-    //         image:"image",
-    //         title:blogtitle,
-    //         content:blogcontent,
-    //         date:blogdate
-    //     });
-    //     // // to loaad window after delete
-    //     // window.location.href="./index.html"
-    //     // // return "deleted"
-    //     console.log(i,"is updated now");
-    // };
-   
 
     // adding event listener to parent using event delegation injavascript
     document.getElementById("contentTomange").addEventListener("click",function (e){
         
         if(e.target.classList.contains('delete')){
             console.log(e.target.dataset.blogId)
-            deletblog(e.target.dataset.blogId)
+            deletemessage(e.target.dataset.blogId)
             // to loaad window after delete
-        // window.location.href="./index.html"
-        }
-        else if(e.target.className=='edit'){
-            window.location.href="./edit.html";
-            console.log(e.target.dataset.bloId)
-            // updateblog(e.target.dataset.blogId)
-            deleteID=e.target.dataset.bloId;
-           
+            setTimeout(() => {
+                //   reload window
+                location.reload(); 
+            },2000);
+  
         }
     })
-</script> -->
+</script>
 
-<script type="module" src="./managepost-index.js"></script>
+
 <script type="module" src="../../js/script.js"></script>
     
 </body>

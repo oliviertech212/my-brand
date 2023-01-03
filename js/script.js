@@ -2,6 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 // import{getDatabase} from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js"
 // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs,updateDoc} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword,onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
 const firebaseConfig = {
     apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
@@ -37,12 +38,15 @@ document.getElementById("menuicon").addEventListener("click",mobilemenu);
 
 
 // specifying characters needed to be rendered on blog card
-(function() {
-    let description=document.querySelectorAll("#blog-desc");
-    description.forEach((i)=>{
-        i.innerHTML=i.innerText.trim().slice(0,120)+"....";
-    });
-})();
+// (function() {
+//     let description=document.querySelectorAll("#blog-desc");
+//     description.forEach((i)=>{
+//         i.innerHTML=i.innerText.trim().slice(0,120)+"....";
+//     });
+//     console.log("here is description",description);
+// })();
+
+
 
 
 // set error popup an form validated
@@ -161,6 +165,8 @@ function contactformvalidation(){
               cmessage.value="";
               cemail.value = "";
               cname.value = "";
+            //   reload window
+            location.reload();
           }).catch((error)=>{
               console.log(error);
           })
@@ -576,4 +582,134 @@ const validateinput=()=>{
     
     //     }
 
+
+    // script for mange post index page
+
+//     let id;
+//             // Initialize Firebase
+//     const app=initializeApp(firebaseConfig);
+//     const db=getFirestore(app);
+
+//     // access data using query
+//     const q=query(collection(db,"cretedblogs"));
+
+
+  
+//     getDocs(q).then(docSnap=>{
+//         let blogs=[];
+//         docSnap.forEach(blog => {
+//             blogs.push({...blog.data(), id:blog.id})
+//         });
+      
+//       console.log(blogs);
+      
+//         function manageposts(){
+     
+//            let table=`
+//              <table>
+//                <thead>
+//                    <th>Number</th>
+//                    <th>Title</th>
+//                    <th>Date</th>
+//                    <th>image</th>
+//                    <th colspan="3">Action</th>
+//                </thead>
+//                <tbody id="blogtable">
+             
+//            `;
+//            // blogs.forEach(element => {
+//                for(let i=0;i<blogs.length;i++){
+//              table+=`
+//                <tr>
+//                    <td>${i+1}</td>
+//                    <td>${blogs[i].title}</td>
+//                    <td>${blogs[i].date}</td>
+//                    <td><img width="40px" height="40px" src="${blogs[i].image}">  </td>
+//                    <td>
+//                        <a  type="button" class="edit" data-blo-id="${blogs[i].id}">edit</a>  
+//                        <a type="button" id="delet"   class="delete"  data-blog-id="${blogs[i].id}">delete</a> 
+//                    </td>
+//                </tr>
+//              `   
+//            };
+//            table=table+`
+//               </tbody>
+//              </table>
+//            `
+//            document.getElementById("contentTomange").innerHTML=table
+//            // console.log(table);
     
+//         }   
+         
+//         manageposts();
+//         // console.log("blogs",deletblog());
+        
+
+
+      
+//     });
+      
+
+
+
+
+
+
+// // // // localStorage.clear()
+// // window.addEventListener("load",(e)=>{
+// //     e.preventDefault();
+// // })
+
+// // function editblog(i){
+// //     console.log(i);
+
+// // }
+// //
+
+//     function deletblog(i){
+//         deleteDoc (doc(db, "cretedblogs",`${i}`));
+        
+//         // return "deleted"
+//         console.log("deleted");
+//     };
+   
+  
+    
+  
+
+//     // function updateblog(i){
+        
+//     //     updateDoc (doc(db, "cretedblogs",`${i}`),{
+//     //         image:"image",
+//     //         title:blogtitle,
+//     //         content:blogcontent,
+//     //         date:blogdate
+//     //     });
+//     //     // // to loaad window after delete
+//     //     // window.location.href="./index.html"
+//     //     // // return "deleted"
+//     //     console.log(i,"is updated now");
+//     // };
+    
+//     // adding event listener to parent using event delegation injavascript
+//     document.getElementById("contentTomange").addEventListener("click",function (e){
+        
+//         if(e.target.classList.contains('delete')){
+//             console.log(e.target.dataset.blogId)
+//             deletblog(e.target.dataset.blogId)
+//             // window.location.href="./index.html";
+        
+            
+           
+            
+//         }
+//         else if(e.target.className=='edit'){
+//             // window.location.href="./edit.html";
+//             console.log(e.target.dataset.bloId)
+//             id=e.target.dataset.bloId;
+//             // updateblog(e.target.dataset.blogId)
+//         }
+//     })
+
+
+//     console.log(id);
