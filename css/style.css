@@ -306,6 +306,8 @@ line-height: 82px;
 .blog-section{
     margin-top: 100px;
     overflow-y: scroll;
+    /* background-color: #0E6BC0;
+    border: 3px solid red; */
 }
 .blog-container{
     display: grid;
@@ -344,6 +346,8 @@ line-height: 82px;
     font-size: 15px;
     line-height: 22px;
     font-family: 'Rubik', sans-serif; 
+    /* background: #0E6BC0; */
+    /* color: #E4E8E9; */
 }
 .blog button{
     margin-top: 20px;
@@ -705,9 +709,12 @@ form .errormsg{
     
     .mobile ul li button{
         width:100%;
+        font-size: 20px;
         color: black;
         font-weight: bold;
+        font-family: 'Roboto', sans-serif;
         margin-bottom: 20px;
+        padding: 10px;
     }
 
     .mobile ul li button:hover{
@@ -719,6 +726,7 @@ form .errormsg{
         color: #FFFFFF;
         background: #136A6E;
         border: 2px solid #FAFAFA;
+        /* border: 3px solid red; */
     }
 
 
@@ -793,7 +801,7 @@ margin-left: 0%;
         font-size: 20px;
         text-align: center;
         letter-spacing: -0.015em;
-        border-radius:20px;
+        border-radius:5px;
         margin-left: 10px;
       
     }

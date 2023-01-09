@@ -140,13 +140,16 @@ form .text-input{
 
 
 
-form .btn-sub{
+form .btn-su{
+    /* width: 105px; */
+    height: 40px;
+    font-weight: bold;
     margin-top: 10px;
     background-color:white;
     padding: 10px;
     color: black;
     font-weight: bold;
-    border: 2px solid black;
+    border: 1px solid black;
     font-family: 'Roboto', sans-serif;
     border-radius: 3px;
 }
