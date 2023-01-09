@@ -123,7 +123,7 @@
     //     // // return "deleted"
     //     console.log(i,"is updated now");
     // };
-   
+  
 
     // adding event listener to parent using event delegation injavascript
     if( document.getElementById("contentTomange")){
@@ -134,188 +134,226 @@
                 console.log(e.target.dataset.blogId)
                 deletblog(e.target.dataset.blogId)
                   // to loaad window after delete
-            setTimeout(() => {
-                //   reload window
-                location.reload(); 
-            },2000);
+            // setTimeout(() => {
+            //     //   reload window
+            //     location.reload(); 
+            // },2000);
             }
             else if(e.target.className=='edit'){
-           
+                let update=document.getElementById("contentToUpdate");
                 // console.log(e.target.dataset.bloId)
                 // updateblog(e.target.dataset.blogId)
                let deleteID=e.target.dataset.bloId;
-               //    export default deleteID;
-            //    if(addDoc(collection(db, "deletId"),{
-            //     id:deleteID
-            //    })){
-                    // window.location.href="./edit.html";
-                // console.log("added");
+               update.scrollIntoView();
+
+             
+                 getDocs(q).then(docSnap=>{
+                     let blogs=[];
+                     docSnap.forEach(blog => {
+                         blogs.push({...blog.data(), id:blog.id})
+                     });
+                     console.log("blogs",blogs);
+                     for(let i=0; i<blogs.length;i++){
+                       
+                        if (blogs[i].id==deleteID) {
+                            console.log(blogs[i].id);  
+
+             update.innerHTML=`<form id="blogform" autocomplete="off" action="" >
+             <div>
+                 <label class="text-label">Title</label>
+                 <input id="blogtitle" type="text" name="title" value="${blogs[i].title}" class="text-input">
+                 <p class="error"></p>
+             </div>
+             <div>
+                 <label class="text-label">Date</label>
+         
+                 <input id="blogdate" type="date" value="${blogs[i].date}" name="title" class="text-input">
+                 <p class="error"></p>
+             </div>
+             <div>
+                 <label class="text-label">image</label>
+              
+                 <input id="blogimage" type="file" name="image"  class="text-input image" >
+                 <p class="error"></p>
+             </div>
+             
+
+             <div>
+                 <label class="text-label">Content</label>
+                 <br>
+                 <textarea   name="" id="editor" width="40" rows="10">${blogs[i].content}</textarea>
+                 <p class="error"></p>
+             </div>
+
+             <div>
+                 <button type="submit" onclick="event.preventDefault();" id="test" class="btn-su">Update</button>
+             </div>
+          
+             </form>`
+                        }
+                     }
+            
+                 });
+               
+               
+                update.addEventListener("click",function(e){
+                    console.log(document.getElementById("blogimage"));
+                    
+                   // initialize tinymce
+                   tinymce.init({
+                    selector: '#editor'
+                  })
+
+                //   if (e.target.classList.contains("image")) {
+                    let image;
+                    console.log("now you can get image");
+                    // if(blogimage){
+                        console.log(blogimage,"blogimage is here");
+                        blogimage.addEventListener("DOMContentLoaded",(e)=>{
+                        
+                            const img=e.target.files[0];
+                    
+                            const reader=new FileReader();
+                    
+                            reader.readAsDataURL(img);
+                            // console.log(reader.readAsDataURL(img))
+                          
+                            reader.addEventListener("load",()=>{
+                                image=reader.result;
+                                console.log(image);
+                    
+                            });
+                        });
+                       
+                    // } 
+                  
+            // 
+                    let btn=document.getElementById("test");
+                   
+                   
+              
                 
-            //    }
-               console.log(deleteID);
-               edit(deleteID)
-               console.log(edit(deleteID));
+                      
+                const validateinputs=()=>{
+                  
+                const seterror=(element,messaage)=>{
+                    const inputcontrol=element.parentElement;
+                    const errorDisplay=inputcontrol.querySelector(".error");
+                
+                
+                    errorDisplay.innerHTML=messaage;
+                    
+                    // inputcontrol.classList.add("error");
+                    inputcontrol.children.item(1).classList.add("failed");
+                    inputcontrol.children.item(1).classList.remove("success");
+                    
+                }
+                
+                const setsuccess=element=>{
+                    const inputcontrol=element.parentElement;
+                    const errorDisplay=inputcontrol.querySelector(".error")
+                   
+                    
+                    errorDisplay.innerHTML="";
+                  
+                    inputcontrol.children.item(1).classList.remove("failed");
+                    inputcontrol.children.item(1).classList.add("success");
+                
+                }
+                
+                
+                // let form2=document.getElementById("blogform");
+                let blogtitle=document.getElementById("blogtitle");
+                let blogdate=document.getElementById("blogdate");
+                let blogimage=document.getElementById("blogimage");
+                // let blogcontent=document.getElementById("editor");
+                let blogcontent=tinyMCE.get('editor').getContent();
+                // Use a regular expression to remove the HTML tags from the string
+                var text =blogcontent.replace(/<[^>]*>/g, "");
+
+                
+                
+                   
+                    
+                   
+              
+        
+                    // blogpost content
+                    let blogimagevalue=image;
+                    let blogtitlevalue= blogtitle.value;
+                    let blogcontentvalue=text;
+                    let blogdatevalue=blogdate.value;
+                   
+                    if (blogtitlevalue==="") {
+                        seterror(blogtitle,"please blog must contain title");
+                        
+                    } else {
+                        setsuccess(blogtitle)
+                    }
+                
+                    if (blogdatevalue==="") {
+                        seterror(blogdate,"please blog must contain date");
+                    } else {
+                        setsuccess(blogdate)
+                    }
+                
+                    if (blogimagevalue==="") {
+                        seterror(blogimage,"please choose image for blog");
+                
+                        
+                    } else {
+                        // console.log(blogimagevalue);
+                        setsuccess(blogimage)
+                    }
+                
+                    // if (blogcontentvalue==="") {
+                    //     seterror(blogcontent,"write body content");
+                        
+                    // } else {
+                    //     setsuccess(blogcontent)
+                    // }
+                  
+                    if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+                        updateDoc (doc(db, "cretedblogs",`${deleteID}`),{
+                            image:blogimagevalue,
+                            title:blogtitlevalue,
+                            content:blogcontentvalue,
+                            date:blogdatevalue,
+                        });
+                    
+                    }
+                
+                }
+                
+              
+        
+                    if(btn&&e.target.className=="btn-su"){
+        
+                        btn.addEventListener("click",()=>{
+                            console.log(btn);
+                          //   e.preventDefault();
+                            validateinputs()
+                          
+                            console.log(deleteID,"to be updated");
+                            // setTimeout(() => {
+                            //   location.reload();
+                            // },2000);
+              
+                        });
+                      }
+                })
+              
+               
+                
+                
+               
+
+
             }
         })
         
     }
-    function edit(id){
-        console.log("iddd",id);
-        const seterror=(element,messaage)=>{
-            const inputcontrol=element.parentElement;
-            const errorDisplay=inputcontrol.querySelector(".error");
-        
-        
-            errorDisplay.innerHTML=messaage;
-            
-            // inputcontrol.classList.add("error");
-            inputcontrol.children.item(1).classList.add("failed");
-            inputcontrol.children.item(1).classList.remove("success");
-            
-        }
-        
-        const setsuccess=element=>{
-            const inputcontrol=element.parentElement;
-            const errorDisplay=inputcontrol.querySelector(".error")
-           
-            
-            errorDisplay.innerHTML="";
-          
-            inputcontrol.children.item(1).classList.remove("failed");
-            inputcontrol.children.item(1).classList.add("success");
-        
-        }
-        
-        
-        // let form2=document.getElementById("blogform");
-        let blogtitle=document.getElementById("blogtitle");
-        let blogimage=document.getElementById("blogimage");
-        let blogdate=document.getElementById("blogdate");
-        let blogcontent=document.getElementById("editor");
-        let btn=document.getElementById("test");
-        
-        let image;
-        // console.log("textarea",blogcontent.value);
-        if(blogimage){
-            blogimage.addEventListener("change",(e)=>{
-            
-                const img=e.target.files[0];
-        
-                const reader=new FileReader();
-        
-                reader.readAsDataURL(img);
-                // console.log(reader.readAsDataURL(img))
-              
-                reader.addEventListener("load",()=>{
-                    image=reader.result;
-                    // console.log(image);
-        
-                });
-            });
-        }
-        
-           
-            
-           
-        
-        const validateinputs=()=>{
-        
-            // blogpost content
-            let blogimagevalue=image;
-            let blogtitlevalue= blogtitle.value;
-            let blogcontentvalue= blogcontent.value;
-            let blogdatevalue=blogdate.value;
-           
-            if (blogtitlevalue==="") {
-                seterror(blogtitle,"please blog must contain title");
-                
-            } else {
-                setsuccess(blogtitle)
-            }
-        
-            if (blogdatevalue==="") {
-                seterror(blogdate,"please blog must contain date");
-            } else {
-                setsuccess(blogdate)
-            }
-        
-            if (blogimagevalue==="") {
-                seterror(blogimage,"please choose image for blog");
-        
-                
-            } else {
-                // console.log(blogimagevalue);
-                setsuccess(blogimage)
-            }
-        
-            if (blogcontentvalue==="") {
-                seterror(blogcontent,"write body content");
-                
-            } else {
-                setsuccess(blogcontent)
-            }
-            console.log(id);
-            if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
-               
-            
-            
-        
-        
-                
-                
-                updateDoc (doc(db, "cretedblogs",`${id}`),{
-                    image:blogcontentvalue,
-                    title:blogtitlevalue,
-                    content:blogcontentvalue,
-                    date:blogdatevalue,
-                    likes:0
-                });
-            
-           
-            
-        
-            // access data using query
-            const q=query(collection(db,"cretedblogs"));
-        
-            getDocs(q).then(docSnap=>{
-                let blogs=[];
-                docSnap.forEach(blog => {
-                    blogs.push({...blog.data(), id:blog.id})
-                });
-                console.log("blogs",blogs);
-                blogid=blogs;
-            });
-              
-          
-            
-            }
-        
-        }
-        
-        // document.getElementById("tobedeleted").innerHTML="deleteID
-        
-        // console.log(deleteID);
-        
-         
-         
-        
-        
-        if(btn){
 
-        btn.addEventListener("click",e=>{
-            e.preventDefault();
-            validateinputs();
-        
-            // make field empty after create
-            blogimage.value="";
-            blogtitle.value="";
-            blogcontent.value="";
-            blogdate.value="";
-        
-           
-        });
-        }
 
-    }
-    
-{/* </script> */}
+ 
+        

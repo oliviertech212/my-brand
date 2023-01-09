@@ -50,6 +50,7 @@
                     <a href="./profile.html">Reset</a>
                     <a href="./index.html" class="active" >Manage Posts</a>
                     <a href="./message.html"   >Messages</a>
+                    <a href="./comments.html">comments</a>
                     <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
                 </li>
@@ -62,8 +63,9 @@
                 <li>
                     <a href="../../index.html"><h1>Home</h1></a>
                     <a href="./profile.html">Reset</a>
-                    <a href="./index.html">Manage Posts</a>
+                    <a href="./index.html"class="active" >Manage Posts</a>
                     <a href="./message.html"   >Messages</a>
+                    <a href="./comments.html">comments</a>
                 </li>
             </ul>
             
@@ -81,7 +83,7 @@
             <div class="content">
                 <h1 class="page-title" >Manage Posts</h1> 
 
-                <form id="blogform" autocomplete="off" action="" >
+                <form id="blogform"  action=""  >
                     <div>
                         <label class="text-label">Title</label>
                         <input id="blogtitle" type="text" name="title" class="text-input">
@@ -123,10 +125,13 @@
 
 
 
-    <!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+<script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 
-<script type="module">
+<script type="module" >
+    tinymce.init({
+      selector: '#editor'
+    });
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
     import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
     const firebaseConfig = {
@@ -139,8 +144,27 @@
     measurementId: "G-8T216E4TG5"
   };
 
-    // set error popup an form validated
+  
+    let btn=document.getElementById("test");
+    let image;
+blogimage.addEventListener("change",(e)=>{
+    
+        const img=e.target.files[0];
 
+        const reader=new FileReader();
+
+        reader.readAsDataURL(img);
+        // console.log(reader.readAsDataURL(img))
+      
+        reader.addEventListener("load",()=>{
+            image=reader.result;
+            // console.log(image);
+
+        });
+    });
+   
+    const validateinpt=()=>{
+           // set error popup an form validate
 const seterror=(element,messaage)=>{
     const inputcontrol=element.parentElement;
     const errorDisplay=inputcontrol.querySelector(".error");
@@ -171,37 +195,20 @@ const setsuccess=element=>{
 let blogtitle=document.getElementById("blogtitle");
 let blogimage=document.getElementById("blogimage");
 let blogdate=document.getElementById("blogdate");
-let blogcontent=document.getElementById("editor");
-let btn=document.getElementById("test");
+let blogcontent=tinyMCE.get('editor').getContent();
+// Use a regular expression to remove the HTML tags from the string
+var text =blogcontent.replace(/<[^>]*>/g, "");
 
-let image;
-// console.log("textarea",blogcontent.value);
 
-blogimage.addEventListener("change",(e)=>{
-    
-        const img=e.target.files[0];
 
-        const reader=new FileReader();
-
-        reader.readAsDataURL(img);
-        // console.log(reader.readAsDataURL(img))
-      
-        reader.addEventListener("load",()=>{
-            image=reader.result;
-            // console.log(image);
-
-        });
-    });
-   
     
    
 
-const validateinputs=()=>{
 
     // blogpost content
     let blogimagevalue=image;
     let blogtitlevalue= blogtitle.value;
-    let blogcontentvalue= blogcontent.value;
+    let blogcontentvalue=text;
     let blogdatevalue=blogdate.value;
    
     if (blogtitlevalue==="") {
@@ -226,15 +233,15 @@ const validateinputs=()=>{
         setsuccess(blogimage)
     }
 
-    if (blogcontentvalue==="") {
-        seterror(blogcontent,"write body content");
+    // if (blogcontentvalue==="") {
+    //     seterror(blogcontent,"write body content");
         
-    } else {
-        setsuccess(blogcontent)
-    }
+    // } else {
+    //     setsuccess(blogcontent)
+    // }
 
     if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
-       
+    console.log(blogcontent);   
        // Initialize Firebase
     const app=initializeApp(firebaseConfig);
     const db=getFirestore(app);
@@ -293,15 +300,19 @@ const validateinputs=()=>{
 
 
 
-btn.addEventListener("click",e=>{
+btn.addEventListener("click",function(e){
     e.preventDefault();
-    validateinputs();
+    // let blogcontent=tinyMCE.get('editor').getContent();
+    // console.log("content value",text);
+    validateinpt();
+    
 
     // make field empty after create
     blogimage.value="";
     blogtitle.value="";
-    blogcontent.value="";
+    // blogcontent="";
     blogdate.value="";
+    tinymce.get('editor').setContent('<p></p>')
 
    
 });
