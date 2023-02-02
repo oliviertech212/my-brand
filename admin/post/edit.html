@@ -1,7 +1,5 @@
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +48,10 @@
                 <li>
                     <a href="../../index.html">Home</a>
                     <a href="./profile.html">Reset</a>
-                    <a href="./index.html">Manage Posts</a>
+                    <a href="./index.html"   >Manage Posts</a>
+                    <a href="./message.html"   >Messages</a>
+                    <a href="./comments.html" >comments</a>
+                    <a href="./edit.html" class="active" >Update</a>
                     <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
                 </li>
@@ -61,9 +62,12 @@
         <div id="mainmenu" class="left-sidebar">
             <ul>
                 <li>
-                    <a href="../../index.html"><h1>Home</h1></a>
+                    <a href="../../index.html">Home</a>
                     <a href="./profile.html">Reset</a>
                     <a href="./index.html">Manage Posts</a>
+                    <a href="./message.html"   >Messages</a>
+                    <a href="./comments.html">comments</a>
+                    <a href="./edit.html" class="active" >Update</a>
                 </li>
             </ul>
             
@@ -82,7 +86,36 @@
                 <h1 class="page-title" >Manage Posts</h1> 
 
                 <form id="blogform" autocomplete="off" action="" >
+                    <div>
+                        <label class="text-label">Title</label>
+                        <input id="blogtitle" type="text" name="title" class="text-input">
+                        <p class="error"></p>
+                    </div>
+                    <div>
+                        <label class="text-label">Date</label>
+                
+                        <input id="blogdate" type="date" name="title" class="text-input">
+                        <p class="error"></p>
+                    </div>
+                    <div>
+                        <label class="text-label">image</label>
+                     
+                        <input id="blogimage" type="file" name="title"  class="text-input" >
+                        <p class="error"></p>
+                    </div>
                     
+
+                    <div>
+                        <label class="text-label">Content</label>
+                        <br>
+                        <textarea   name=""  id="editor" width="40" rows="10"></textarea>
+                        <p class="error"></p>
+                    </div>
+
+                    <div>
+                        <button type="submit" id="test" class="btn-su">Update</button>
+                    </div>
+                 
                 </form>
 
                 </div>
@@ -94,108 +127,204 @@
 
 
 
+    <!-- <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script> -->
 
-    <script>
-        // localStorage.clear()
-        // tinymce.init({
-        //   selector: '#blog-editor'
-        // });
+<!-- <script type="module">
+    // import {deleteID} from "./managepost-index.js"
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+    import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs, updateDoc} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
+    const firebaseConfig = {
+    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
+    authDomain: "my-brand-ab3eb.firebaseapp.com",
+    projectId: "my-brand-ab3eb",
+    storageBucket: "my-brand-ab3eb.appspot.com",
+    messagingSenderId: "1054921679340",
+    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
+    measurementId: "G-8T216E4TG5"
+  };
+     // Initialize Firebase
+     const app=initializeApp(firebaseConfig);
+    const db=getFirestore(app);
+
+
+    // access data to be deleted using query
+    const deletblog=query(collection(db,"deletId"));
+
+    getDocs(deletblog).then(docSnap=>{
+        let id;
+        docSnap.forEach((i,index )=> {
+
+            // id.push(i)
+            console.log(index);
+            id={...i.data()}
+            // id.push({...i.data()})
+        });
+        console.log("blogs id",id);
+    });
+      
+
+    // set error popup an form validated
+
+const seterror=(element,messaage)=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error");
+
+
+    errorDisplay.innerHTML=messaage;
     
-        // form rorblogpost
-    const form2=document.getElementById("blogform");
-    const blogtitle=document.getElementById("blogtitl");
-    const blogimage=document.getElementById("blogimag");
-    const blogdate=document.getElementById("blogdat");
-    const blogcontent=document.getElementById("blog-edito");
-    const btn=document.getElementById("btn");
+    // inputcontrol.classList.add("error");
+    inputcontrol.children.item(1).classList.add("failed");
+    inputcontrol.children.item(1).classList.remove("success");
     
+}
+
+const setsuccess=element=>{
+    const inputcontrol=element.parentElement;
+    const errorDisplay=inputcontrol.querySelector(".error")
+   
     
+    errorDisplay.innerHTML="";
+  
+    inputcontrol.children.item(1).classList.remove("failed");
+    inputcontrol.children.item(1).classList.add("success");
+
+}
+
+
+// let form2=document.getElementById("blogform");
+let blogtitle=document.getElementById("blogtitle");
+let blogimage=document.getElementById("blogimage");
+let blogdate=document.getElementById("blogdate");
+let blogcontent=document.getElementById("editor");
+let btn=document.getElementById("test");
+
+let image;
+// console.log("textarea",blogcontent.value);
+
+blogimage.addEventListener("change",(e)=>{
     
+        const img=e.target.files[0];
+
+        const reader=new FileReader();
+
+        reader.readAsDataURL(img);
+        // console.log(reader.readAsDataURL(img))
+      
+        reader.addEventListener("load",()=>{
+            image=reader.result;
+            // console.log(image);
+
+        });
+    });
+   
     
-    
-    
+   
+
+const validateinputs=()=>{
+
+    // blogpost content
+    let blogimagevalue=image;
+    let blogtitlevalue= blogtitle.value;
+    let blogcontentvalue= blogcontent.value;
+    let blogdatevalue=blogdate.value;
+   
+    if (blogtitlevalue==="") {
+        seterror(blogtitle,"please blog must contain title");
         
+    } else {
+        setsuccess(blogtitle)
+    }
+
+    if (blogdatevalue==="") {
+        seterror(blogdate,"please blog must contain date");
+    } else {
+        setsuccess(blogdate)
+    }
+
+    if (blogimagevalue==="") {
+        seterror(blogimage,"please choose image for blog");
 
         
+    } else {
+        // console.log(blogimagevalue);
+        setsuccess(blogimage)
+    }
+
+    if (blogcontentvalue==="") {
+        seterror(blogcontent,"write body content");
+        
+    } else {
+        setsuccess(blogcontent)
+    }
+
+    if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+       
+    
+    
+
+
+  
+        
+        updateDoc (doc(db, "cretedblogs","GgRmtqIEkSyaDVEioahk"),{
+            image:blogcontentvalue,
+            title:blogtitlevalue,
+            content:blogcontentvalue,
+            date:blogdatevalue,
+            likes:0
+        });
+    
+   
+    
+
+    // access data using query
+    const q=query(collection(db,"cretedblogs"));
+
+    getDocs(q).then(docSnap=>{
+        let blogs=[];
+        docSnap.forEach(blog => {
+            blogs.push({...blog.data(), id:blog.id})
+        });
+        console.log("blogs",blogs);
+        blogid=blogs;
+    });
+      
+  
+    
+    }
+
+}
+
+document.getElementById("tobedeleted").innerHTML=
+
+// console.log(deleteID);
+
  
-    
-    let button;
-    
-    // if(localStorage.getItem("blogs")!==null){
+ 
 
-        
-    //     let arr=JSON.parse(localStorage.getItem("blogs"))
-    //     arr.forEach((blog, index) => {
-           
-    //           console.log("image",blog.blogimage)
-              console.log(editblog())
-    blogs=JSON.parse(localStorage.getItem("blogs"));
-    
-           function edit(index){
-               let display= document.getElementById("blogform");
-               console.log(blogs);
-               display.innerHTML=(`
-                           <div>
-                               <label class="text-label">Title</label>
-                               <input id="blogtitl" type="text" name="title"value=${blogs[index]} class="text-input">
-                               <p class="error"></p>
-                           </div>
-                           <div>
-                               <label class="text-label">Date</label>
-                       
-                               <input id="blogdat" type="date" name="title" value=${blogs[index]}   class="text-input">
-                               <p class="error"></p>
-                           </div>
-                           <div>
-                               <label class="text-label">image</label>
-                            
-                               <input id="blogimag" type="file"  value=${blogs[index]}  name="title" >
-                               <p class="error"></p>
-                           </div>
-                           
-       
-                           <div>
-                               <label class="text-label">Content</label>
-                               <br>
-                               <textarea   name="" id="blog-edito" value=${blogs[index]}  cols="30" rows="10"></textarea>
-                               <p class="error"></p>
-                           </div>
-       
-                           <div>
-                               <button type="submit" id="btn" onclick="update(${index})"   class="btn-sub">UPDATE</button>
-                           </div>
-                      
-       
-                                `);
-                  }
-                  edit()
-               function update(index) {;
-                   const blogtitle=document.getElementById("blogtitl");
-                   const blogimage=document.getElementById("blogimag");
-                   const blogdate=document.getElementById("blogdat");
-                   const blogcontent=document.getElementById("blog-edito");
-                   const btn=document.getElementById("btn");
-         
-               blog={
-               blogcontent:blogcontent,
-               blogdate:blogdate,
-               blogimage:blogimage,
-               blogtitle:blogtitle
-               };
-               console.log(arr);
-          
-           //   localStorage.setItem("blogs",JSON.stringify(arr));
-           //   document.getElementById("").innerHTML = form;
-            }
-    
-    //     });
-        
-    // }
-    </script>
-    
 
-<!-- script -->
-<script type="module" src="../../js/script.js"></script>
+
+btn.addEventListener("click",e=>{
+    e.preventDefault();
+    validateinputs();
+
+    // make field empty after create
+    blogimage.value="";
+    blogtitle.value="";
+    blogcontent.value="";
+    blogdate.value="";
+
+   
+});
+
+   
+
+   
+</script> -->
+
+
+<!-- <script type="module" src="./managepost-index.js"></script> -->
+<!-- <script type="module" src="../../js/script.js"></script> -->
     
 </body>
 </html>

@@ -43,33 +43,26 @@ font-family: 'Rubik', sans-serif; */
    max-height:600px;
    margin:0px auto 30px auto;
    overflow: hidden;
-
    
  }
- .single-blog .blog-desc .like-comment{
+ .single-blog .blog .like-comment{
    margin-top: 20px;
-/* float: left; */
+float: left;
 font-style: normal;
 font-weight: 300;
 font-size: 25px;
 line-height: 22px;
 display: flex;
-margin-left: 30px;
 }
-#comt{
-    display: flex;
-}
-.single-blog .blog-desc .like-comment span i{
+.single-blog .blog .like-comment span i{
 
-font-size: 30px;
+font-size: 20px;
 color: #00ADB5;
 padding-left: 10px;
-cursor: pointer;
 }
 .single-blog .material-symbols-outlined {
 padding-left: 10px;
-cursor: pointer;
-font-size: 30px;
+font-size: 20px;
 color: #00ADB5;
 font-variation-settings:
 'FILL' 0,
@@ -78,7 +71,6 @@ font-variation-settings:
 'opsz' 48
 }
 .single-blog .blog-desc{
-
     padding-top: 0px;
    padding-left: 20px;
    font-family: 'Rubik', sans-serif;
@@ -86,7 +78,8 @@ font-variation-settings:
    overflow-y: auto;
    /* height:100%; */
 }
-/* .single-blog .blog-desc .readless{
+.single-blog .blog-desc .readless{
+/* background-color: blue; */
 margin-top: 20px;
     margin-bottom: 20px;
     font-family: 'Rubik', sans-serif; 
@@ -101,7 +94,7 @@ margin-top: 20px;
     background-color: #00ADB5;
     border-radius: 5px;
     border: none;
-} */
+}
 .single-blog .blog-desc h2{
  
  font-size: 30px;
@@ -111,29 +104,6 @@ margin-top: 20px;
    font-weight: 100;
    line-height: 30px;
 }
-/* style for coment form */
-/* .single-blog .blog-desc .user{
-    float: left;
-    /* margin-top: 20px; */
-    /* display:flex; */
-/* } */
-.user label{
-    /* font-size: small; */
-    color: black;
-  }
-  .user #form .input-txt{
-    width: 30%;
-    border:2px solid gray;
-   
-  }
-  .user .cmt{
-    margin-top: 20px;
-    background-color: #00ADB5;
-    width: 30%;
-    border: 2px solid gray;
-    border-radius: 10px;
-    padding: 5px;
-  }
 
 @media (max-width:480px){
     .single-blog {
@@ -243,11 +213,12 @@ margin-top: 20px;
        border-radius: 5px;
    }
 
-   .single-blog .blog-desc  .like-comment{
+   .single-blog .blog .like-comment{
+
   font-size:20px;
 
    }
-   .single-blog .blog-desc .like-comment span i{
+   .single-blog .blog .like-comment span i{
    
    font-size: 20px;
    }
@@ -313,96 +284,13 @@ margin-top: 20px;
             <hr>
         </div> 
         <div class="blog-container">
-            <!-- <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1>UX/UI developers and UX/UI designers</h1>
-                <div class="blog-pc">
-                <img  class="mobile" src="../images/ui.png" alt="">
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    By now, you might have heard of UX/UI developers and UX/UI designers.
-                     Those are the ones making the apps and interfaces you are using daily
-                </div>
-                <div>
-                    <a href="../blogs/ui.html" target="_blank">
-                        <button type="button">
-                            Read more
-                            <span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>  
-                        </button>
-                    </a>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment 
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-            </div>
-            <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1>Frontend development</h1>
-                <div class="blog-pc">
-                  <img class="mobile" src="../images/frontend.jpg" alt="">   
-
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    Frontend development also known as (client side) development 
-                    is the practice of producing CSS, html and JavaScript for a website............
-                </div>
-                
-                <div>
-                    <button type="button">
-                        Read more
-                        <span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>  
-                    </button>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-            </div>
-            <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1> Back-end development</h1>
-                <div class="blog-pc">
-                    <img  class="mobile" src="../images/backend.jpg" alt="">
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    Back-end developers are the experts who build and maintain the
-                     mechanisms that process data and perform actions on websites. Unlike ............
-                </div>
-                
-                <div>
-                    <button type="button">
-                        Read more
-                        <span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>  
-                    </button>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment 
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-
-            </div> -->
+          
         </div>
         <div id="single-blog" class="single-blog">
-
+            
         </div>
 
-      </section>
+    </section>
       
 
 
@@ -487,16 +375,15 @@ margin-top: 20px;
                         </button>
             
                      </div>
-                     
+                     <div class="like-comment">like
+                          <span "> <i id="${index}"class="like fa-solid fa-thumbs-up"> <span class="likes-value-${index}">${blog.likes}</span></i></span>
+                          comment 
+                          <span class="material-symbols-outlined">
+                             comment
+                          </span>
+                     </div>
                  </div>
                 `
-                // <div class="like-comment">like
-                //           <span "> <i id="${index}"class="like fa-solid fa-thumbs-up"> <span class="likes-value-${index}">${blog.likes}</span></i></span>
-                //           comment 
-                //           <span class="material-symbols-outlined">
-                //              comment
-                //           </span>
-                //      </div>
 
             ));
             blogDisplay.addEventListener("click",(e)=>{
@@ -539,72 +426,50 @@ margin-top: 20px;
                     <div class="blog">
                         <div class="blog-pc">
                             <img width="500px" height="500px"  class="mobile" src="${blog.image}" alt="">
+                            <div class="like-comment">like
+                                      <span "> <i id="${index}"class="like fa-solid fa-thumbs-up"> <span class="likes-value-${index}">${blog.likes}</span></i></span>
+                                      comment 
+                                      <span class="material-symbols-outlined">
+                                         comment
+                                      </span>
+                            </div>
                         </div>
                     </div>
                     <div class="blog-desc">
+                        <h1>${blog.title}</h1> 
+                        ${blog.content} 
                         <div>
-                            <h1>${blog.title}</h1> 
-                        ${blog.content}
-                        </div>
-                      
-                        <div id="comt">
                             <button  id="readLess" class="readless" data-b-id="${index} " type="button">
                                         Read Less
                                         <span>
                                             <i class="fa-solid fa-arrow-right"></i>
                                         </span>  
                             </button>
-                            <div class="like-comment">
-                                      comment 
-                                      <span class="material-symbols-outlined" id="show-comment">
-                                         comment
-                                      </span>
-                            </div>
                         </div>
-
-                        <div class="user" id="user">
-                             <div id="form">
-                                <form id="commentform" action="">
-                                 <div>
-                                   <label for="">name</label><br>
-                                  <input class="input-txt" id="username" value="" type="text">
-                                 </div>
-                                 
-                                 <div>
-                                   <label for="">coment</label><br>
-                                  <textarea class="input-txt" id="usercomment" name="" id="" cols="30" rows="5"></textarea>
-                                  <input id="usertitle" type="hidden" value="${blog.title}">
-                                 </div>
-                                 
-                                  <button type="submit" id="sub" value="submit" onclick="event.preventDefault()" >Send</button>
-                                </form>
-                             </div>
-                         
-                             <div  id="cmt">
-                               
-                             </div>
-                        </div>
-                    
-                    
+                        <div>
+                            <div>
+                       <form id="commentform" action="">
+                         <label for="">name</label>
+                         <input id="username" value="ggggggg" type="text">
+                         <label for="">coment</label>
+                         <textarea id="usercomment" name="" id="" cols="30" rows="10"></textarea>
+                         <input id="usertitle" type="hidden" value="${blog.title}">
+                         <button type="submit" id="sub" value="submit" onclick="event.preventDefault()" ></button>
+                       </form>
+                     </div>
+                     <div id="cmt">
+                       
+                     </div>
                     </div>
 
                 </section>  `
 
 
-                // like
-                                    //   <span "> <i id="${index}"class="like fa-solid fa-thumbs-up"> <span class="likes-value-${index}">${blog.likes}</span></i></span>
+
                 
                console.log("blogtitle",blog.title);
 
-                document.getElementById("show-comment").addEventListener("click",()=>{
-                       
-                       if (document.getElementById("user").style.display=="none") {
-                        document.getElementById("user").style.display="block"
-                       }
-                       else{
-                        document.getElementById("user").style.display="none"
-                       }
-                });
+
 
                 getDocs(c).then(docSnap=>{
                 let comments=[];
@@ -617,10 +482,8 @@ margin-top: 20px;
                 for (let i = 0; i<comments.length; i++) {
                     if(comments[i].title==blog.title){
                         cmtid.innerHTML+=`
-                        <div class="cmt"  >
-                            <p id="uname">${comments[i].username}</p>
-                            <p id="cm">${comments[i].usercomment}</p>
-                        </div>
+                       <p id="uname">${comments[i].username}</p>
+                       <p id="cm">${comments[i].usercomment}</p>
                 `
                     }
                 
@@ -700,25 +563,6 @@ margin-top: 20px;
         
     });
 
-    // blogDisplay.addEventListener("click",function(e){
-    //         document.querySelectorAll(".like").forEach((i,index)=>{
-    //             console.log(i);
-    //         i.addEventListener("click",(e)=>{
-    //         // console.log(blogs[i.id].likes+1);
-    //         document.querySelector(`.likes-value-${index}`).innerHTML=blogs[i.id].likes+1;
-    //         // console.log(blogs[i.id].likes=blogs[i.id].likes+1);
-    //         // ++blogs[index].likes;
-    //         console.log(e.target);
-
-    //         // console.log(blogs);
-    //        }) 
-    //     }) 
-    //     });
-
-   
-
-   
-   
 
 
 
