@@ -89,12 +89,12 @@
                         <input id="blogtitle" type="text" name="title" class="text-input">
                         <p class="error"></p>
                     </div>
-                    <div>
+                    <!-- <div>
                         <label class="text-label">Date</label>
                 
                         <input id="blogdate" type="date" name="title" class="text-input">
                         <p class="error"></p>
-                    </div>
+                    </div> -->
                     <div>
                         <label class="text-label">image</label>
                      
@@ -126,192 +126,332 @@
 
 
 <script src="https://cdn.tiny.cloud/1/bolaxte3m4c4guxuwupfs83ml6wyux8hq5d93vzgvmrvh7be/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script> -->
 
 <script type="module" >
     tinymce.init({
       selector: '#editor'
     });
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-    import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-    const firebaseConfig = {
-    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
-    authDomain: "my-brand-ab3eb.firebaseapp.com",
-    projectId: "my-brand-ab3eb",
-    storageBucket: "my-brand-ab3eb.appspot.com",
-    messagingSenderId: "1054921679340",
-    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
-    measurementId: "G-8T216E4TG5"
+
+
+    
+   
+  
+//     let btn=document.getElementById("test");
+//     let image;
+//     let img;
+//     blogimage.addEventListener("change",(e)=>{
+    
+//         img=e.target.files[0];
+
+//         const reader=new FileReader();
+
+//         reader.readAsDataURL(img);
+//         // console.log(reader.readAsDataURL(img))
+      
+//         reader.addEventListener("load",()=>{
+//             image=reader.result;
+//             // console.log(image);
+
+//         });
+//     });
+   
+//     const validateinpt=()=>{
+//            // set error popup an form validate
+// const seterror=(element,messaage)=>{
+//     const inputcontrol=element.parentElement;
+//     const errorDisplay=inputcontrol.querySelector(".error");
+
+
+//     errorDisplay.innerHTML=messaage;
+    
+//     // inputcontrol.classList.add("error");
+//     inputcontrol.children.item(1).classList.add("failed");
+//     inputcontrol.children.item(1).classList.remove("success");
+    
+// }
+
+// const setsuccess=element=>{
+//     const inputcontrol=element.parentElement;
+//     const errorDisplay=inputcontrol.querySelector(".error")
+   
+    
+//     errorDisplay.innerHTML="";
+  
+//     inputcontrol.children.item(1).classList.remove("failed");
+//     inputcontrol.children.item(1).classList.add("success");
+
+// }
+
+
+// // let form2=document.getElementById("blogform");
+// let blogtitle=document.getElementById("blogtitle");
+// let blogimage=image;
+// let blogdate=document.getElementById("blogdate");
+// let blogcontent=tinyMCE.get('editor').getContent();
+// // Use a regular expression to remove the HTML tags from the string
+// var text =blogcontent.replace(/<[^>]*>/g, "");
+
+
+
+    
+   
+
+
+//     // blogpost content
+//     let blogimagevalue=image;
+//     // let blogimagevalue=blogimage.value;
+//     let blogtitlevalue= blogtitle.value;
+//     let blogcontentvalue=text;
+//     let blogdatevalue=blogdate.value;
+   
+//     // if (blogtitlevalue==="") {
+//     //     seterror(blogtitle,"please blog must contain title");
+        
+//     // } else {
+//     //     setsuccess(blogtitle)
+//     // }
+
+//     // if (blogdatevalue==="") {
+//     //     seterror(blogdate,"please blog must contain date");
+//     // } else {
+//     //     setsuccess(blogdate)
+//     // }
+
+//     // if (blogimagevalue==="") {
+//     //     seterror(blogimage,"please choose image for blog");
+
+        
+//     // } else {
+//     //     // console.log(blogimagevalue);
+//     //     setsuccess(blogimage)
+//     // }
+
+//     // if (blogcontentvalue==="") {
+//     //     seterror(blogcontent,"write body content");
+        
+//     // } else {
+//     //     setsuccess(blogcontent)
+//     // }
+
+//     if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
+//     // console.log(blogcontent);   
+//     //    // Initialize Firebase
+//     // const app=initializeApp(firebaseConfig);
+//     // const db=getFirestore(app);
+//     // // add blogs or create blogs
+//     // addDoc(collection(db, "cretedblogs"),{
+
+//     // image:blogimagevalue,
+//     // title:blogtitlevalue,
+//     // content:blogcontentvalue,
+//     // date:blogdatevalue,
+//     // likes:0
+
+//     // });
+
+//     async function createblog() {
+//     const token = localStorage.getItem("token");
+//     console.log(blogcontentvalue,  blogimagevalue  , blogtitlevalue);
+
+//     let formData = new FormData();
+// formData.append("title", blogtitlevalue);
+// formData.append("content", blogcontentvalue);
+// formData.append("image",blogimagevalue);
+
+// console.log(formData);
+
+// await fetch("https://expensive-newt-tiara.cyclic.app/articles/post", {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: `Bearer ${token}`,
+//   },
+//   body: formData,
+// })
+//   .then(async (res) => {
+//     console.log(res);
+//     if (res.status === 201) {
+//       let result = await res.json();
+//       console.log("result", result);
+//     } else if (res.status === 401) {
+//       document.getElementById("status").innerHTML = "Please sign in.";
+//       window.location.href = "../pages/login.html";
+//     }
+//   })
+//   .catch((err) => {
+//     console.log("notcretaed");
+//     console.error(err.message);
+//   });
+// }
+
+
+
+
+   
+    
+
+
+//     // // access data using query
+//     // const q=query(collection(db,"cretedblogs"));
+
+//     // getDocs(q).then(docSnap=>{
+//     //     let blogs=[];
+//     //     docSnap.forEach(blog => {
+//     //         blogs.push({...blog.data(), id:blog.id})
+//     //     });
+//     //     console.log("blogs",blogs);
+//     // });
+      
+  
+    
+//     // }
+//     createblog()
+
+// }
+//     }
+
+
+
+
+
+    let btn = document.getElementById("test");
+let image;
+let img;
+
+blogimage.addEventListener("change", (e) => {
+  img = e.target.files[0];
+
+  const reader = new FileReader();
+
+  reader.readAsDataURL(img);
+
+  reader.addEventListener("load", () => {
+    image = reader.result;
+  });
+});
+
+const validateInput = () => {
+  // Set error popup and form validation
+  const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector(".error");
+
+    errorDisplay.innerHTML = message;
+    inputControl.children.item(1).classList.add("failed");
+    inputControl.children.item(1).classList.remove("success");
   };
 
-  
-    let btn=document.getElementById("test");
-    let image;
-blogimage.addEventListener("change",(e)=>{
-    
-        const img=e.target.files[0];
+  const setSuccess = (element) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector(".error");
 
-        const reader=new FileReader();
+    errorDisplay.innerHTML = "";
+    inputControl.children.item(1).classList.remove("failed");
+    inputControl.children.item(1).classList.add("success");
+  };
 
-        reader.readAsDataURL(img);
-        // console.log(reader.readAsDataURL(img))
-      
-        reader.addEventListener("load",()=>{
-            image=reader.result;
-            // console.log(image);
+  let blogTitle = document.getElementById("blogtitle");
+  let blogImage = image;
+  // let blogDate = document.getElementById("blogdate");
+  let blogContent = tinyMCE.get("editor").getContent();
+  let text = blogContent.replace(/<[^>]*>/g, "");
 
-        });
-    });
-   
-    const validateinpt=()=>{
-           // set error popup an form validate
-const seterror=(element,messaage)=>{
-    const inputcontrol=element.parentElement;
-    const errorDisplay=inputcontrol.querySelector(".error");
+  const fileField = document.querySelector('input[type="file"]');
 
+  console.log(fileField);
 
-    errorDisplay.innerHTML=messaage;
-    
-    // inputcontrol.classList.add("error");
-    inputcontrol.children.item(1).classList.add("failed");
-    inputcontrol.children.item(1).classList.remove("success");
-    
-}
+  let blogTitleValue = blogTitle.value;
+  let blogImageValue = blogImage;
+  let blogContentValue = text;
+  // let blogDateValue = blogDate.value;
 
-const setsuccess=element=>{
-    const inputcontrol=element.parentElement;
-    const errorDisplay=inputcontrol.querySelector(".error")
-   
-    
-    errorDisplay.innerHTML="";
-  
-    inputcontrol.children.item(1).classList.remove("failed");
-    inputcontrol.children.item(1).classList.add("success");
-
-}
-
-
-// let form2=document.getElementById("blogform");
-let blogtitle=document.getElementById("blogtitle");
-let blogimage=document.getElementById("blogimage");
-let blogdate=document.getElementById("blogdate");
-let blogcontent=tinyMCE.get('editor').getContent();
-// Use a regular expression to remove the HTML tags from the string
-var text =blogcontent.replace(/<[^>]*>/g, "");
-
-
-
-    
-   
-
-
-    // blogpost content
-    let blogimagevalue=image;
-    let blogtitlevalue= blogtitle.value;
-    let blogcontentvalue=text;
-    let blogdatevalue=blogdate.value;
-   
-    if (blogtitlevalue==="") {
-        seterror(blogtitle,"please blog must contain title");
-        
+  if (blogTitleValue === "" || blogImageValue === "" || blogContentValue=== "") {
+    if (blogTitleValue === "") {
+      setError(blogTitle, "Please enter a title for the blog");
     } else {
-        setsuccess(blogtitle)
+      setSuccess(blogTitle);
     }
 
-    if (blogdatevalue==="") {
-        seterror(blogdate,"please blog must contain date");
+    if (blogContentValue=== "") {
+      setError(blogContent, "Please enter a date for the blog");
     } else {
-        setsuccess(blogdate)
+      setSuccess(blogContent);
     }
 
-    if (blogimagevalue==="") {
-        seterror(blogimage,"please choose image for blog");
-
-        
+    if (blogImageValue === "") {
+      setError(blogImage, "Please choose an image for the blog");
     } else {
-        // console.log(blogimagevalue);
-        setsuccess(blogimage)
+      setSuccess(blogImage);
     }
+  } else {
+    async function createBlog() {
+      const token = localStorage.getItem("token");
+      let formData = new FormData();
+      formData.append("title", blogTitleValue);
+      formData.append("content", blogContentValue);
+      formData.append("image",fileField.files[0]);
 
-    // if (blogcontentvalue==="") {
-    //     seterror(blogcontent,"write body content");
-        
-    // } else {
-    //     setsuccess(blogcontent)
+      await fetch("https://expensive-newt-tiara.cyclic.app/articles/post", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      })
+        .then( (res) => 
+        // {
+          res.json()
+      //     if (res.status === 201) {
+      //       let result = await res.json();
+      //       return result
+      //       console.log("result", result);
+      //     } else if (res.status ===401) {
+      // document.getElementById("status").innerHTML = "Please sign in.";
+      // window.location.href = "../pages/login.html";
     // }
-
-    if(blogtitlevalue!==""&&blogimagevalue!==""&& blogdatevalue!==""){
-    console.log(blogcontent);   
-       // Initialize Firebase
-    const app=initializeApp(firebaseConfig);
-    const db=getFirestore(app);
-    // add blogs or create blogs
-    addDoc(collection(db, "cretedblogs"),{
-
-    image:blogimagevalue,
-    title:blogtitlevalue,
-    content:blogcontentvalue,
-    date:blogdatevalue,
-    likes:0
-
-    });
-   
-    
-    // Add a new document in collection "cities"
-    // deleteDoc (doc(db, "cretedblogs","43aFspGnZVKZDdP3VhiA"));
-    // blogimage.value="";
-    // blogtitle.value="";
-    // blogcontent.value="";
-    // blogdate.value="";
-
-
-    // getDoc (doc(db, "cretedblogs","UpjN9PSU9xwp5mwW8a19")).then(docSnap=>{
-    //     if (docSnap.exists()) {
-    //         console.log("data",docSnap.data());
-            
-    //     }else{
-    //         console.log("no data");
-    //     }
-    // });
-    // blogimage.value="";
-    // blogtitle.value="";
-    // blogcontent.value="";
-    // blogdate.value="";
-
-    // access data using query
-    const q=query(collection(db,"cretedblogs"));
-
-    getDocs(q).then(docSnap=>{
-        let blogs=[];
-        docSnap.forEach(blog => {
-            blogs.push({...blog.data(), id:blog.id})
-        });
-        console.log("blogs",blogs);
-    });
-      
-  
-    
-    }
-
+  // }
+  ).then((data)=>{
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log("notcretaed");
+    console.error(err.message);
+  });
 }
 
+createBlog()
+
+}
+    }
+
+
+
+
+
+
+
+
+
+          
+
+
  
  
 
 
 
-btn.addEventListener("click",function(e){
-    e.preventDefault();
+btn.addEventListener("click",async function(e){
+  await  e.preventDefault();
     // let blogcontent=tinyMCE.get('editor').getContent();
     // console.log("content value",text);
-    validateinpt();
+   await validateInput();
     
 
     // make field empty after create
     blogimage.value="";
     blogtitle.value="";
-    // blogcontent="";
-    blogdate.value="";
+  
     tinymce.get('editor').setContent('<p></p>')
 
    
@@ -323,7 +463,7 @@ btn.addEventListener("click",function(e){
 </script>
 
 
-<!-- script -->
+
 <script type="module" src="../../js/script.js"></script>
     
 </body>
