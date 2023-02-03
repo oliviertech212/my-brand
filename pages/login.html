@@ -1,123 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>oliviertech</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
     <!-- fontawersome -->
     <!-- <script src="https://kit.fontawesome.com/6eef1430d0.js" crossorigin="anonymous"></script>  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <!-- google font robot Alconica -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Alegreya+Sans&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aclonica&family=Alegreya+Sans&family=Roboto&family=Rubik:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <nav>
-          <a href="../index.html">
-            <img class="logo" src="../images/logo.png" alt="">
+      <nav>
+        <a href="../index.html">
+          <img class="logo" src="../images/logo.png" alt="" />
         </a>
         <button id="menuicon" class="menu-btn">
-            <i class="fa-sharp fa-solid fa-bars"></i>
+          <i class="fa-sharp fa-solid fa-bars"></i>
         </button>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="./skills.html">Skills</a></li>
-                <li><a href="./works.html">Works</a></li>
-                <li><a href="./blogs.html">Blogs</a></li>
-                <li><a href="./contact.html">Contact</a></li>
-                <li><a href="./login.html"><button class="active-login">Login</button></a></li>
-            </ul>
-        </nav>
-        <div id="mainmenu" class="mobile">
-          <ul class="nav-links">
-              <li><a href="../index.html">Home</a></li>
-              <li><a href="./about.html">About</a></li>
-              <li><a href="./skills.html">Skills</a></li>
-              <li><a href="./works.html">Works</a></li>
-              <li><a href="./blogs.html">Blogs</a></li>
-              <li><a href="./contact.html">Contact</a></li>
-              <li><a href="./login.html" ><button class="active-login">Login</button></a></li>
-          </ul>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./skills.html">Skills</a></li>
+          <li><a href="./works.html">Works</a></li>
+          <li><a href="./blogs.html">Blogs</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li>
+            <a href="./login.html"
+              ><button class="active-login">Login</button></a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div id="mainmenu" class="mobile">
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./skills.html">Skills</a></li>
+          <li><a href="./works.html">Works</a></li>
+          <li><a href="./blogs.html">Blogs</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li>
+            <a href="./login.html"
+              ><button class="active-login">Login</button></a
+            >
+          </li>
+        </ul>
       </div>
     </header>
 
-    <section  class="login-section">
-        <div class="login-form">
-           <div class="top-div">
-             <form id="loginform" name="loginform" >
-                <div class="label">
-                   <h1>Login</h1>
-                   <div>
-                  <input id="admin-email" name="email" class="input" type="email" placeholder="email">
-                  <p class="error"></p>
-                  </div>
-                   <div>
-                    <input id="admin-pass" name="password" class="input" type="password" placeholder="password">
-                    <p class="error"></p>
-                   </div>
-                  
-                </div>
-                <input id="login-btn" class="login-btn" type="submit" value="Login">
-             </form>
-           </div>
-          
-            <div class="sign-in">
-                <div class="google">
-                  <a class="btn-google" href="/auth/google" role="button">
-                    <i class="fab fa-google"></i>
-                    Sign In with Google
-                  </a>
-                </div>
-                <div class="facebook">
-                  <a class="btn-facebook" href="/auth/google" role="button">
-                    <i class="fab fa-facebook"></i>
-                    Sign In with facebook
-                  </a>
-                </div>
-           </div>
+    <section class="login-section">
+      <div class="login-form">
+        <div id="login" class="top-div">
+          <form id="loginform" name="loginform">
+            <div class="label">
+              <h1>Login</h1>
+
+              <div>
+                <input
+                  id="admin-email"
+                  name="email"
+                  class="input"
+                  type="email"
+                  placeholder="email"
+                />
+                <p class="error"></p>
+              </div>
+              <div>
+                <input
+                  id="admin-pass"
+                  name="password"
+                  class="input"
+                  type="password"
+                  placeholder="password"
+                />
+                <p class="error"></p>
+              </div>
+            </div>
+            <input
+              id="login-btn"
+              class="login-btn"
+              type="submit"
+              value="Login"
+            />
+            <a href="./signup.html"
+              ><input
+                id="signup-btn"
+                class="signup-btn"
+                type="button"
+                value="Signup"
+            /></a>
+          </form>
         </div>
+
+        <div class="sign-in">
+          <div class="google">
+            <a class="btn-google" href="/auth/google" role="button">
+              <i class="fab fa-google"></i>
+              Sign In with Google
+            </a>
+          </div>
+          <div class="facebook">
+            <a class="btn-facebook" href="/auth/google" role="button">
+              <i class="fab fa-facebook"></i>
+              Sign In with facebook
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
-       
 
     <footer>
-        <img class="logo" src="../images/images-removebg-preview.png" alt="">
-        <p>
-            <i class="fa-regular fa-copyright"></i>Copyright 2022. Designed by olivier 
-        </p>
-        <span>
-                
-               
-          <a href="https://www.facebook.com/profile.php?id=100005753869027" target="_blank">
-              <i class="fa-brands fa-facebook"></i>
-          </a>
-          <a href="https://twitter.com/Olivier88798962" target="_blank">
-              <i class="fa-brands fa-twitter"></i>
-          </a> 
-          <a href="https://www.linkedin.com/in/olivier-ganishuri-279aaa240/" target="_blank">
-              <i class="fa-brands fa-linkedin"></i>
-          </a>
-          <a href="https://github.com/oliviertech212" target="_blank">
-              <i class="fa-brands fa-github"></i>
-          </a>
+      <img class="logo" src="../images/images-removebg-preview.png" alt="" />
+      <p>
+        <i class="fa-regular fa-copyright"></i>Copyright 2022. Designed by
+        olivier
+      </p>
+      <span>
+        <a
+          href="https://www.facebook.com/profile.php?id=100005753869027"
+          target="_blank"
+        >
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/Olivier88798962" target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/olivier-ganishuri-279aaa240/"
+          target="_blank"
+        >
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/oliviertech212" target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
       </span>
-        
-        
     </footer>
 
     <!-- firebase initialization -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script> -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script> -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>     -->
-   
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script> -->
 
-
-
-
-    <script type="module" src="../js/script.js"></script>     
-</body>
+    <script type="module" src="../js/script.js"></script>
+  </body>
 </html>
