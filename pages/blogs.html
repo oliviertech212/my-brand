@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>oliviertech</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="icon" href="../images/og.ico" />
     <!-- fontawersome -->
     <link
       rel="stylesheet"
@@ -64,12 +65,23 @@ font-family: 'Rubik', sans-serif; */
       }
       #comt {
         display: flex;
+        /* border: 2px solid blue; */
+      }
+      #user {
+        display: none;
       }
       .single-blog .blog-desc .like-comment span i {
         font-size: 30px;
         color: #00adb5;
         padding-left: 10px;
         cursor: pointer;
+      }
+      /* span for comment nbr */
+      .cmtnbr {
+        font-size: smaller;
+        position: relative;
+        top: -5px;
+        left: 5px;
       }
       .single-blog .material-symbols-outlined {
         padding-left: 10px;
@@ -86,22 +98,33 @@ font-family: 'Rubik', sans-serif; */
         overflow-y: auto;
         /* height:100%; */
       }
-      /* .single-blog .blog-desc .readless{
-margin-top: 20px;
-    margin-bottom: 20px;
-    font-family: 'Rubik', sans-serif; 
-    float: left;
-    font-style: normal;
-    font-weight: 100;
-    font-size: 24px;
-    line-height: 36px;
-    width: 244px;
-    height: 42px;
-    color: white;
-    background-color: #00ADB5;
-    border-radius: 5px;
-    border: none;
-} */
+
+      #readLess {
+        margin-top: 20px;
+        background-color: #00adb5;
+        padding: 10px;
+        font-size: 12px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 2px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      #readLess span {
+        margin-left: 10px;
+      }
+      #readLess span i {
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+      }
+
       .single-blog .blog-desc h2 {
         font-size: 30px;
       }
@@ -127,10 +150,15 @@ margin-top: 20px;
       .user .cmt {
         margin-top: 20px;
         background-color: #00adb5;
-        width: 30%;
+        width: 40%;
         border: 2px solid gray;
         border-radius: 10px;
         padding: 5px;
+        word-wrap: break-word;
+      }
+      .user .cmt #date {
+        color: aliceblue;
+        font-size: small;
       }
 
       @media (max-width: 480px) {
@@ -208,7 +236,7 @@ margin-top: 20px;
         .single-blog .blog-desc {
           padding-left: 0px;
           overflow-y: unset;
-          background-color: #00adb5;
+          /* background-color: #00adb5; */
         }
         .single-blog .blog-desc h2 {
           font-size: 25px;
@@ -271,7 +299,7 @@ margin-top: 20px;
           <li><a href="./blogs.html" class="active">Blogs</a></li>
           <li><a href="./contact.html">Contact</a></li>
           <li>
-            <a href="./login.html"><button>Login</button></a>
+            <a href="./login.html"><button id="logedin">Login</button></a>
           </li>
         </ul>
       </nav>
@@ -284,7 +312,7 @@ margin-top: 20px;
           <li><a href="./blogs.html" class="active">Blogs</a></li>
           <li><a href="./contact.html">Contact</a></li>
           <li>
-            <a href="./login.html"><button>Login</button></a>
+            <a href="./login.html"><button id="logedin">Login</button></a>
           </li>
         </ul>
       </div>
@@ -408,7 +436,6 @@ margin-top: 20px;
     <!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script> -->
     <script type="module">
       const token = localStorage.getItem("token");
-
       let blogDisplay = document.querySelector(".blog-container");
       let singleblg = document.getElementById("single-blog");
 
@@ -463,16 +490,17 @@ margin-top: 20px;
       }
       displayMessages();
 
-      blogDisplay.addEventListener("click", (e) => {
+      blogDisplay.addEventListener("click", async (e) => {
         if (e.target.classList.contains("readmore")) {
           //   console.log(e.target);
           //   // readmore(e.target.dataset.bId)
           //   if (index == e.target.dataset.bId) {
           //     singleblog();
           //     //   scroll to single blog
-          singleblg.scrollIntoView();
+          // await singleblg.scrollIntoView();
           //   }
-          singArticle(e.target.dataset.bId);
+          await singArticle(e.target.dataset.bId);
+          blogDisplay.style.display = "none";
         }
 
         //   add like an dcomment
@@ -483,7 +511,9 @@ margin-top: 20px;
         }
       });
 
+      let comments;
       async function singArticle(i) {
+        const token = localStorage.getItem("token");
         await fetch(
           `https://expensive-newt-tiara.cyclic.app/articles/getOne/${i}`,
           {
@@ -494,11 +524,23 @@ margin-top: 20px;
             },
           }
         )
-          .then((res) => res.json())
-          .then((singArticle) => {
-            console.log("result", singArticle.article);
+          .then(async (res) => {
+            // console.log(res.status);
+
+            if (res.status === 401) {
+              // setTimeout(() => {
+              return (window.location.href = await "./login.html");
+              // }, 1000);
+            } else {
+              return await res.json();
+            }
+          })
+          .then(async (singArticle) => {
+            console.log("result", singArticle);
+            comments = await singArticle.article.comments;
+            // console.log(comments);
             // singArticle.article.forEach((blog) => {
-            let createdAt = singArticle.article.createdAt;
+            let createdAt = await singArticle.article.createdAt;
             let date = new Date(createdAt);
             let dateString = date.toDateString();
             singleblg.innerHTML = `
@@ -519,22 +561,28 @@ margin-top: 20px;
                           <button  id="readLess" class="readless" data-b-id="${singArticle.article._id} " type="button">
                                       Read Less
                                       <span>
-                                          <i class="fa-solid fa-arrow-right"></i>
+                                          <i class="fa-solid fa-arrow-right" ></i>
                                       </span>
                           </button>
                           <div class="like-comment">
                                     comment
-                                    <span class="material-symbols-outlined" id="show-comment">
+                                    <span class="material-symbols-outlined" class="show-comment" id="show-comment" >
                                        comment
                                     </span>
+                                    <span id="cmtnbr" classs="cmtnbr">0</span>
+
                           </div>
                       </div>
 
                       <div class="user" id="user">
+                        <h2 id="commentdiv">Comments</h2><hr>
+                           <div  id="comment" class="comment">
+
+                           </div>
                            <div id="form">
                               <form id="commentform" action="">
                                <div>
-                                 <label for="">name</label><br>
+                                 <label for="">email</label><br>
                                 <input class="input-txt" id="username" value="" type="text">
                                </div>
 
@@ -543,14 +591,12 @@ margin-top: 20px;
                                 <textarea class="input-txt" id="usercomment" name="" id="" cols="30" rows="5"></textarea>
                                 <input id="usertitle" type="hidden" value="${singArticle.article.title}">
                                </div>
+                               <input class=" sub" id="sub" value="Send" data-article-id="${singArticle.article._id}"   type="submit">
 
-                                <button type="submit" id="sub" value="submit" onclick="event.preventDefault()" >Send</button>
                               </form>
                            </div>
 
-                           <div  id="cmt">
 
-                           </div>
                       </div>
 
                   </div>
@@ -560,153 +606,151 @@ margin-top: 20px;
           .catch((err) => {
             console.log(err);
           });
+
+        singleblg.addEventListener("click", (e) => {
+          if (e.target.classList.contains("readless")) {
+            console.log(e.target);
+            location.reload();
+          }
+          if (e.target.classList.contains("show-comment")) {
+            if (document.getElementById("user").style.display == "none") {
+              document.getElementById("user").style.display = "block";
+            } else {
+              document.getElementById("user").style.display = "none";
+            }
+          }
+        });
+        // comment
+
+        // if (document.getElementById("show-comment")) {
+        //   document
+        //     .getElementById("show-comment")
+        //     .addEventListener("click", () => {
+        //       if (document.getElementById("user").style.display === "none") {
+        //         document.getElementById("user").style.display = "block";
+        //         setTimeout(() => {
+        //           document.getElementById("commentdiv").scrollIntoView();
+        //         }, 0);
+        //       } else {
+        //         document.getElementById("user").style.display = "none";
+        //       }
+        //     });
+        // }
+        if (document.getElementById("show-comment")) {
+          document
+            .getElementById("show-comment")
+            .addEventListener("click", () => {
+              const userEl = document.getElementById("user");
+              if (userEl.style.display === "none") {
+                userEl.style.display = "block";
+                userEl.scrollIntoView({ behavior: "smooth" });
+              } else {
+                userEl.style.display = "none";
+              }
+            });
+        }
+
+        // singleblg.addEventListener("DOMContentLoaded", async () => {
+        let cmtnbr = await document.getElementById("cmtnbr");
+
+        let commentform = document.getElementById("commentform");
+        let usename = document.getElementById("username");
+        let usercomment = document.getElementById("usercomment");
+
+        async function commentpost(id) {
+          await fetch(
+            `https://expensive-newt-tiara.cyclic.app/articles/${id}/comments`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                username: username.value,
+                comment: usercomment.value,
+              }),
+            }
+          )
+            .then(async (res) => await res.json())
+            .then((posted) => {
+              // console.log("posted comment", posted);
+            })
+            .catch((err) => {
+              // document.getElementById("contentTomange").innerHTML = err;
+              // console.log(err);
+            });
+        }
+
+        if (commentform) {
+          document
+            .getElementById("sub")
+            .addEventListener("click", async (e) => {
+              e.preventDefault();
+
+              if (e.target.classList.contains("sub")) {
+                await commentpost(e.target.dataset.articleId);
+                await commentform.reset();
+                // reload fetch for updating comment nbr
+                displayComments();
+              }
+            });
+        }
+
+        // get all comment
+        async function displayComments() {
+          let cmtid = await document.querySelector(".comment");
+
+          await fetch(
+            "https://expensive-newt-tiara.cyclic.app/articles/getall/comments",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+            .then(async (res) => await res.json())
+            .then(async (cmts) => {
+              const blogcomment = [];
+              for (let index = 0; index < cmts.cmt.length; index++) {
+                console.log("comment", cmts.cmt[index].article);
+                console.log("articleid", i);
+                // console.log(cmts.cmt[index]);
+                if (cmts.cmt[index].article.trim() == i.trim()) {
+                  console.log(cmts.cmt[index]);
+                  blogcomment.push(cmts.cmt[index]);
+                }
+              }
+              // console.log(blogcomment.length);
+
+              // render number of comment
+
+              if (cmtnbr) {
+                console.log(cmtnbr);
+                cmtnbr.textContent = blogcomment.length;
+              } else {
+                console.log("not found");
+              }
+
+              blogcomment.forEach(async (comment) => {
+                let createdAt = comment.createdAt;
+                let date = new Date(createdAt);
+                let dateString = date.toDateString();
+                cmtid.innerHTML += `
+                       <div class="cmt"  >
+                          <p id="date">${dateString}</p>
+                         <p id="uname">${comment.username}</p>
+                         <p id="cm">${comment.comment}</p>
+                     </div>
+             `;
+              });
+            });
+        }
+        displayComments();
+        // });
       }
-
-      //   document
-      //     .getElementById("contentTomange")
-      //     .addEventListener("click", function (e) {
-      //       if (e.target.classList.contains("delete")) {
-      //         console.log(e.target.dataset.blogId);
-      //         singArticle(e.target.dataset.blogId);
-      //         // to loaad window after delete
-      //         setTimeout(() => {
-      //           //   reload window
-      //           location.reload();
-      //         }, 2000);
-      //       }
-      //     });
-
-      // let singleblg = document.getElementById("single-blog");
-
-      // //read data from firebase
-      // getDocs(q).then((docSnap) => {
-      //   let blogs = [];
-      //   docSnap.forEach((blog) => {
-      //     blogs.push({ ...blog.data(), id: blog.id });
-      //     console.log("blogs", blog.data());
-      //   });
-
-      //   // console.log(blogs);
-      //   blogs.forEach((blog, index) => {
-      //     // function blogRendering(){
-      //     blogDisplay.insertAdjacentHTML(
-      //       "beforeend",
-      //       ` <div class="blog">
-      //              <p class="date">${blog.date}</p>
-      //              <h1>${blog.title}</h1>
-      //              <div class="blog-pc">
-      //              <img  class="mobile"  src="${blog.image}" alt="">
-      //              </div>
-      //              <div id="blog-desc" class="blog-desc">${
-      //                blog.content.trim().slice(0, 120) + "...."
-      //              }</div>
-      //              <div>
-      //                 <button  id="readmore" class="readmore" data-b-id="${index} " type="button">
-      //                     Read more
-      //                     <span>
-      //                         <i class="fa-solid fa-arrow-right"></i>
-      //                     </span>
-      //                 </button>
-
-      //              </div>
-
-      //          </div>
-      //         `
-      //     );
-      //     blogDisplay.addEventListener("click", (e) => {
-      //       if (e.target.classList.contains("readmore")) {
-      //         console.log(e.target);
-      //         // readmore(e.target.dataset.bId)
-      //         if (index == e.target.dataset.bId) {
-      //           singleblog();
-      //           //   scroll to single blog
-      //           singleblg.scrollIntoView();
-      //         }
-      //       }
-
-      //       //   add like an dcomment
-      //       if (e.target.classList.contains("like")) {
-      //         document.querySelectorAll(".like").forEach((i, index) => {
-      //           console.log(i);
-      //         });
-      //       }
-      //     });
-
-      //   function singleblog() {
-      //     // like
-      //     //   <span "> <i id="${index}"class="like fa-solid fa-thumbs-up"> <span class="likes-value-${index}">${blog.likes}</span></i></span>
-
-      //     console.log("blogtitle", blog.title);
-
-      //     document
-      //       .getElementById("show-comment")
-      //       .addEventListener("click", () => {
-      //         if (document.getElementById("user").style.display == "none") {
-      //           document.getElementById("user").style.display = "block";
-      //         } else {
-      //           document.getElementById("user").style.display = "none";
-      //         }
-      //       });
-
-      //     getDocs(c).then((docSnap) => {
-      //       let comments = [];
-      //       docSnap.forEach((comment) => {
-      //         comments.push({ ...comment.data(), id: comment.id });
-      //         console.log("comment ", comment.data());
-      //       });
-      //       console.log(comments);
-      //       const cmtid = document.getElementById("cmt");
-      //       for (let i = 0; i < comments.length; i++) {
-      //         if (comments[i].title == blog.title) {
-      //           cmtid.innerHTML += `
-      //                   <div class="cmt"  >
-      //                       <p id="uname">${comments[i].username}</p>
-      //                       <p id="cm">${comments[i].usercomment}</p>
-      //                   </div>
-      //           `;
-      //         }
-      //       }
-
-      //       // const cm= document.getElementById("cm");
-      //     });
-
-      //     console.log(document.getElementById("commentform"));
-
-      //     document.getElementById("sub").addEventListener("click", function (e) {
-      //       e.preventDefault();
-      //       //   console.log("useris ",username.value);
-      //       const usename = document.getElementById("username");
-      //       const usecomment = document.getElementById("usercomment");
-      //       const usertitle = document.getElementById("usertitle");
-      //       //   function savecomment (){
-      //       let uname = usename.value;
-      //       let ucomment = usecomment.value;
-      //       let utitle = usertitle.value;
-      //       addDoc(collection(d, "blogcomment"), {
-      //         title: utitle,
-      //         username: uname,
-      //         usercomment: ucomment,
-      //       });
-      //       //   }
-
-      //       console.log("btn clicked");
-      //     });
-
-      //     singleblg.addEventListener("click", (e) => {
-      //       if (e.target.classList.contains("readless")) {
-      //         console.log(e.target);
-      //         // readmore(e.target.dataset.bId)
-      //         //   if(index==e.target.dataset.bId){
-      //         //       singleblog()
-      //         //     //   scroll to single blog
-      //         //     singleblg.scrollIntoView();
-      //         //   }
-      //         //   }
-      //         //   else if(index==""){
-      //         blogDisplay.scrollIntoView();
-      //       }
-      //     });
-      //   }
     </script>
 
     <script type="module" src="../js/script.js"></script>
