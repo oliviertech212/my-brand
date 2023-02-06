@@ -137,9 +137,10 @@ function contactformvalidation() {
           let result = await res.json();
 
           document.getElementById("status").innerHTML = "message  sent";
+          // console.log(document.getElementById("status"));
           setTimeout(() => {
             document.getElementById("status").innerHTML = "";
-          }, 1000);
+          }, 2000);
 
           contactform.reset();
           return result;
@@ -235,6 +236,39 @@ function loginformvalidation() {
   // fetchapi
   login();
 }
+
+// get loged in user
+let logedin = localStorage.getItem("userInfo");
+let userlogedin = JSON.parse(logedin);
+let logout = document.getElementById("logedin");
+
+if (userlogedin) {
+  logout.innerHTML = "Logout";
+  logout.addEventListener("click", (e) => {
+    e.preventDefault();
+    const keys = ["userInfo", "token"];
+
+    keys.forEach((key) => {
+      window.localStorage.removeItem(key);
+      location.reload();
+    });
+  });
+} else {
+  if (logout) {
+    logout.innerHTML = "Login";
+  }
+}
+
+let loginstatus = document.getElementById("loginstatus");
+if (loginstatus) {
+  if (userlogedin) {
+    // console.log("loged in", userlogedin.username);
+    loginstatus.innerHTML = `${userlogedin.username}` + " Loged in";
+  } else {
+    loginstatus.innerHTML = "Login";
+  }
+}
+
 async function login() {
   // e.preventDefault();
 
@@ -255,7 +289,7 @@ async function login() {
         localStorage.setItem("token", result.token);
 
         const token = localStorage.getItem("token");
-
+        document.getElementById("loginstatus").innerHTML = "Login Successful";
         await fetch(
           "https://expensive-newt-tiara.cyclic.app/admin/user/profile",
           {
@@ -271,6 +305,7 @@ async function login() {
             // console.log("user", user.json());
           })
           .then((data) => {
+            console.log("data", data);
             let user = {
               role: data.role,
               username: data.username,
@@ -280,19 +315,16 @@ async function login() {
             if (data.username && data.role === "admin") {
               window.location.href = "../admin/post/index.html";
               userInf = localStorage.getItem("userInfo");
-              // console.log(JSON.parse(userInfo));
             }
           });
 
         // console.log(result);
       } else if (res.status === 401) {
         window.location.href = "./signup.html";
-        document.getElementById("status").innerHTML = "User not found";
       }
     })
     .catch((err) => {
-      console.error(err.message);
-      document.getElementById("status").innerHTML = err.messaage;
+      console.log(err.message);
     });
 }
 
@@ -362,11 +394,16 @@ async function signup() {
   })
     .then(async (res) => {
       if (res.status === 201) {
-        document.getElementById("status").innerHTML =
-          "account created successful";
+        if (document.getElementById("status")) {
+          document.getElementById("status").innerHTML =
+            "account created successful";
+        }
+
         //   reset form
         signupform.reset();
-
+        setTimeout(() => {
+          return (window.location.href = "./login.html");
+        }, 100);
         //     let result = await res.json();
         //     localStorage.setItem("token", result.token);
         //   window.location.href = "../admin/post/index.html";

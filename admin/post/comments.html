@@ -1,199 +1,257 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>admin-manage Posts</title>
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/admin.css" />
+    <link rel="icon" href="../../images/og.ico" />
     <!-- fontawersome -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <!-- <script src="https://kit.fontawesome.com/6eef1430d0.js" crossorigin="anonymous"></script>  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <!-- google font robot Alconica -->
     <!-- <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Alegreya+Sans&family=Roboto&family=Rubik:wght@400;800&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Aclonica&family=Alegreya+Sans&family=Roboto&family=Rubik:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="../../index.html">
-                <img class="logo" src="../../images/logo.png" alt="">
+      <nav>
+        <a href="../../index.html">
+          <img class="logo" src="../../images/logo.png" alt="" />
+        </a>
+        <button id="menuicon" class="menu-btn">
+          <i class="fa-sharp fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+          <li>
+            <a href="./pages/login.html">
+              <!-- <button>Logout </button> -->
+              <i class="fa-solid fa-user"></i>
+              admin
+              <span>
+                <!-- <i class="fa-sharp fa-solid fa-chevron-down"></i> -->
+              </span>
             </a>
-            <button id="menuicon" class="menu-btn">
-                <i class="fa-sharp fa-solid fa-bars"></i>
-            </button>
-            <ul class="nav-links">
-                <li><a href="./pages/login.html">
-                    <!-- <button>Logout </button> -->
-                    <i class="fa-solid fa-user"></i>
-                    admin
-                    <span>
-                        <!-- <i class="fa-sharp fa-solid fa-chevron-down"></i> -->
-                    </span>
-                </a></li>
-            </ul>
-        </nav>
+          </li>
+        </ul>
+      </nav>
     </header>
-   
 
     <!-- admin page section -->
-    <section  class="admin-home ">
-        <div id="bordmenu" class="left-sidebar">
-            <ul>
-                <li>
-                    <a href="../../index.html">Home</a>
-                    <a href="./profile.html">Reset</a>
-                    <a href="./index.html" >Manage Posts</a>
-                    <a href="./message.html"  >Messages</a>
-                    <a href="./comments.html" class="active">comments</a>
-            
-                    <!-- <a href="../user/index.html">Manage Users</a>
+    <section class="admin-home">
+      <div id="bordmenu" class="left-sidebar">
+        <ul>
+          <li>
+            <a href="../../index.html">Home</a>
+            <a href="./profile.html">Reset</a>
+            <a href="./index.html">Manage Posts</a>
+            <a href="./message.html">Messages</a>
+            <a href="./comments.html" class="active">comments</a>
+
+            <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
-                </li>
-            </ul>
-            
+          </li>
+        </ul>
+      </div>
+      <div id="mainmenu" class="left-sidebar">
+        <ul>
+          <li>
+            <a href="../../index.html">Home</a>
+            <a href="./profile.html">Reset</a>
+            <a href="./index.html" class="active">Manage Posts</a>
+            <a href="./message.html">Messages</a>
+            <a href="./comments.html" class="active">comments</a>
+          </li>
+        </ul>
+      </div>
+      <div class="admin-content">
+        <div class="btn-group"></div>
 
+        <div class="content">
+          <h1 class="page-title">Messages</h1>
+          <div id="contentTomange"></div>
         </div>
-        <div id="mainmenu" class="left-sidebar">
-            <ul>
-                <li>
-                    <a href="../../index.html">Home</a>
-                    <a href="./profile.html">Reset</a>
-                    <a href="./index.html" class="active">Manage Posts</a>
-                    <a href="./message.html" >Messages</a>
-                    <a href="./comments.html" class="active">comments</a>
-                </li>
-            </ul>
-            
-
-        </div>
-        <div  class="admin-content">
-            <div class="btn-group">
-               
-            </div>
-
-
-
-            <div  class="content">
-                 <h1 class="page-title" >Messages</h1>
-                 <div id="contentTomange">
-
-                 </div>
-            </div>
-            
-        </div>
-
+      </div>
     </section>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-    import { getFirestore,addDoc,collection,deleteDoc,doc , getDoc,query,getDocs,updateDoc} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-    const firebaseConfig = {
-    apiKey: "AIzaSyBSa-jwDGSpcPGoyi127r-eoaVOdi0xQfY",
-    authDomain: "my-brand-ab3eb.firebaseapp.com",
-    projectId: "my-brand-ab3eb",
-    storageBucket: "my-brand-ab3eb.appspot.com",
-    messagingSenderId: "1054921679340",
-    appId: "1:1054921679340:web:179e54d3c673a25a97a0c9",
-    measurementId: "G-8T216E4TG5"
-  };
-        
-       
-       // Initialize Firebase
-    const app=initializeApp(firebaseConfig);
-    const d=getFirestore(app);
+    <script type="module">
+      const token = localStorage.getItem("token");
 
-    // access data using query
-    const c=query(collection(d,"blogcomment"));
-   
-  
-                
+      async function displayComments() {
+        console.log("hello", token);
+        await fetch(
+          "https://expensive-newt-tiara.cyclic.app/articles/getall/comments",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+          .then(
+            async (res) => await res.json()
+            // console.log("comment", res)
+          )
+          .then((blog) => {
+            console.log(blog.cmt);
+            let table = ` <table> 
+            
+                    <thead>
+                     <th>number</th>
+                     <th>UserName</th>
+                     <th>UserComment</th>
+                     <th>blog</th>
+                     <th colspan="3">Action</th>
+                 </thead>
+                    
+                     <tbody id="blogtable">`;
+            // console.log(blog.message);
+            for (let i = 0; i < blog.cmt.length; i++) {
+              table += `
+                 <tr>
+                     <td>${i + 1}</td>
+                     <td>${blog.cmt[i].username}</td>
+                     <td>${blog.cmt[i].comment}</td>
+                     <td> ${blog.cmt[i].article} </td>
+                     <td>
+                      <a type="button" id="delet"   class="delete"  data-comt-id="${
+                        blog.cmt[i]._id
+                      }">delete</a>
+                     </td>
+                 </tr>
+               `;
+            }
+            table =
+              table +
+              `
+                </tbody>
+               </table>
+             `;
 
-  
-    getDocs(c).then(docSnap=>{
-        let comments=[];
-                docSnap.forEach(comment=> {
-                    comments.push({...comment.data(), id:comment.id})
-                    console.log("comment ",comment.data());
-                });
-      
-     
-      
-        function manageposts(){
-     
-           let table=`
-             <table>
-               <thead>
-                   <th>number</th>
-                   <th>UserName</th>
-                   <th>UserComment</th>
-                   <th>blog</th>
-                   <th colspan="3">Action</th>
-               </thead>
-               <tbody id="blogtable">
-             
-           `;
-           // blogs.forEach(element => {
-               for(let i=0;i<comments.length;i++){
-             table+=`
-               <tr>
-                   <td>${i+1}</td>
-                   <td>${comments[i].username}</td>
-                   <td>${comments[i].usercomment}</td>
-                   <td> ${comments[i].title} </td>
-                   <td>
-                    <a type="button" id="delet"   class="delete"  data-blog-id="${comments[i].id}">delete</a> 
-                   </td>
-               </tr>
-             `   
-           };
-           table=table+`
-              </tbody>
-             </table>
-           `
-           document.getElementById("contentTomange").innerHTML=table
-           // console.log(table);
-    
-        }   
-         
-        manageposts();
-        // console.log("blogs",deletblog());
-        
+            document.getElementById("contentTomange").innerHTML = table;
+          })
+          .catch((err) => {
+            document.getElementById("contentTomange").innerHTML = err;
+          });
+      }
+      displayComments();
 
+      async function deleteComments(i) {
+        await fetch(
+          `https://expensive-newt-tiara.cyclic.app/articles/{id}/delete`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            console.log("result", result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
 
-      
-    });
-      
-    function deletemessage(i){
-        deleteDoc (doc(d, "blogcomment",`${i}`));
-       
-        console.log("deleted");
-    };
-   
-  
-
-
-    // adding event listener to parent using event delegation injavascript
-    document.getElementById("contentTomange").addEventListener("click",function (e){
-        
-        if(e.target.classList.contains('delete')){
-            console.log(e.target.dataset.blogId)
-            deletemessage(e.target.dataset.blogId)
+      document
+        .getElementById("contentTomange")
+        .addEventListener("click", function (e) {
+          if (e.target.classList.contains("delete")) {
+            deleteComments(e.target.dataset.comtId);
             // to loaad window after delete
             setTimeout(() => {
-                //   reload window
-                location.reload(); 
-            },2000);
-  
-        }
-    })
-</script>
+              //   reload window
+              location.reload();
+            }, 2000);
+          }
+        });
 
+      // getDocs(c).then(docSnap=>{
+      //     let comments=[];
+      //             docSnap.forEach(comment=> {
+      //                 comments.push({...comment.data(), id:comment.id})
+      //                 console.log("comment ",comment.data());
+      //             });
 
-<script type="module" src="../../js/script.js"></script>
-    
-</body>
+      //     function manageposts(){
+
+      //        let table=`
+      //          <table>
+      //  <thead>
+      //      <th>number</th>
+      //      <th>UserName</th>
+      //      <th>UserComment</th>
+      //      <th>blog</th>
+      //      <th colspan="3">Action</th>
+      //  </thead>
+      //            <tbody id="blogtable">
+
+      //        `;
+      //        // blogs.forEach(element => {
+      //            for(let i=0;i<comments.length;i++){
+      //          table+=`
+      //            <tr>
+      //                <td>${i+1}</td>
+      //                <td>${comments[i].username}</td>
+      //                <td>${comments[i].usercomment}</td>
+      //                <td> ${comments[i].title} </td>
+      //                <td>
+      //                 <a type="button" id="delet"   class="delete"  data-blog-id="${comments[i].id}">delete</a>
+      //                </td>
+      //            </tr>
+      //          `
+      //        };
+      //        table=table+`
+      //           </tbody>
+      //          </table>
+      //        `
+      //        document.getElementById("contentTomange").innerHTML=table
+      //        // console.log(table);
+
+      //     }
+
+      //     manageposts();
+      //     // console.log("blogs",deletblog());
+
+      // });
+
+      // function deletemessage(i){
+      //     deleteDoc (doc(d, "blogcomment",`${i}`));
+
+      //     console.log("deleted");
+      // };
+
+      // // adding event listener to parent using event delegation injavascript
+      // document.getElementById("contentTomange").addEventListener("click",function (e){
+
+      //     if(e.target.classList.contains('delete')){
+      //         console.log(e.target.dataset.blogId)
+      //         deletemessage(e.target.dataset.blogId)
+      //         // to loaad window after delete
+      //         setTimeout(() => {
+      //             //   reload window
+      //             location.reload();
+      //         },2000);
+
+      //     }
+      // })
+    </script>
+
+    <script type="module" src="../../js/script.js"></script>
+  </body>
 </html>

@@ -14,6 +14,7 @@ i {
   cursor: pointer;
   text-decoration: none;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -277,6 +278,32 @@ nav ul li .active-login {
   border: none;
 }
 
+/* #readLess {
+  margin-top: 20px;
+  background-color: #00adb5;
+  padding: 10px;
+  font-size: 12px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.work button span {
+  /* margin-left: 10px; */
+}
+.work button span i {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+} */
+
 /* blog section */
 .blog-section {
   margin-top: 100px;
@@ -339,6 +366,8 @@ nav ul li .active-login {
   background-color: #00adb5;
   border-radius: 5px;
   border: none;
+  align-items: center;
+  justify-content: center;
 }
 .blog .like-comment {
   float: left;
