@@ -302,7 +302,7 @@ nav ul li .active-login {
   font-size: 10px;
   display: flex;
   align-items: center;
-} */
+}
 
 /* blog section */
 .blog-section {
@@ -656,6 +656,7 @@ form .errormsg {
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
+
 @media (max-width: 480px) and (min-width: 320px) {
   /* #mainmenu{
         display:block;
@@ -990,6 +991,20 @@ form .errormsg {
     /* border: 2px solid green; */
     width: 20px;
     height: auto;
+  }
+
+  .top-div .signup-btn {
+    margin-top: 20px;
+    margin-left: 0px;
+    background: #0a8c92;
+    border: none;
+    border-radius: 5px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    padding: 10px 30px;
+    color: white;
   }
 }
 

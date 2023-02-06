@@ -77,27 +77,20 @@ async function deletemessage(i) {
     });
 }
 
-document
-  .getElementById("contentTomange")
-  .addEventListener("click", function (e) {
-    if (e.target.classList.contains("delete")) {
-      console.log(e.target.dataset.blogId);
-      deletemessage(e.target.dataset.blogId);
-      // to loaad window after delete
-      setTimeout(() => {
-        //   reload window
-        location.reload();
-      }, 2000);
-    }
-  });
-
-function deletblog(i) {
-  deleteDoc(doc(db, "cretedblogs", `${i}`));
-  // to loaad window after delete
-  // window.location.href="./index.html"
-  // return "deleted"
-  console.log("deleted");
-}
+// adding event listener to parent using event delegation injavascript
+// document
+//   .getElementById("contentTomange")
+//   .addEventListener("click", function (e) {
+//     if (e.target.classList.contains("delete")) {
+//       console.log(e.target.dataset.blogId);
+//       deletemessage(e.target.dataset.blogId);
+//       // to loaad window after delete
+//       setTimeout(() => {
+//         //   reload window
+//         location.reload();
+//       }, 2000);
+//     }
+//   });
 
 // adding event listener to parent using event delegation injavascript
 if (document.getElementById("contentTomange")) {
@@ -106,94 +99,70 @@ if (document.getElementById("contentTomange")) {
     .addEventListener("click", function (e) {
       if (e.target.classList.contains("delete")) {
         console.log(e.target.dataset.blogId);
-        deletblog(e.target.dataset.blogId);
+        deletemessage(e.target.dataset.blogId);
         // to loaad window after delete
-        // setTimeout(() => {
-        //     //   reload window
-        //     location.reload();
-        // },2000);
+        setTimeout(() => {
+          //   reload window
+          location.reload();
+        }, 2000);
       } else if (e.target.className == "edit") {
         let update = document.getElementById("contentToUpdate");
-        // console.log(e.target.dataset.bloId)
-        // updateblog(e.target.dataset.blogId)
-        let deleteID = e.target.dataset.bloId;
+
         update.scrollIntoView();
 
-        getDocs(q).then((docSnap) => {
-          let blogs = [];
-          docSnap.forEach((blog) => {
-            blogs.push({ ...blog.data(), id: blog.id });
-          });
-          console.log("blogs", blogs);
-          for (let i = 0; i < blogs.length; i++) {
-            if (blogs[i].id == deleteID) {
-              console.log(blogs[i].id);
+        //  get article by id
+        async function getarticle(i) {
+          await fetch(
+            `https://expensive-newt-tiara.cyclic.app/articles/getOne/${i}`,
+            {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then((result) => {
+              console.log("result", result.article);
 
               update.innerHTML = `<form id="blogform" autocomplete="off" action="" >
-             <div>
-                 <label class="text-label">Title</label>
-                 <input id="blogtitle" type="text" name="title" value="${blogs[i].title}" class="text-input">
-                 <p class="error"></p>
-             </div>
-             <div>
-                 <label class="text-label">Date</label>
-         
-                 <input id="blogdate" type="date" value="${blogs[i].date}" name="title" class="text-input">
-                 <p class="error"></p>
-             </div>
-             <div>
-                 <label class="text-label">image</label>
-              
-                 <input id="blogimage" type="file" name="image"  class="text-input image" >
-                 <p class="error"></p>
-             </div>
-             
+              <div>
+                  <label class="text-label">Title</label>
+                  <input id="blogtitle" type="text" name="title" value="${result.article.title}" class="text-input">
+                  <p class="error"></p>
+              </div>
+              <div>
+                  <label class="text-label">image</label>
+ 
+                  <input id="blogimage" type="file" name="image" value="${result.article.image}"  class="text-input image" >
+                  <p class="error"></p>
+              </div>
+ 
+              <div>
+                  <label class="text-label">Content</label>
+                  <br>
+                  <textarea   name="" id="editor" width="40" rows="10">${result.article.content}</textarea>
+                  <p class="error"></p>
+              </div>
+ 
+              <div>
+                  <button type="submit" onclick="event.preventDefault();" data-update-id="${result.article._id}"  id="test" class="btn-su">Update</button>
+              </div>
+ 
+              </form>`;
 
-             <div>
-                 <label class="text-label">Content</label>
-                 <br>
-                 <textarea   name="" id="editor" width="40" rows="10">${blogs[i].content}</textarea>
-                 <p class="error"></p>
-             </div>
-
-             <div>
-                 <button type="submit" onclick="event.preventDefault();" id="test" class="btn-su">Update</button>
-             </div>
-          
-             </form>`;
-            }
-          }
-        });
+              // initialize tinymce
+              tinymce.init({
+                selector: "#editor",
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+        getarticle(e.target.dataset.bloId);
 
         update.addEventListener("click", function (e) {
-          console.log(document.getElementById("blogimage"));
-
-          // initialize tinymce
-          tinymce.init({
-            selector: "#editor",
-          });
-
-          //   if (e.target.classList.contains("image")) {
-          let image;
-          console.log("now you can get image");
-          // if(blogimage){
-          console.log(blogimage, "blogimage is here");
-          blogimage.addEventListener("DOMContentLoaded", (e) => {
-            const img = e.target.files[0];
-
-            const reader = new FileReader();
-
-            reader.readAsDataURL(img);
-            // console.log(reader.readAsDataURL(img))
-
-            reader.addEventListener("load", () => {
-              image = reader.result;
-              console.log(image);
-            });
-          });
-
-          // }
-
           //
           let btn = document.getElementById("test");
 
@@ -221,18 +190,17 @@ if (document.getElementById("contentTomange")) {
 
             // let form2=document.getElementById("blogform");
             let blogtitle = document.getElementById("blogtitle");
-            let blogdate = document.getElementById("blogdate");
+
             let blogimage = document.getElementById("blogimage");
-            // let blogcontent=document.getElementById("editor");
+
             let blogcontent = tinyMCE.get("editor").getContent();
             // Use a regular expression to remove the HTML tags from the string
             var text = blogcontent.replace(/<[^>]*>/g, "");
 
             // blogpost content
-            let blogimagevalue = image;
+
             let blogtitlevalue = blogtitle.value;
             let blogcontentvalue = text;
-            let blogdatevalue = blogdate.value;
 
             if (blogtitlevalue === "") {
               seterror(blogtitle, "please blog must contain title");
@@ -240,38 +208,47 @@ if (document.getElementById("contentTomange")) {
               setsuccess(blogtitle);
             }
 
-            if (blogdatevalue === "") {
-              seterror(blogdate, "please blog must contain date");
-            } else {
-              setsuccess(blogdate);
+            async function updateMessage(id) {
+              const formData = new FormData();
+              formData.append("content", blogcontentvalue);
+              formData.append("title", blogtitlevalue);
+              formData.append("image", blogimage.files[0]);
+
+              await fetch(
+                `https://expensive-newt-tiara.cyclic.app/articles/update/${id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                  body: formData,
+                }
+              )
+                .then((res) => res.json())
+                .then((result) => {
+                  console.log("result", result);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }
 
-            if (blogimagevalue === "") {
-              seterror(blogimage, "please choose image for blog");
-            } else {
-              // console.log(blogimagevalue);
-              setsuccess(blogimage);
-            }
+            // adding event listener to parent using event delegation in javascript
+            // document
+            //   .getElementById("contentTomange")
+            //   .addEventListener("click", function (e) {
+            //     if (e.target.classList.contains("edit")) {
+            //       console.log(e.target.dataset.bloId);
+            //       updateMessage(e.target.dataset.bloId);
+            //       // to reload window after update
+            //       setTimeout(() => {
+            //         // reload window
+            //         location.reload();
+            //       }, 2000);
+            //     }
+            //   });
 
-            // if (blogcontentvalue==="") {
-            //     seterror(blogcontent,"write body content");
-
-            // } else {
-            //     setsuccess(blogcontent)
-            // }
-
-            if (
-              blogtitlevalue !== "" &&
-              blogimagevalue !== "" &&
-              blogdatevalue !== ""
-            ) {
-              updateDoc(doc(db, "cretedblogs", `${deleteID}`), {
-                image: blogimagevalue,
-                title: blogtitlevalue,
-                content: blogcontentvalue,
-                date: blogdatevalue,
-              });
-            }
+            updateMessage(e.target.dataset.updateId);
           };
 
           if (btn && e.target.className == "btn-su") {
@@ -279,8 +256,10 @@ if (document.getElementById("contentTomange")) {
               console.log(btn);
               //   e.preventDefault();
               validateinputs();
+              if (validateinputs()) {
+                location.reload();
+              }
 
-              console.log(deleteID, "to be updated");
               // setTimeout(() => {
               //   location.reload();
               // },2000);
