@@ -58,7 +58,7 @@
           <li><a href="./contact.html">Contact</a></li>
           <li>
             <a href="./login.html"
-              ><button id="logedin" class="active-login">Login</button></a
+              ><button id="mobileLogedin" class="active-login">Login</button></a
             >
           </li>
         </ul>
@@ -159,15 +159,12 @@
     <script>
       async function authenticateWithGoogle() {
         try {
-          const response = await fetch(
-            "https://expensive-newt-tiara.cyclic.app/auth/google/Capstone",
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const response = await fetch("http://localhost:8000/auth/google", {
+            method: "GET",
+            // headers: {
+            //   "Content-Type": "application/json",
+            // },
+          });
           const data = await response.json();
           if (data.token) {
             const token = data.token;

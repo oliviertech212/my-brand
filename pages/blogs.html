@@ -34,6 +34,7 @@ font-family: 'Rubik', sans-serif; */
         margin-top: 100px;
         margin-left: 70px;
         margin-right: 70px;
+        word-wrap: break-word;
       }
       .single-blog h1 {
         /* text-align: center; */
@@ -170,7 +171,7 @@ font-family: 'Rubik', sans-serif; */
         }
         .single-blog h1 {
           font-size: 30px;
-          width: 90%;
+
           float: left;
         }
         .single-blog .blog-section {
@@ -312,7 +313,7 @@ font-family: 'Rubik', sans-serif; */
           <li><a href="./blogs.html" class="active">Blogs</a></li>
           <li><a href="./contact.html">Contact</a></li>
           <li>
-            <a href="./login.html"><button id="logedin">Login</button></a>
+            <a href="./login.html"><button id="mobileLogedin">Login</button></a>
           </li>
         </ul>
       </div>
@@ -323,92 +324,8 @@ font-family: 'Rubik', sans-serif; */
         <h1>Blogs</h1>
         <hr />
       </div>
-      <div class="blog-container">
-        <!-- <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1>UX/UI developers and UX/UI designers</h1>
-                <div class="blog-pc">
-                <img  class="mobile" src="../images/ui.png" alt="">
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    By now, you might have heard of UX/UI developers and UX/UI designers.
-                     Those are the ones making the apps and interfaces you are using daily
-                </div>
-                <div>
-                    <a href="../blogs/ui.html" target="_blank">
-                        <button type="button">
-                            Read more
-                            <span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>  
-                        </button>
-                    </a>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment 
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-            </div>
-            <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1>Frontend development</h1>
-                <div class="blog-pc">
-                  <img class="mobile" src="../images/frontend.jpg" alt="">   
-
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    Frontend development also known as (client side) development 
-                    is the practice of producing CSS, html and JavaScript for a website............
-                </div>
-                
-                <div>
-                    <button type="button">
-                        Read more
-                        <span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>  
-                    </button>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-            </div>
-            <div class="blog">
-                <p class="date">november/30/2022</p>
-                <h1> Back-end development</h1>
-                <div class="blog-pc">
-                    <img  class="mobile" src="../images/backend.jpg" alt="">
-                </div>
-                <div id="blog-desc" class="blog-desc">
-                    Back-end developers are the experts who build and maintain the
-                     mechanisms that process data and perform actions on websites. Unlike ............
-                </div>
-                
-                <div>
-                    <button type="button">
-                        Read more
-                        <span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </span>  
-                    </button>
-                </div>
-                <div class="like-comment">like
-                     <span> <i class="fa-solid fa-thumbs-up"></i></span>
-                     comment 
-                     <span class="material-symbols-outlined">
-                        comment
-                     </span>
-                </div>
-
-            </div> -->
-      </div>
+      <div id="loader" class="loader"></div>
+      <div class="blog-container"></div>
       <div id="single-blog" class="single-blog"></div>
     </section>
 
@@ -438,9 +355,11 @@ font-family: 'Rubik', sans-serif; */
       const token = localStorage.getItem("token");
       let blogDisplay = document.querySelector(".blog-container");
       let singleblg = document.getElementById("single-blog");
+      let loader = document.getElementById("loader");
 
       async function displayMessages() {
-        console.log("hello", token);
+        loader.style.display = "block";
+        blogDisplay.style.visibility = "hidden";
         await fetch("https://expensive-newt-tiara.cyclic.app/articles/getall", {
           method: "GET",
           headers: {
@@ -482,6 +401,9 @@ font-family: 'Rubik', sans-serif; */
                 `
               );
             });
+
+            loader.style.display = "none";
+            blogDisplay.style.visibility = "visible";
           })
           .catch((err) => {
             // document.getElementById("contentTomange").innerHTML = err;
@@ -513,6 +435,7 @@ font-family: 'Rubik', sans-serif; */
 
       let comments;
       async function singArticle(i) {
+        loader.style.display = "block";
         const token = localStorage.getItem("token");
         await fetch(
           `https://expensive-newt-tiara.cyclic.app/articles/getOne/${i}`,
@@ -602,6 +525,7 @@ font-family: 'Rubik', sans-serif; */
                   </div>
 
               </section>  `;
+            loader.style.display = "none";
           })
           .catch((err) => {
             console.log(err);

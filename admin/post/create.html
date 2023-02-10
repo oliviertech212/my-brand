@@ -28,7 +28,7 @@
                 <i class="fa-sharp fa-solid fa-bars"></i>
             </button>
             <ul class="nav-links">
-                <li><a href="./pages/login.html">
+                <li><a href="#">
                     <!-- <button>Logout </button> -->
                     <i class="fa-solid fa-user"></i>
                     admin
@@ -47,11 +47,13 @@
         <div id="bordmenu" class="left-sidebar">
             <ul>
                 <li>
-                    <a href="../../index.html">Home</a>
-                    <a href="./profile.html">Reset</a>
+                    <a href="../../index.html">Home <i class="fa-solid fa-right-from-bracket"></i
+                      ></a>
+                    <a href="./profile.html">create admin</a>
                     <a href="./index.html" class="active" >Manage Posts</a>
                     <a href="./message.html"   >Messages</a>
                     <a href="./comments.html">comments</a>
+                    <a href="./users.html">Users</a>
                     <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
                 </li>
@@ -62,11 +64,13 @@
         <div id="mainmenu" class="left-sidebar">
             <ul>
                 <li>
-                    <a href="../../index.html"><h1>Home</h1></a>
-                    <a href="./profile.html">Reset</a>
+                    <a href="../../index.html">Home<i class="fa-solid fa-right-from-bracket"></i
+                      ></a>
+                    <a href="./profile.html">create admin</a>
                     <a href="./index.html"class="active" >Manage Posts</a>
                     <a href="./message.html"   >Messages</a>
                     <a href="./comments.html">comments</a>
+                    <a href="./users.html">Users</a>
                 </li>
             </ul>
             
@@ -400,18 +404,13 @@ const validateInput = () => {
         },
         body: formData,
       })
-        .then( (res) => 
-        // {
-          res.json()
-      //     if (res.status === 201) {
-      //       let result = await res.json();
-      //       return result
-      //       console.log("result", result);
-      //     } else if (res.status ===401) {
-      // document.getElementById("status").innerHTML = "Please sign in.";
-      // window.location.href = "../pages/login.html";
-    // }
-  // }
+        .then(async (res) => {
+          if (res.status == 200) {
+                    location.reload();
+                  }
+
+                  return await res.json();
+        }
   ).then((data)=>{
     console.log(data);
   })

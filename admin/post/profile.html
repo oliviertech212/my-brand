@@ -36,7 +36,7 @@
         </button>
         <ul class="nav-links">
           <li>
-            <a href="./pages/login.html">
+            <a href="#">
               <!-- <button>Logout </button> -->
               <i class="fa-solid fa-user"></i>
               admin
@@ -59,11 +59,14 @@
       <div id="bordmenu" class="left-sidebar">
         <ul>
           <li>
-            <a href="../../index.html">Home</a>
-            <a href="./profile.html" class="active">Reset</a>
+            <a href="../../index.html"
+              >Home <i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+            <a href="./profile.html" class="active">create admin</a>
             <a href="./index.html">Manage Posts</a>
             <a href="./message.html">Messages</a>
             <a href="./comments.html">comments</a>
+            <a href="./users.html">Users</a>
             <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
           </li>
@@ -72,19 +75,20 @@
       <div id="mainmenu" class="left-sidebar">
         <ul>
           <li>
-            <a href="../../index.html">Home</a>
-            <a href="./profile.html" class="active">Reset</a>
+            <a href="../../index.html"
+              >Home <i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+            <a href="./profile.html" class="active">create admin</a>
             <a href="./index.html">Manage Posts</a>
             <a href="./message.html">Messages</a>
             <a href="./comments.html">comments</a>
+            <a href="./users.html">Users</a>
           </li>
         </ul>
       </div>
       <div class="admin-content">
         <div class="content">
-          <h1 class="page-title">
-            Welcome now you can change your email or password
-          </h1>
+          <h1 class="page-title">Welcome now you can create an admin</h1>
 
           <form id="resetform" name="resetform" action="">
             <div>
@@ -107,33 +111,9 @@
               />
               <p class="error"></p>
             </div>
-            <div>
-              <label class="text-label">New Email</label>
-
-              <input
-                id="newemail"
-                type="email"
-                name="newemail"
-                class="text-input"
-              />
-              <p class="error"></p>
-            </div>
-            <div>
-              <label class="text-label">New Password</label>
-
-              <input
-                id="newpassword"
-                type="password"
-                name="newpassword"
-                class="text-input"
-              />
-              <p class="error"></p>
-            </div>
 
             <div>
-              <button type="submit" onclick="validateinput()" class="btn-sub">
-                change
-              </button>
+              <button type="submit" class="btn-sub">Create</button>
             </div>
           </form>
         </div>
@@ -145,6 +125,84 @@
     <!-- Tiny MCE -->
 
     <!-- script -->
+    <script>
+      let token = localStorage.getItem("token");
+      const validateinput = () => {
+        const seterror = (element, messaage) => {
+          const inputcontrol = element.parentElement;
+          const errorDisplay = inputcontrol.querySelector(".error");
+
+          errorDisplay.innerHTML = messaage;
+
+          // inputcontrol.classList.add("error");
+          inputcontrol.children.item(1).classList.add("failed");
+          inputcontrol.children.item(1).classList.remove("success");
+        };
+
+        const setsuccess = (element) => {
+          const inputcontrol = element.parentElement;
+          const errorDisplay = inputcontrol.querySelector(".error");
+
+          errorDisplay.innerHTML = "";
+
+          inputcontrol.children.item(1).classList.remove("failed");
+          inputcontrol.children.item(1).classList.add("success");
+        };
+
+        const lastemail = document.getElementById("lastemail");
+        const lastpassword = document.getElementById("lastpassword");
+
+        if (lastemail.value === "") {
+          seterror(lastemail, "email is required");
+        } else {
+          setsuccess(lastemail);
+        }
+
+        if (lastpassword.value === "") {
+          seterror(lastpassword, "please enter  password");
+        } else {
+          setsuccess(lastpassword);
+        }
+
+        if (lastemail.value !== "" && lastpassword.value !== "") {
+          async function createadmin() {
+            const formData = new FormData();
+            formData.append("username", lastemail.value);
+            formData.append("password", lastpassword.value);
+
+            await fetch("https://expensive-newt-tiara.cyclic.app/admin/admin", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                username: lastemail.value,
+                password: lastpassword.value,
+              }),
+            })
+              .then((res) => res.json())
+              .then((result) => {
+                console.log("result", result);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+
+          createadmin();
+        }
+      };
+
+      const createfrom = document.getElementById("resetform");
+
+      if (createfrom) {
+        createfrom.addEventListener("submit", (e) => {
+          e.preventDefault();
+          validateinput();
+        });
+      }
+    </script>
     <script type="module" src="../../js/script.js"></script>
   </body>
 </html>
