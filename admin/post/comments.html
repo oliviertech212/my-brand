@@ -75,7 +75,7 @@
               >Home <i class="fa-solid fa-right-from-bracket"></i
             ></a>
             <a href="./profile.html">create admin</a>
-            <a href="./index.html" class="active">Manage Posts</a>
+            <a href="./index.html">Manage Posts</a>
             <a href="./message.html">Messages</a>
             <a href="./comments.html" class="active">comments</a>
             <a href="./users.html">Users</a>
@@ -87,6 +87,7 @@
 
         <div class="content">
           <h1 class="page-title">Messages</h1>
+          <div id="loader" class="loader"></div>
           <div id="contentTomange"></div>
         </div>
       </div>
@@ -95,6 +96,8 @@
       const token = localStorage.getItem("token");
 
       async function displayComments() {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("contentTomange").style.visibility = "hidden";
         console.log("hello", token);
         await fetch(
           "https://expensive-newt-tiara.cyclic.app/articles/getall/comments",
@@ -147,9 +150,12 @@
              `;
 
             document.getElementById("contentTomange").innerHTML = table;
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("contentTomange").style.visibility =
+              "visible";
           })
           .catch((err) => {
-            document.getElementById("contentTomange").innerHTML = err;
+            // document.getElementById("contentTomange").innerHTML = err;
           });
       }
       displayComments();

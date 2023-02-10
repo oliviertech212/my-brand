@@ -2,6 +2,8 @@ const token = localStorage.getItem("token");
 
 async function displayMessages() {
   console.log("hello", token);
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("contentTomange").style.visibility = "hidden";
   await fetch("https://expensive-newt-tiara.cyclic.app/articles/getall", {
     method: "GET",
     headers: {
@@ -52,10 +54,12 @@ async function displayMessages() {
 `;
       if (document.getElementById("contentTomange")) {
         document.getElementById("contentTomange").innerHTML = table;
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("contentTomange").style.visibility = "visible";
       }
     })
     .catch((err) => {
-      document.getElementById("contentTomange").innerHTML = err;
+      // document.getElementById("contentTomange").innerHTML = err;
     });
 }
 displayMessages();

@@ -86,6 +86,7 @@
 
         <div class="content">
           <h1 class="page-title">Messages</h1>
+          <div id="loader" class="loader"></div>
           <div id="contentTomange"></div>
         </div>
       </div>
@@ -226,6 +227,8 @@
       //     });
 
       async function displayMessages() {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("contentTomange").style.visibility = "hidden";
         console.log("hello", token);
         await fetch("https://expensive-newt-tiara.cyclic.app/contact/getall", {
           method: "GET",
@@ -259,9 +262,12 @@
     </table>
   `;
             document.getElementById("contentTomange").innerHTML = table;
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("contentTomange").style.visibility =
+              "visible";
           })
           .catch((err) => {
-            document.getElementById("contentTomange").innerHTML = err;
+            // document.getElementById("contentTomange").innerHTML = err;
           });
       }
       displayMessages();
