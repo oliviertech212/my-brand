@@ -241,9 +241,11 @@ function loginformvalidation() {
 let logedin = localStorage.getItem("userInfo");
 let userlogedin = JSON.parse(logedin);
 let logout = document.getElementById("logedin");
+let mobileLogout = document.getElementById("mobileLogedin");
 
 if (userlogedin) {
   logout.innerHTML = "Logout";
+  mobileLogout.innerHTML = "Logout";
   logout.addEventListener("click", (e) => {
     e.preventDefault();
     const keys = ["userInfo", "token"];
@@ -253,9 +255,19 @@ if (userlogedin) {
       location.reload();
     });
   });
+  mobileLogout.addEventListener("click", (e) => {
+    e.preventDefault();
+    const keys = ["userInfo", "token"];
+
+    keys.forEach((key) => {
+      window.localStorage.removeItem(key);
+      location.reload();
+    });
+  });
 } else {
-  if (logout) {
+  if (logout || mobileLogout) {
     logout.innerHTML = "Login";
+    mobileLogout.innerHTML = "Login";
   }
 }
 
@@ -290,6 +302,7 @@ async function login() {
 
         const token = localStorage.getItem("token");
         document.getElementById("loginstatus").innerHTML = "Login Successful";
+
         await fetch(
           "https://expensive-newt-tiara.cyclic.app/admin/user/profile",
           {
@@ -315,6 +328,9 @@ async function login() {
             if (data.username && data.role === "admin") {
               window.location.href = "../admin/post/index.html";
               userInf = localStorage.getItem("userInfo");
+            } else {
+              console.log("user");
+              window.location.href = "../index.html";
             }
           });
 

@@ -36,7 +36,7 @@
         </button>
         <ul class="nav-links">
           <li>
-            <a href="./pages/login.html">
+            <a href="#">
               <!-- <button>Logout </button> -->
               <i class="fa-solid fa-user"></i>
               admin
@@ -54,11 +54,14 @@
       <div id="bordmenu" class="left-sidebar">
         <ul>
           <li>
-            <a href="../../index.html">Home</a>
-            <a href="./profile.html">Reset</a>
+            <a href="../../index.html"
+              >Home <i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+            <a href="./profile.html">create admin</a>
             <a href="./index.html">Manage Posts</a>
             <a href="./message.html">Messages</a>
             <a href="./comments.html" class="active">comments</a>
+            <a href="./users.html">Users</a>
 
             <!-- <a href="../user/index.html">Manage Users</a>
                     <a href="../topics/index.html">Manage Topics</a> -->
@@ -68,11 +71,14 @@
       <div id="mainmenu" class="left-sidebar">
         <ul>
           <li>
-            <a href="../../index.html">Home</a>
-            <a href="./profile.html">Reset</a>
+            <a href="../../index.html"
+              >Home <i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+            <a href="./profile.html">create admin</a>
             <a href="./index.html" class="active">Manage Posts</a>
             <a href="./message.html">Messages</a>
             <a href="./comments.html" class="active">comments</a>
+            <a href="./users.html">Users</a>
           </li>
         </ul>
       </div>
@@ -105,7 +111,7 @@
             // console.log("comment", res)
           )
           .then((blog) => {
-            console.log(blog.cmt);
+            console.log("comment", blog.cmt);
             let table = ` <table> 
             
                     <thead>
@@ -148,9 +154,9 @@
       }
       displayComments();
 
-      async function deleteComments(i) {
+      async function deleteComments(id) {
         await fetch(
-          `https://expensive-newt-tiara.cyclic.app/articles/${i}/delete`,
+          `https://expensive-newt-tiara.cyclic.app/articles/${id}/delete`,
           {
             method: "DELETE",
             headers: {
@@ -161,7 +167,7 @@
         )
           .then((res) => res.json())
           .then((result) => {
-            console.log("result", result);
+            // console.log("result", result);
           })
           .catch((err) => {
             console.log(err);
@@ -172,6 +178,7 @@
         .getElementById("contentTomange")
         .addEventListener("click", function (e) {
           if (e.target.classList.contains("delete")) {
+            console.log("id deleted ", e.target.dataset.comtId);
             deleteComments(e.target.dataset.comtId);
             // to loaad window after delete
             setTimeout(() => {

@@ -1,225 +1,274 @@
-header nav{
-    background-color: #26262c;
-    padding-top:10px;
-    padding-bottom:auto;
-    height: 60px;
-    max-height: 40px;
+header nav {
+  background-color: #26262c;
+  padding-top: 10px;
+  padding-bottom: auto;
+  height: 60px;
+  max-height: 40px;
 }
-nav .logo{
-    width: 339px;
-    height: 40px;
+nav .logo {
+  width: 339px;
+  height: 40px;
 }
 
-
-.admin-home{
-    margin-top:70px;
-    /* height: calc(100%-60px); */
-    height:100%;
-    display: flex;
-    
-   
+.admin-home {
+  margin-top: 70px;
+  /* height: calc(100%-60px); */
+  height: 100%;
+  display: flex;
 }
 .admin-home .left-sidebar {
-    flex: 2;
-    background-color: #3e3e50;
-    border-right: 5px solid gray ; 
-    padding-top: 20px;
+  flex: 2;
+  background-color: #3e3e50;
+  border-right: 5px solid gray;
+  padding-top: 20px;
 }
 
-.admin-home .left-sidebar ul{
-    list-style-type: none;
-    margin:0px;
-    padding: 0px;
+.admin-home .left-sidebar ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
-.admin-home .left-sidebar ul li a{
-    margin:0px;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    display: block;
-    font-size: 25px;
-    font-family: 'Roboto', sans-serif;
-    border-bottom: 3px solid #004044;
+.admin-home .left-sidebar ul li a {
+  margin: 0px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  display: block;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  border-bottom: 3px solid #004044;
+  padding-left: 40px;
 }
-.admin-home .left-sidebar ul li a:hover{
-    background-color:#00ADB5;
-
+.admin-home .left-sidebar ul li a:hover {
+  background-color: #00adb5;
 }
-.admin-home .left-sidebar ul li .active{
-    background-color:#00ADB5;
-
-}
-
-a{
-    text-decoration: none;
-    cursor: pointer;
+.admin-home .left-sidebar ul li .active {
+  background-color: #00adb5;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
 
-
-
-
-.admin-home .admin-content{
+.admin-home .admin-content {
   flex: 8;
   /* height: 100%; */
   padding: 20px 100px 100px;
   overflow-y: scroll;
-  max-height:70%;
+  max-height: 70%;
 }
-.btn{
-    background-color:#00ADB5 ;
+.btn {
+  background-color: #00adb5;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  border-radius: 3px;
+}
+.admin-content .content {
+  margin-top: 20px;
+}
+.admin-content .content .page-title {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: bolder;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid gray;
+  font-family: "Roboto", sans-serif;
+}
+
+.edit {
+  color: white;
+  background-color: green;
+}
+.delete {
+  color: white;
+  margin-left: 20px;
+  background-color: red;
+}
+.publish {
+  color: blue;
+  margin-left: 20px;
+}
+.edit:hover,
+.delete:hover,
+.publish:hover {
+  border-bottom: 2px solid gray;
+}
+
+/* create post */
+form {
+  border-radius: 8px;
+  background-color: #00adb5;
+  padding: 20px;
+}
+form div {
+  padding-top: 10px;
+}
+form .text-label {
+  line-height: normal;
+  margin-top: -10px;
+  color: black;
+  font-size: larger;
+}
+form .text-input {
+  width: 100%;
+  height: 40px;
+  border: 2;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+form .btn-su {
+  /* width: 105px; */
+  height: 40px;
+  font-weight: bold;
+  margin-top: 10px;
+  background-color: white;
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  border: 1px solid black;
+  font-family: "Roboto", sans-serif;
+  border-radius: 3px;
+}
+#mainmenu {
+  display: none;
+}
+
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+  .admin-home {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+  #bordmenu {
+    display: none;
+  }
+
+  .admin-home .admin-content {
+    /* padding: 20px 100px 100px; */
+    overflow-y: unset;
+    max-width: 100%;
+    max-height: fit-content;
+    padding-left: 0%;
+  }
+  .btn-group {
+    margin-left: 30px;
+  }
+  .btn {
+    background-color: #00adb5;
     padding: 10px;
     color: white;
     font-weight: bold;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     border-radius: 3px;
-}
-.admin-content .content{
+  }
+  .admin-content .content {
     margin-top: 20px;
-}
-.admin-content .content .page-title{
+  }
+  .admin-content .content .page-title {
     text-align: center;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom:10px;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 10px;
     font-style: normal;
     font-weight: bolder;
-}
+  }
 
-table{
+  table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
-}
-th,td{
-    padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid gray;
-    font-family: 'Roboto', sans-serif;
-}
+  }
+  .delete {
+    margin-left: 0px;
+  }
+  .publish {
+    margin-left: 0px;
+  }
 
-.edit{
-    color: green;
-}
-.delete{
-    color: red;
-    margin-left: 20px;
-}
-.publish{
-    color:blue;
-    margin-left: 20px;
-}
-.edit:hover,.delete:hover,.publish:hover{
-    border-bottom: 2px solid gray;
-}
-
-
-
-
-/* create post */
-form{
-    border-radius: 8px;
-    background-color: #00ADB5;
-    padding: 20px;
-}
-form div{
-    padding-top: 10px;
-}
-form  .text-label{
-    line-height:normal;
-    margin-top: -10px;
-    color: black;
-    font-size:larger;
-}
-form .text-input{
-    width:100%;
-    height: 40px;
-    border: 2;
-    background: #F5F5F5;
-    border-radius: 8px;
-}
-
-
-
-form .btn-su{
-    /* width: 105px; */
-    height: 40px;
-    font-weight: bold;
-    margin-top: 10px;
-    background-color:white;
+  form {
     padding: 10px;
-    color: black;
-    font-weight: bold;
-    border: 1px solid black;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 3px;
+    width: 100%;
+    margin: 20px auto 10px auto;
+    margin-left: 30px;
+  }
+  form div {
+    padding-top: 10px;
+  }
 }
-#mainmenu{
+
+@media (max-width: 480px) and (min-width: 320px) {
+  .admin-home {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+  }
+  #bordmenu {
     display: none;
-}
+  }
 
-@media (max-width:480px)and (min-width:320px) {
-    .admin-home{
-        margin-top:70px;
-        display: flex;
-        flex-direction: column;
-        
-       
-    }
-    #bordmenu {
-        display: none;
-    }  
-    
-    
+  .admin-home .admin-content {
+    /* padding: 20px 100px 100px; */
+    overflow-y: unset;
+    max-width: 100%;
+    max-height: fit-content;
+    padding-left: 0%;
+  }
+  .btn-group {
+    margin-left: 30px;
+  }
+  .btn {
+    background-color: #00adb5;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    border-radius: 3px;
+  }
+  .admin-content .content {
+    margin-top: 20px;
+  }
+  .admin-content .content .page-title {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    margin-bottom: 10px;
+    font-style: normal;
+    font-weight: bolder;
+  }
 
-    .admin-home .admin-content{
-        /* padding: 20px 100px 100px; */
-        overflow-y:unset;
-        max-width: 100%;
-        max-height:fit-content;
-        padding-left: 0%;
-      }
-      .btn{
-          background-color:#00ADB5 ;
-          padding: 10px;
-          color: white;
-          font-weight: bold;
-          font-family: 'Roboto', sans-serif;
-          border-radius: 3px;
-      }
-      .admin-content .content{
-          margin-top: 20px;
-      }
-      .admin-content .content .page-title{
-          text-align: center;
-          font-family: 'Roboto', sans-serif;
-          margin-bottom:10px;
-          font-style: normal;
-          font-weight: bolder;
-      }
-      
-      table{
-          width: 100%;
-          text-align: center;
-          border-collapse: collapse;
-      }
-      .delete{
-        margin-left:0px;
-    }
-    .publish{
-        margin-left:0px;
-    }
+  table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  .delete {
+    margin-left: 0px;
+  }
+  .publish {
+    margin-left: 0px;
+  }
 
-
-
-
-    form{
-        padding:10px;
-        width:100%;
-        margin: 20px auto 10px auto;
-    }
-    form div{
-        padding-top: 10px;
-    }
-      
-    
+  form {
+    padding: 10px;
+    width: 100%;
+    margin: 20px auto 10px auto;
+    margin-left: 30px;
+  }
+  form div {
+    padding-top: 10px;
+  }
 }

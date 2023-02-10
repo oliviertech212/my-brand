@@ -30,7 +30,7 @@ async function displayMessages() {
         table += `
         <tr>
             <td>${i + 1}</td>
-            <td>${blog.article[i].title}</td>
+            <td>${blog.article[i].title.slice(0, 50) + "....."}</td>
             <td>${dateString}</td>
             <td><img width="40px" height="40px" src="${
               blog.article[i].image
@@ -224,7 +224,14 @@ if (document.getElementById("contentTomange")) {
                   body: formData,
                 }
               )
-                .then((res) => res.json())
+                .then(async (res) => {
+                  if (res.status == 200) {
+                    location.reload();
+                  }
+
+                  return await res.json();
+                })
+
                 .then((result) => {
                   console.log("result", result);
                 })
@@ -256,13 +263,6 @@ if (document.getElementById("contentTomange")) {
               console.log(btn);
               //   e.preventDefault();
               validateinputs();
-              if (validateinputs()) {
-                location.reload();
-              }
-
-              // setTimeout(() => {
-              //   location.reload();
-              // },2000);
             });
           }
         });
