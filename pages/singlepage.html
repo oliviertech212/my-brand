@@ -26,12 +26,11 @@
 
     <!-- single blog -->
     <style>
-      /* font-family: 'Aclonica', sans-serif;
-font-family: 'Alegreya Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Rubik', sans-serif; */
+      .blog {
+        box-shadow: 0px 0px 10px #00adb5;
+      }
       .single-blog {
-        margin-top: 100px;
+        margin-top: 10px;
         margin-left: 70px;
         margin-right: 70px;
         word-wrap: break-word;
@@ -49,8 +48,6 @@ font-family: 'Rubik', sans-serif; */
       .single-blog .blog-section {
         display: flex;
         border-radius: 10px;
-        /* padding: 20px; */
-        max-height: 600px;
         margin: 0px auto 30px auto;
         overflow: hidden;
       }
@@ -95,9 +92,6 @@ font-family: 'Rubik', sans-serif; */
         padding-top: 0px;
         padding-left: 20px;
         font-family: "Rubik", sans-serif;
-        /* overflow-y: scroll; */
-        overflow-y: auto;
-        /* height:100%; */
       }
 
       #readLess {
@@ -134,12 +128,7 @@ font-family: 'Rubik', sans-serif; */
         font-weight: 100;
         line-height: 30px;
       }
-      /* style for coment form */
-      /* .single-blog .blog-desc .user{
-    float: left;
-    /* margin-top: 20px; */
-      /* display:flex; */
-      /* } */
+
       .user label {
         /* font-size: small; */
         color: black;
@@ -181,7 +170,7 @@ font-family: 'Rubik', sans-serif; */
           max-height: fit-content;
         }
         .single-blog .blog .blog-pc .mobile {
-          width: 90%;
+          width: 100%;
           height: 300px;
           border-radius: 5px;
         }
@@ -220,7 +209,7 @@ font-family: 'Rubik', sans-serif; */
           max-height: fit-content;
         }
         .single-blog .blog .blog-pc .mobile {
-          width: 90%;
+          width: 100%;
           height: 400px;
           border-radius: 5px;
         }
@@ -255,7 +244,7 @@ font-family: 'Rubik', sans-serif; */
           max-height: fit-content;
         }
         .single-blog .blog .blog-pc .mobile {
-          width: 90%;
+          width: 100%;
           height: 400px;
           border-radius: 5px;
         }
@@ -325,8 +314,7 @@ font-family: 'Rubik', sans-serif; */
         <hr />
       </div>
       <div id="loader" class="loader"></div>
-      <div class="blog-container"></div>
-      <!-- <div id="single-blog" class="single-blog"></div> -->
+      <div id="single-blog" class="single-blog"></div>
     </section>
 
     <footer>
@@ -352,80 +340,246 @@ font-family: 'Rubik', sans-serif; */
     </footer>
     <!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script> -->
     <script type="module">
+      let blodid = new URLSearchParams(window.location.search);
+      let Id = blodid.get("id");
+
       const token = localStorage.getItem("token");
-      let blogDisplay = document.querySelector(".blog-container");
+      let singleblg = document.getElementById("single-blog");
       let loader = document.getElementById("loader");
 
-      async function displayMessages() {
+      let comments;
+      async function singArticle(i) {
         loader.style.display = "block";
-        blogDisplay.style.visibility = "hidden";
-        await fetch("https://expensive-newt-tiara.cyclic.app/articles/getall", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then(async (res) => await res.json())
-          .then((blog) => {
-            blog.article.forEach((blog) => {
-              let createdAt = blog.createdAt;
-              let date = new Date(createdAt);
-              let dateString = date.toDateString();
-              console.log(blog);
-              blogDisplay.insertAdjacentHTML(
-                "beforeend",
-                ` <div class="blog">
-                     <p class="date">${dateString}</p>
-                     <h1>${blog.title}</h1>
-                     <div class="blog-pc">
-                     <img  class="mobile"  src="${blog.image}" alt="">
-                     </div>
-                     <div id="blog-desc" class="blog-desc">${
-                       blog.content.trim().slice(0, 120) + "...."
-                     }</div>
-                     <div>
-                        <button  id="readmore"  class="readmore" data-b-id="${
-                          blog._id
-                        } " type="button">
-                         Read more
-                          <span>
-                              <i class="fa-solid fa-arrow-right"></i>
-                          </span>
-                            
-                           
-                            
-                        </button>
+        singleblg.style.visibility = "hidden";
+        const token = localStorage.getItem("token");
+        await fetch(
+          `https://expensive-newt-tiara.cyclic.app/articles/getOne/${i}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+          .then(async (res) => {
+            // console.log(res.status);
 
-                     </div>
+            if (res.status === 401) {
+              // setTimeout(() => {
+              return (window.location.href = await "./login.html");
+              // }, 1000);
+            } else {
+              return await res.json();
+            }
+          })
+          .then(async (singArticle) => {
+            console.log("result", singArticle);
+            comments = await singArticle.article.comments;
+            // console.log(comments);
+            // singArticle.article.forEach((blog) => {
+            let createdAt = await singArticle.article.createdAt;
+            let date = new Date(createdAt);
+            let dateString = date.toDateString();
+            singleblg.innerHTML = `
+              <section class="blog-section">
 
-                 </div>
-                `
-              );
-            });
+                  <div class="blog">
+                      <div class="blog-pc">
+                          <img width="500px" height="500px"  class="mobile" src="${singArticle.article.image}" alt="">
+                      </div>
+                  </div>
+                  <div class="blog-desc">
+                      <div>
+                          <h1>${singArticle.article.title}</h1>
+                      ${singArticle.article.content}
+                      </div>
 
+                      <div id="comt">
+                          <button  id="readLess" class="readless" data-b-id="${singArticle.article._id} " type="button">
+                                      Read Less
+                                      <span>
+                                          <i class="fa-solid fa-arrow-right" ></i>
+                                      </span>
+                          </button>
+                          <div class="like-comment">
+                                    comment
+                                    <span class="material-symbols-outlined" class="show-comment" id="show-comment" >
+                                       comment
+                                    </span>
+                                    <span id="cmtnbr" classs="cmtnbr">0</span>
+
+                          </div>
+                      </div>
+
+                      <div class="user" id="user">
+                        <h2 id="commentdiv">Comments</h2><hr>
+                           <div  id="comment" class="comment">
+
+                           </div>
+                           <div id="form">
+                              <form id="commentform" action="">
+                               <div>
+                                 <label for="">email</label><br>
+                                <input class="input-txt" id="username" value="" type="text">
+                               </div>
+
+                               <div>
+                                 <label for="">coment</label><br>
+                                <textarea class="input-txt" id="usercomment" name="" id="" cols="30" rows="5"></textarea>
+                                <input id="usertitle" type="hidden" value="${singArticle.article.title}">
+                               </div>
+                               <input class=" sub" id="sub" value="Send" data-article-id="${singArticle.article._id}"   type="submit">
+
+                              </form>
+                           </div>
+
+
+                      </div>
+
+                  </div>
+
+              </section>  `;
             loader.style.display = "none";
-            blogDisplay.style.visibility = "visible";
+            singleblg.style.visibility = "visible";
           })
           .catch((err) => {
-            // document.getElementById("contentTomange").innerHTML = err;
             console.log(err);
           });
-      }
-      displayMessages();
 
-      blogDisplay.addEventListener("click", async (e) => {
-        if (e.target.classList.contains("readmore")) {
-          window.location.href = "./singlepage.html?id=" + e.target.dataset.bId;
+        singleblg.addEventListener("click", (e) => {
+          if (e.target.classList.contains("readless")) {
+            window.location.href = "./blogs.html";
+          }
+          if (e.target.classList.contains("show-comment")) {
+            if (document.getElementById("user").style.display == "none") {
+              document.getElementById("user").style.display = "block";
+            } else {
+              document.getElementById("user").style.display = "none";
+            }
+          }
+        });
+
+        if (document.getElementById("show-comment")) {
+          document
+            .getElementById("show-comment")
+            .addEventListener("click", () => {
+              const userEl = document.getElementById("user");
+              if (userEl.style.display === "none") {
+                userEl.style.display = "block";
+                userEl.scrollIntoView({ behavior: "smooth" });
+              } else {
+                userEl.style.display = "none";
+              }
+            });
         }
 
-        //   add like an dcomment
-        // if (e.target.classList.contains("like")) {
-        //   document.querySelectorAll(".like").forEach((i, index) => {
-        //     console.log(i);
-        //   });
-        // }
-      });
+        // singleblg.addEventListener("DOMContentLoaded", async () => {
+        let cmtnbr = await document.getElementById("cmtnbr");
+
+        let commentform = document.getElementById("commentform");
+        let usename = document.getElementById("username");
+        let usercomment = document.getElementById("usercomment");
+
+        async function commentpost(id) {
+          await fetch(
+            `https://expensive-newt-tiara.cyclic.app/articles/${id}/comments`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                username: username.value,
+                comment: usercomment.value,
+              }),
+            }
+          )
+            .then(async (res) => await res.json())
+            .then((posted) => {
+              // console.log("posted comment", posted);
+            })
+            .catch((err) => {
+              // document.getElementById("contentTomange").innerHTML = err;
+              // console.log(err);
+            });
+        }
+
+        if (commentform) {
+          document
+            .getElementById("sub")
+            .addEventListener("click", async (e) => {
+              e.preventDefault();
+
+              if (e.target.classList.contains("sub")) {
+                await commentpost(e.target.dataset.articleId);
+                await commentform.reset();
+                // reload fetch for updating comment nbr
+                displayComments();
+                location.reload();
+                const userEl = document.getElementById("user");
+                if (userEl.style.display === "none") {
+                  userEl.style.display = "block";
+                  userEl.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  userEl.style.display = "none";
+                }
+              }
+            });
+        }
+
+        // get all comment
+        async function displayComments() {
+          let cmtid = await document.querySelector(".comment");
+
+          await fetch(
+            "https://expensive-newt-tiara.cyclic.app/articles/getall/comments",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          )
+            .then(async (res) => await res.json())
+            .then(async (cmts) => {
+              const blogcomment = [];
+              for (let index = 0; index < cmts.cmt.length; index++) {
+                console.log("comment", cmts.cmt[index].article);
+                console.log("articleid", i);
+                if (cmts.cmt[index].article.trim() == i.trim()) {
+                  console.log(cmts.cmt[index]);
+                  blogcomment.push(cmts.cmt[index]);
+                }
+              }
+              // render number of comment
+
+              if (cmtnbr) {
+                console.log(cmtnbr);
+                cmtnbr.textContent = blogcomment.length;
+              } else {
+                console.log("not found");
+              }
+
+              blogcomment.forEach(async (comment) => {
+                let createdAt = comment.createdAt;
+                let date = new Date(createdAt);
+                let dateString = date.toDateString();
+                cmtid.innerHTML += `
+                       <div class="cmt"  >
+                          <p id="date">${dateString}</p>
+                         <p id="uname">${comment.username}</p>
+                         <p id="cm">${comment.comment}</p>
+                     </div>
+             `;
+              });
+            });
+        }
+        displayComments();
+      }
+      singArticle(`${Id}`);
     </script>
 
     <script type="module" src="../js/script.js"></script>
