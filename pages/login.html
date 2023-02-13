@@ -111,7 +111,11 @@
 
         <div class="sign-in">
           <div id="google" class="google">
-            <a class="btn-google" role="button">
+            <a
+              class="btn-google"
+              href="http://localhost:8000/auth/google/"
+              role="button"
+            >
               <i class="fab fa-google"></i>
               Sign In with Google
             </a>
@@ -161,9 +165,10 @@
         try {
           const response = await fetch("http://localhost:8000/auth/google", {
             method: "GET",
-            // headers: {
-            //   "Content-Type": "application/json",
-            // },
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Add this line to send cookies with the request
           });
           const data = await response.json();
           if (data.token) {
@@ -182,10 +187,10 @@
         }
       }
 
-      document.getElementById("google").addEventListener("click", (e) => {
-        e.preventDefault();
-        authenticateWithGoogle();
-      });
+      // document.getElementById("google").addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   authenticateWithGoogle();
+      // });
     </script>
 
     <script type="module" src="../js/script.js"></script>

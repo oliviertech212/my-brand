@@ -37,7 +37,7 @@ async function displayMessages() {
             <td><img width="40px" height="40px" src="${
               blog.article[i].image
             }">  </td>
-            <td>
+            <td class="deleteandupdate">
                 <a  type="button" class="edit" data-blo-id="${
                   blog.article[i]._id
                 }">edit</a>  
