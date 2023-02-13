@@ -359,8 +359,7 @@
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
-            },
-            credentials: "include", // Add this line to send cookies with the request
+            }
           }
         )
           .then(async (res) => {
