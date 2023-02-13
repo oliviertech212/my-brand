@@ -90,11 +90,18 @@ td {
   font-family: "Roboto", sans-serif;
 }
 
+.deleteandupdate a {
+  border-radius: 5px;
+}
 .edit {
+  border: 2px solid black;
+  padding: 10px;
   color: white;
   background-color: green;
 }
 .delete {
+  border: 2px solid black;
+  padding: 10px;
   color: white;
   margin-left: 20px;
   background-color: red;
@@ -188,6 +195,27 @@ form .btn-su {
     font-weight: bolder;
   }
 
+  .deleteandupdate a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .edit {
+    border: 2px solid black;
+    padding: 10px;
+    color: white;
+  }
+  .delete {
+    border: 2px solid black;
+    padding: 10px;
+    color: white;
+    margin-left: 20px;
+  }
+
   table {
     width: 100%;
     text-align: center;
@@ -254,6 +282,15 @@ form .btn-su {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
+  }
+  .deleteandupdate a {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
   }
   .delete {
     margin-left: 0px;

@@ -360,18 +360,19 @@
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
+            credentials: "include", // Add this line to send cookies with the request
           }
         )
           .then(async (res) => {
-            // console.log(res.status);
+            // console.log(token, res);
 
-            if (res.status === 401) {
-              // setTimeout(() => {
-              return (window.location.href = await "./login.html");
-              // }, 1000);
-            } else {
-              return await res.json();
-            }
+            // if (res.status === 401) {
+            //   // setTimeout(() => {
+            //   return (window.location.href = await "./login.html");
+            //   // }, 1000);
+            // } else {
+            return await res.json();
+            // }
           })
           .then(async (singArticle) => {
             console.log("result", singArticle);
@@ -577,7 +578,7 @@
               });
             });
         }
-        displayComments();
+        // displayComments();
       }
       singArticle(`${Id}`);
     </script>
