@@ -61,9 +61,12 @@
         <h1>Contact me</h1>
         <hr />
       </div>
+      <div id="reactcontact"></div>
       <div class="contact-form">
-        <div class="left-div">
-          <form name="contactform" id="cform" action="">
+        <div id="left-div" class="left-div">
+          <!-- implement reactjs -->
+
+          <!-- <form name="contactform" id="cform" action="">
             <p id="status"></p>
             <div class="label">
               <div class="mobile">
@@ -103,7 +106,7 @@
               <p class="error"></p>
             </div>
             <input id="csubmit" class="send-btn" type="submit" value="send" />
-          </form>
+          </form> -->
         </div>
         <div class="right-div">
           <a href=" https://wa.me/250784448194" target="_blank">
@@ -188,6 +191,21 @@ submitbtn.addEventListener("click",e=>{
 });
     </script> -->
 
-    <script type="module" src="../js/script.js"></script>
+    <!-- reactjs -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="../Reactjs/contact.js" type="text/babel"></script>
+
+    <!-- <script type="module" src="../js/script.js"></script> -->
+    <script src="../js/checklogedin.js"></script>
   </body>
 </html>
