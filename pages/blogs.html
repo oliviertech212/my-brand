@@ -324,8 +324,11 @@ font-family: 'Rubik', sans-serif; */
         <h1>Blogs</h1>
         <hr />
       </div>
-      <div id="loader" class="loader"></div>
-      <div class="blog-container"></div>
+      <div id="blog-section">
+        <!-- <div id="loader" class="loader"></div>
+        <div class="blog-container" id="blog-container"></div> -->
+      </div>
+
       <!-- <div id="single-blog" class="single-blog"></div> -->
     </section>
 
@@ -350,7 +353,7 @@ font-family: 'Rubik', sans-serif; */
         </a>
       </span>
     </footer>
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script> -->
+
     <script type="module">
       const token = localStorage.getItem("token");
       let blogDisplay = document.querySelector(".blog-container");
@@ -412,7 +415,7 @@ font-family: 'Rubik', sans-serif; */
             console.log(err);
           });
       }
-      displayMessages();
+      // displayMessages();
 
       blogDisplay.addEventListener("click", async (e) => {
         if (e.target.classList.contains("readmore")) {
@@ -427,7 +430,18 @@ font-family: 'Rubik', sans-serif; */
         // }
       });
     </script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
 
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script src="../js/react.js" type="text/babel"></script>
     <script type="module" src="../js/script.js"></script>
   </body>
 </html>

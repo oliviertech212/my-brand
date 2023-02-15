@@ -349,6 +349,7 @@
 
       let comments;
       async function singArticle(i) {
+        console.log("singleblogid", i);
         loader.style.display = "block";
         singleblg.style.visibility = "hidden";
         const token = localStorage.getItem("token");
@@ -360,19 +361,19 @@
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            credentials: "include", // Add this line to send cookies with the request
+            // credentials: "include", // Add this line to send cookies with the request
           }
         )
           .then(async (res) => {
             // console.log(token, res);
 
-            // if (res.status === 401) {
-            //   // setTimeout(() => {
-            //   return (window.location.href = await "./login.html");
-            //   // }, 1000);
-            // } else {
-            return await res.json();
-            // }
+            if (res.status === 401) {
+              // setTimeout(() => {
+              return (window.location.href = await "./login.html");
+              // }, 1000);
+            } else {
+              return await res.json();
+            }
           })
           .then(async (singArticle) => {
             console.log("result", singArticle);
@@ -578,11 +579,11 @@
               });
             });
         }
-        // displayComments();
+        displayComments();
       }
       singArticle(`${Id}`);
     </script>
-
+    <script src="../js/react.js" type="text/babel"></script>
     <script type="module" src="../js/script.js"></script>
   </body>
 </html>
