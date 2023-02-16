@@ -6,6 +6,10 @@ function Contactform() {
   const [email, setEmail] = React.useState("");
   const [message, setMessage] = React.useState("");
 
+  const [nameError, setNameError] = React.useState("");
+  const [emailError, setEmailError] = React.useState("");
+  const [messageError, setMessageError] = React.useState("");
+
   const [statusMessage, setStatusMessage] = React.useState("");
   // const [isEmailValid, setIsEmailValid] = React.useState("");
 
@@ -25,8 +29,31 @@ function Contactform() {
 
   const handleformSubmit = (e) => {
     e.preventDefault();
-    // const data = { name, email, message };
-    console.log(name, email, message);
+    let isError = false;
+    if (!name.trim()) {
+      isError = true;
+      setNameError("please enter name");
+    } else {
+      setNameError("");
+    }
+    if (!isValid) {
+      isError = true;
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
+
+    if (!message.trim()) {
+      isError = true;
+      setMessageError("Please enter your message");
+    } else {
+      setMessageError("");
+    }
+
+    if (isError) {
+      return;
+    }
+
     fetch("https://expensive-newt-tiara.cyclic.app/contact/post", {
       method: "POST",
       headers: {
@@ -52,6 +79,7 @@ function Contactform() {
           setName("");
           setEmail("");
           setMessage("");
+
           return result;
         } else if (res.status === 401) {
           setStatusMessage("please sign in");
@@ -86,7 +114,7 @@ function Contactform() {
             type="text"
             placeholder="enter your name"
           />
-          <p className="error"></p>
+          <p className="error">{nameError}</p>
         </div>
         <div className="mobile">
           <label htmlFor="email">email</label>
@@ -100,12 +128,8 @@ function Contactform() {
             type="email"
             placeholder="enter your email"
           />
-          {/* {!isEmailValid && (
-            <p className="error" style={{ color: "red" }}>
-              Please enter a valid email address
-            </p>
-          )} */}{" "}
-          <p>{!isValid && error}</p>
+
+          <p className="error">{emailError}</p>
         </div>
       </div>
       <div className="msg">
@@ -123,7 +147,7 @@ function Contactform() {
         {characterCount < minimumCharacterCount && (
           <div>{characterCountDifference} more characters required.</div>
         )}
-        <p className="error"></p>
+        <p className="error">{messageError}</p>
       </div>
       <input id="csubmit" className="send-btn" type="submit" value="send" />
     </form>
