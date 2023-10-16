@@ -183,12 +183,14 @@ nav ul li .active-login {
 .topdiv {
   margin-left: 70px;
   margin-right: 70px;
+  /* background-color: #00adb5; */
+  margin-bottom: 20px;
 }
 .topdiv p {
   color: black;
   font-style: normal;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 47px;
   font-family: "Roboto", sans-serif;
   margin-top: 50px;
@@ -205,16 +207,24 @@ nav ul li .active-login {
 }
 .skill {
   text-align: center;
+  /* background-color: #4a8a8f; */
+  box-shadow: 0px 0px 40px #d2d5ec;
+  border-radius: 10px ;
+  border: #000000 1px solid;
 }
 .skills-containers {
   margin: 20px auto 20px auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
+
+
 }
 .skill img {
   width: 250px;
   height: 250px;
+  border-radius:2px;
+  
 }
 
 /* work section */
@@ -227,6 +237,9 @@ nav ul li .active-login {
   /* gap:10px; */
   margin-left: 70px;
   margin-right: 70px;
+  gap: 25px;
+  margin-bottom: 20px;
+  padding-right: 0px;
   /* border: 4px solid blue; */
 }
 .work {
@@ -240,8 +253,13 @@ nav ul li .active-login {
   width: 400px;
   background: #ffffff;
   box-shadow: 0px 0px 40px #d2d5ec;
-  border-radius: 10px;
+  border-radius: 10px ;
+  border: #000000 1px solid;
   /* margin: 0px auto 0px auto; */
+}
+.work .project-pc .img{
+  height: auto;
+  width: 100%;
 }
 .work .project-pc h2 {
   float: left;
@@ -886,16 +904,19 @@ form .errormsg {
   }
   .skill {
     text-align: center;
+   
   }
   .skills-containers {
     margin: 10px auto 10px auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+   
   }
   .skill img {
     width: 160px;
     height: 170px;
+    
   }
 
   /* work page */
@@ -1263,7 +1284,7 @@ form .errormsg {
     margin: 10px auto 10px auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
   }
   .skill img {
     width: 160px;
